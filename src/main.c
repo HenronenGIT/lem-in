@@ -11,18 +11,25 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <fcntl.h>
+
+int	read_rooms(t_data *data)
+{
+	char	*line;
+
+	while (get_next_line(0, &line))
+	{
+		if (*line == '#')
+		{
+			if (read_comment(data, line))
+				return (-1);
+		}
+	}
+}
 
 int main(void)
 {
 	t_data	data;
-	char	*string;
-	char	*found;
 
-	data.file_desc = open("example.txt", O_RDONLY);
-	get_next_line(data.file_desc, &string);
-	ft_printf("%s\n", string);
-	found = ft_strstr(string, "0");
-	ft_printf("%s\n", found);
+	read_rooms(&data);
 	return (0);
 }
