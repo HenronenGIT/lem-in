@@ -13,13 +13,17 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include "../libftprintf/includes/ft_printf.h"
+# include <stdio.h>
+// # include "../libftprintf/includes/ft_printf.h"
+# include "../libft/includes/libft.h" // hmaronen library //? temp
 
 typedef struct s_data
 {
 	unsigned long	ants;
-	
+
 }					t_data;
+
+void	read_ants(t_data *data);
 
 
 #endif

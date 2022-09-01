@@ -12,16 +12,33 @@
 
 #include "../includes/lem_in.h"
 
+void	error(int error_number)
+{
+	if (error_number == 1)
+		perror("Invalid ant input!");
+	exit (1);
+}
 
+void	read_ants(t_data *data)
+{
+	char	*line;
+
+	line = NULL;
+	get_next_line(0, &line);
+	
+	if (!ft_isnumber(line))
+		error(1);
+	free(line);
+	printf("%s\n", line); //! temp
+}
 
 int main(void)
 {
 	t_data	data;
 
-
 	// init_struct(&data);
-	read_ants();
-	// read_rooms();
+	read_ants(&data);
+	// read_rooms();asdas
 	// read_links();
 
 	return (0);
