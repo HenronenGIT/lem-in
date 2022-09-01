@@ -17,10 +17,9 @@
 
 typedef struct s_data
 {
-	int				file_desc;
-	int				**nodes;
-	unsigned long	nodes_amount;
-	unsigned long	ants_amount;
+	unsigned long	ants;
+	
 }					t_data;
+
 
 #endif

@@ -11,18 +11,18 @@
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-#include <fcntl.h>
+
+
 
 int main(void)
 {
 	t_data	data;
-	char	*string;
-	char	*found;
 
-	data.file_desc = open("example.txt", O_RDONLY);
-	get_next_line(data.file_desc, &string);
-	ft_printf("%s\n", string);
-	found = ft_strstr(string, "0");
-	ft_printf("%s\n", found);
+
+	// init_struct(&data);
+	read_ants();
+	// read_rooms();
+	// read_links();
+
 	return (0);
 }
