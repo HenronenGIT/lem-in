@@ -39,6 +39,11 @@ void	read_ants(t_data *data)
 	free(line);
 }
 
+int	init_struct(t_data *data)
+{
+	
+}
+
 int main(void)
 {
 	t_data	data;

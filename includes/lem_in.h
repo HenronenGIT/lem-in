@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+w/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
@@ -16,6 +16,12 @@
 # include <stdio.h>
 // # include "../libftprintf/includes/ft_printf.h"
 # include "../libft/includes/libft.h" // hmaronen library //? temp
+
+typedef struct	s_vector
+{
+	char	**rooms;
+	
+}				t_vector
 
 typedef struct s_data
 {
