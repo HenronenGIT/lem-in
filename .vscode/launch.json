@@ -10,7 +10,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/lem-in", // Binary name
-			"args": ["< ${workspaceFolder}/eval_tests/test_maps/augment_1.map"],
+			"args": ["<", "valid.map"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

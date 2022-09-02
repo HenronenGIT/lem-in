@@ -15,7 +15,8 @@
 void	error(int error_number)
 {
 	if (error_number == 1)
-		perror("Invalid ant input!");
+		ft_puterror("Invalid ant input!\n");
+		// perror("Invalid ant input!");
 	exit (1);
 }
 
@@ -25,11 +26,12 @@ void	read_ants(t_data *data)
 
 	line = NULL;
 	get_next_line(0, &line);
-	
 	if (!ft_isnumber(line))
 		error(1);
+	if (!line)
+		error(1);
+	data->ants = ft_atoi(line); //! Change to "atou" - unsigned long.
 	free(line);
-	printf("%s\n", line); //! temp
 }
 
 int main(void)

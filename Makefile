@@ -3,8 +3,8 @@ CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
-NAME = lem_in
-FLAGS = -Wall -Wextra -g
+NAME = lem-in
+FLAGS = #-Wall -Wextra -g
 
 SRC_DIR = ./src/
 SRC_FILES = main.c
