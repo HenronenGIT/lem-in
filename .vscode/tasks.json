@@ -1,9 +1,8 @@
-<<<<<<< HEAD
 {
     "tasks": [
         {
             "type": "shell",
-            "label": "makefile for lemin",
+            "label": "C/C++: lem-in",
             "command": "make",
             "args": [
             ],
@@ -21,68 +20,4 @@
         }
     ],
     "version": "2.0.0"
-    }
-=======
-// {
-    // "tasks": [
-    //     {
-    //         "type": "shell",
-    //         "label": "makefile for lemin",
-    //         "command": "make",
-    //         "args": [
-    //         ],
-    //         "options": {
-    //             "cwd": "${workspaceFolder}"
-    //         },
-    //         "problemMatcher": [
-    //             "$gcc"
-    //         ],
-    //         "group": {
-    //             "kind": "build",
-    //             "isDefault": true
-    //         },
-    //         "detail": "C/C++: lem-in"
-    //     }
-    // ],
-    // "version": "2.0.0"
-    // }
-
-{
-"tasks": [
-	{
-		"type": "cppbuild",
-		"label": "C/C++: lem-in",
-		"command": "/usr/bin/gcc",
-		"args": [
-			"-fdiagnostics-color=always",
-			// "-enable-pretty-printing",
-			"-g",
-			"-L./libft",
-			"-lft",
-			// "-Wall",
-			// "-Wextra",
-			// "-Werror",
-			// "-Wconversion",
-			"-I./libft/includes",
-			"-I./includes",
-			"${workspaceFolder}/src/*.c",
-			"${workspaceFolder}/libft/*.c", // For debugging lib functions
-			"-o",
-			"${workspaceFolder}/${workspaceFolderBasename}",
-		],
-		"options": {
-			"cwd": "${workspaceFolder}"
-		},
-		"problemMatcher": [
-			"$gcc"
-		],
-		"group": {
-			"kind": "build",
-			"isDefault": true
-		},
-		"detail": "C/C++: lem-in"
-	}
-],
-"version": "2.0.0"
 }
->>>>>>> cc62ed7a00c3754780dd4968174553004bc8cfd4

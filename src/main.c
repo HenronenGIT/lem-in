@@ -12,9 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-int	build_room_list(t_data *data, char *name)
+int	build_room_arr(t_data *data, char *name)
 {
-	
+	if (vec_insert(data->rooms, name) == -1)
+		exit(-1);
 }
 
 int	read_room_name(t_data *data, char *line)
@@ -24,7 +25,7 @@ int	read_room_name(t_data *data, char *line)
 	i = 0;
 	while (line[i] && line[i] != ' ')
 		i++;
-	build_room_list(data, ft_strsub(line, 0, i));
+	build_room_arr(data, ft_strsub(line, 0, i));
 }
 
 // int	read_comment(t_data *data, char *line)
@@ -57,8 +58,9 @@ void	error(int error_number)
 {
 	if (error_number == 1)
 		ft_puterror("Invalid ant input!\n");
-		// perror("Invalid ant input!");
-	exit (1);
+	if (error_number == MALLOC_ERR)
+		ft_puterror("Not enough space for malloc");
+	exit (error_number);
 }
 
 void	read_ants(t_data *data)
@@ -80,17 +82,33 @@ void	read_ants(t_data *data)
 	free(line);
 }
 
+void	init_struct(t_data *data, t_vec *rooms_list)
+{
+	data->ants = 0;
+	data->rooms = rooms_list;
+	data->rooms->room_names = NULL;
+	data->rooms->length = 0;
+	data->rooms->space_left = 0;
+	data->rooms->space_taken = 0;
+}
+
 int main(void)
 {
 	t_data	data;
 	t_vec	rooms_list;
 
-	// init_struct(&data);
+	init_struct(&data, &rooms_list);
 	read_ants(&data);
 	read_rooms(&data);
 	// init_struct(&data);
 	// read_ants();
 	// read_rooms();
 	// read_links();
+	int i = 0;
+	while (i < 2)
+	{
+		printf("%s\n", data.rooms->room_names[i]);
+		i++;
+	}
 	return (0);
 }
