@@ -4,10 +4,11 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = #-Wall -Wextra -g
+FLAGS = -Wall -Wextra -g
 
 SRC_DIR = ./src/
-SRC_FILES = main.c
+SRC_FILES = main.c \
+			vector.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

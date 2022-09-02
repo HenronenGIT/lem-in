@@ -17,17 +17,19 @@ w/* ************************************************************************** *
 // # include "../libftprintf/includes/ft_printf.h"
 # include "../libft/includes/libft.h" // hmaronen library //? temp
 
-typedef struct	s_vector
+typedef struct s_vec
 {
-	char	**rooms;
-	
-}				t_vector
+	char	**room_names;
+	size_t	length;
+	size_t	space_left;
+	size_t	space_taken;
+}	t_vec;
 
 typedef struct s_data
 {
 	unsigned long	ants;
-
-}					t_data;
+	struct s_vec	rooms;
+}	t_data;
 
 void	read_ants(t_data *data);
 

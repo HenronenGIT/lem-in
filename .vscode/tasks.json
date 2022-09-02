@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "makefile for lemin",
+            "command": "make",
+            "args": [
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "C/C++: lem-in"
+        }
+    ],
+    "version": "2.0.0"
+    }
+=======
 // {
     // "tasks": [
     //     {
@@ -60,3 +85,4 @@
 ],
 "version": "2.0.0"
 }
+>>>>>>> cc62ed7a00c3754780dd4968174553004bc8cfd4

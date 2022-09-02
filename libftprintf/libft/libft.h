@@ -16,7 +16,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFF_SIZE 10
+# define BUFF_SIZE 10000
 # define MAX_FD 10000
 
 typedef struct s_list

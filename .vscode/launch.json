@@ -4,19 +4,34 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
+<<<<<<< HEAD
+=======
 		
+>>>>>>> cc62ed7a00c3754780dd4968174553004bc8cfd4
 		{
 			"name": "C/C++: lem-in",
 			"type": "cppdbg",
 			"request": "launch",
+<<<<<<< HEAD
+			"program": "${workspaceFolder}/lem_in", // Binary name
+			"args": ["<", "/Users/igaplich/Documents/Curriculum/current/lem_in/eval_tests/test_maps/cnysten_tricky.map"],
+=======
 			"program": "${workspaceFolder}/lem-in", // Binary name
 			"args": ["<", "valid.map"],
+>>>>>>> cc62ed7a00c3754780dd4968174553004bc8cfd4
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb",
+<<<<<<< HEAD
+			"preLaunchTask": "makefile for lemin" // Task name
+		}
+	]
+}
+=======
 			"preLaunchTask": "C/C++: lem-in" // Task name
 		}
 	]
 }
+>>>>>>> cc62ed7a00c3754780dd4968174553004bc8cfd4
