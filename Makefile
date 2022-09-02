@@ -19,8 +19,11 @@ INC_DIR = ./includes/
 INC_FILES = lem_in.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
-LIBPRINT_DIR = libftprintf/
-LIBPRINT_LIB = libftprintf.a
+# LIBPRINT_DIR = libftprintf/
+# LIBPRINT_LIB = libftprintf.a
+# LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
+LIBPRINT_DIR = libft/
+LIBPRINT_LIB = libft.a
 LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
 
 all : $(NAME)
@@ -28,7 +31,7 @@ all : $(NAME)
 $(NAME): $(OBJ) 
 	@make -C $(LIBPRINT_DIR)
 	@echo "$(CYELLOW)Compiling $(NAME)$(CEND)"
-	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libftprintf/includes/ft_printf.h -L. $(LIBPRINT)
+	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)
 	@echo "$(CGREEN)OK$(CEND)"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
