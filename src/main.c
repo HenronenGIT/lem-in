@@ -23,14 +23,19 @@ void	error(int error_number)
 void	read_ants(t_data *data)
 {
 	char	*line;
+	long	ant_count;
 
 	line = NULL;
+	ant_count = 0;
 	get_next_line(0, &line);
 	if (!ft_isnumber(line))
 		error(1);
 	if (!line)
 		error(1);
-	data->ants = ft_atoi(line); //! Change to "atou" - unsigned long.
+	ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
+	if (ant_count <= 0) //? Is 0 ant count error?
+		error(1);
+	data->ants = ant_count;
 	free(line);
 }
 
@@ -38,10 +43,10 @@ int main(void)
 {
 	t_data	data;
 
-	// init_struct(&data);
+	init_struct(&data);
 	read_ants(&data);
 	// read_rooms();asdas
 	// read_links();
 
-	return (0);
+	exit(0);
 }

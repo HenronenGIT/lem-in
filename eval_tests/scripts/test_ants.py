@@ -1,22 +1,29 @@
 # Test script for testing read_ants() function
-#
+# New tests and be added to "tests" array
+
 from asyncio.subprocess import PIPE
-import readline
-import sys
 import subprocess
+import time
 import os
 
-# file =  open("../test_maps/invalid_tests/invalid_ant.map")
-file = os.open("../test_maps/invalid_tests/invalid_ant.map", os.O_RDWR)
-# lines = file.readlines()
+# Path to lem-in executable
+lem_in_path = "../../lem-in"
 
-# print(lines[0])
-# sys.stdout()
-# file.readline
+# New tests can be added here
+tests = 	[" 42",
+				"42 ",
+				"	42",
+				"42		",
+				"42",
+				]
 
-# r"echo 'a' | ../../lem_in"
-output = subprocess.run(["../../lem-in"],
-				stdin = file,
-				stdout = PIPE)
-print (output.stdout)
-#! try to add test 
+# Loop for testing all numbers
+for line in tests:
+	proc = subprocess.run(["../../lem-in", line],
+	stdin=subprocess.PIPE)
+	# stdout=subprocess.PIPE)
+	print(proc)
+	if proc.returncode == 1:
+		print("ok")
+	else:
+		print("ko")
