@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   vector.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: igaplich <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 15:40:56 by igaplich          #+#    #+#             */
-/*   Updated: 2022/08/22 15:43:11 by igaplich         ###   ########.fr       */
+/*   Created: 2022/09/02 11:09:31 by igaplich          #+#    #+#             */
+/*   Updated: 2022/09/02 11:09:33 by igaplich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "../includes/lem_in.h"
 
-# include "../libftprintf/includes/ft_printf.h"
-
-typedef struct s_vec
+int	vec_new(t_vec *dst, size_t len)
 {
-	char	**room_names;
-	size_t	length;
-	size_t	space_left;
-	size_t	space_taken;
-}	t_vec;
+	if (!dst || len == 0)
+		return (-1);
+	dst->length = len;
+	dst->space_taken = 1;
+	dst->space_left = len - dst->space_taken;
+	dst->room_names = (char **)malloc(sizeof(char *) * (len + 1));
 
-typedef struct s_data
-{
-	unsigned long	ants;
-	struct s_vec	rooms;
-}	t_data;
-
-#endif
+}

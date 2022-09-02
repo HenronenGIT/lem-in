@@ -14,19 +14,7 @@
 
 int	build_room_list(t_data *data, char *name)
 {
-	if (!data->head)
-	{
-		data->head = (t_rooms *)malloc(sizeof(t_rooms));
-		data->tail = data->head;
-		data->head->next = NULL;
-	}
-	else
-	{
-		data->tail->next = (t_rooms *)malloc(sizeof(t_rooms));
-		data->tail = data->tail->next;
-		data->tail->next = NULL;
-	}
-	data->tail = name;
+	
 }
 
 int	read_room_name(t_data *data, char *line)
@@ -68,6 +56,7 @@ int	read_rooms(t_data *data)
 int main(void)
 {
 	t_data	data;
+	t_vec	rooms_list;
 
 	read_rooms(&data);
 	// init_struct(&data);
