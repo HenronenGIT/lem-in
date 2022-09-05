@@ -14,9 +14,15 @@
 
 void	vec_free(t_vec **array)
 {
-	free((*array)->room_names);
 	if (*array)
-		free(*array);
+	{
+		if (*array)
+		{
+			if ((*array)->rooms)
+				free((*array)->rooms);
+			free(*array);
+		}
+	}
 }
 
 void	vec_copy(t_vec **src, t_vec *dst)
@@ -28,7 +34,7 @@ void	vec_copy(t_vec **src, t_vec *dst)
 	i = 0;
 	while (i < (*src)->length)
 	{
-		dst->room_names[i] = (*src)->room_names[i];
+		dst->rooms[i] = (*src)->rooms[i];
 		i++;
 	}
 	dst->space_taken = i;
@@ -57,7 +63,11 @@ void	vec_insert(t_vec **dst, char *name)
 		error(-3);
 	if ((*dst)->space_left == 0)
 		vec_resize(dst);
-	(*dst)->room_names[(*dst)->space_taken] = name;
+	(*dst)->rooms[(*dst)->space_taken] = (t_room *)malloc(sizeof(t_room));
+	if (!(*dst)->rooms[(*dst)->space_taken])
+		error(MALLOC_ERR);
+	(*dst)->rooms[(*dst)->space_taken]->room_name = name;
+	(*dst)->rooms[(*dst)->space_taken]->next = NULL;
 	(*dst)->space_taken++;
 	(*dst)->space_left--;
 }
@@ -66,18 +76,15 @@ void	vec_new(t_vec *dst, size_t len)
 {
 	size_t	i;
 
-	i = 0;
 	if (!dst || len == 0)
 		error(-3);
 	dst->length = len;
 	dst->space_taken = 0;
 	dst->space_left = len;
-	dst->room_names = (char **)malloc(sizeof(char *) * (len + 1));
-	if (!dst->room_names)
+	dst->rooms = (t_room **)malloc(sizeof(t_room *) * (len + 1));
+	if (!dst->rooms)
 		error(MALLOC_ERR);
+	i = 0;
 	while (i < len + 1)
-	{
-		dst->room_names[i] = NULL;
-		i++;
-	}
+		dst->rooms[i++] = NULL;
 }

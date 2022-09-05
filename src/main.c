@@ -26,11 +26,13 @@ void	error(int error_number)
 void	init_struct(t_data *data)
 {
 	data->ants = 0;
-	data->rooms = (t_vec *)malloc(sizeof(t_vec));
-	data->rooms->room_names = NULL;
-	data->rooms->length = 0;
-	data->rooms->space_left = 0;
-	data->rooms->space_taken = 0;
+	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
+	if (!data->rooms_vec)
+		error(MALLOC_ERR);
+	data->rooms_vec->rooms = NULL;
+	data->rooms_vec->length = 0;
+	data->rooms_vec->space_left = 0;
+	data->rooms_vec->space_taken = 0;
 }
 
 int main(void)
@@ -44,9 +46,9 @@ int main(void)
 
 	//! temp
 	size_t i = 0;
-	while (i < data.rooms->length)
+	while (i < data.rooms_vec->space_taken)
 	{
-		printf("%s\n", data.rooms->room_names[i]);
+		printf("%s\n", data.rooms_vec->rooms[i]->room_name);
 		i++;
 	}
 	//! temp

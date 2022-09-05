@@ -38,18 +38,17 @@ void	read_rooms(t_data *data)
 	while (get_next_line(0, &line))
 	{
 		if (line && *line == '#')
-			read_comment(data, line);
+			read_hashtag(data, line);
 		else if (line && *line == 'L')
 			error(FORMAT_ERR);
 		else
-			read_room_name(data, line);
-			// read_room_name(data, line, NORMAL);
+			read_room_name(data, line, NORMAL);
 		free(line);
 	}
 }
 
-// void	read_room_name(t_data *data, char *line, int decider)
-void	read_room_name(t_data *data, char *line)
+// void	read_room_name(t_data *data, char *line)
+void	read_room_name(t_data *data, char *line, int decider)
 {
 	int		i;
 	char	*name;
@@ -58,55 +57,35 @@ void	read_room_name(t_data *data, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	name = ft_strsub(line, 0, i);
-	vec_insert(&(data->rooms), name);
+	vec_insert(&(data->rooms_vec), name);
 
 
 
-// 	if (decider == START)
-// 		data->start = name;
-// 	if (decider == END)
-// 		data->end = name;
+	if (decider == START)
+		data->start = name;
+	if (decider == END)
+		data->end = name;
 }
 
-int	read_comment(t_data *data, char *line)
+int	read_hashtag(t_data *data, char *line)
 {
-	if (!ft_strncmp("##", line, 2)) //? Can segfault in some cases
-		read_command(data, line);
-// 
-	// if (!ft_strcmp("##start", line))
-		// read_start(data, line);
-	// else if (!ft_strcmp("##end", line))
-		// read_end(data, line);
+	char *test;
+
+	// if (!ft_strncmp("##", line, 2)) //? Can segfault in some cases
+		// read_command(data, line);
+	test = NULL;
+	if (!ft_strcmp("##start", line))
+	{
+		get_next_line(0, &test);
+		read_room_name(data, test, START);
+	}
+
+	else if (!ft_strcmp("##end", line))
+	{
+		get_next_line(0, &test);
+		read_room_name(data, test, END);
+	}
 	else
 		return (1);
 }
 
-void	read_command(t_data *data, char *line)
-{
-	if (!ft_strcmp("##start", line))
-		read_start(data, line);
-	else if (!ft_strcmp("##end", line))
-		read_end(data, line);
-	else
-		return ;
-}
-
-//? read_start() and read_end() function can bee merged to one function "read_start_end"
-void	read_start(t_data *data, char *line)
-{
-	free(line);
-	get_next_line(0, &line);
-	free(line);
-	read_room_name(data, line);
-	// read_room_name(data, line, START);
-}
-
-void	read_end(t_data *data, char *line)
-{
-	printf("line in read_end() = %s\n", line);
-	free(line);
-	get_next_line(0, &line);
-	free(line);
-	read_room_name(data, line);
-	// read_room_name(data, line, END);
-}
