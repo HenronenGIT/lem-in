@@ -14,9 +14,6 @@
 
 void	vec_free(t_vec **array)
 {
-	size_t	i;
-
-	i = 0;
 	free((*array)->room_names);
 	if (*array)
 		free(*array);
@@ -40,11 +37,13 @@ void	vec_copy(t_vec **src, t_vec *dst)
 
 void	vec_resize(t_vec **src)
 {
-	t_vec *dst;
+	t_vec	*dst;
 
 	if (!*src)
 		error(-3);
 	dst = (t_vec *)malloc(sizeof(t_vec));
+	if (!dst)
+		error(MALLOC_ERR);
 	vec_new(dst, ((*src)->length * 2) + 1);
 	if ((*src)->length != 0)
 		vec_copy(src, dst);
