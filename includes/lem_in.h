@@ -20,18 +20,24 @@
 # define MALLOC_ERR -2
 # define FORMAT_ERR -4
 
+typedef struct s_room
+{
+	char			*room_name;
+	struct s_room	*next;
+}	t_room;
+
 typedef struct s_vec
 {
-	char	**room_names;
-	size_t	length;
-	size_t	space_left;
-	size_t	space_taken;
+	struct s_room	**rooms;
+	size_t			length;
+	size_t			space_left;
+	size_t			space_taken;
 }	t_vec;
 
 typedef struct s_data
 {
 	unsigned long	ants;
-	struct s_vec	*rooms;
+	struct s_vec	*rooms_vec;
 }	t_data;
 
 void	read_ants(t_data *data);

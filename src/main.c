@@ -21,7 +21,7 @@ void	read_room_name(t_data *data, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	name = ft_strsub(line, 0, i);
-	vec_insert(&(data->rooms), name);
+	vec_insert(&(data->rooms_vec), name);
 }
 
 // int	read_comment(t_data *data, char *line)
@@ -40,14 +40,14 @@ void	read_rooms(t_data *data)
 
 	while (get_next_line(0, &line))
 	{
-		if (line && *line == '#')
-		{
-			if (read_comment(data, line))
-				return (-1);
-		}
-		else if (line && *line == 'L')
-			error(FORMAT_ERR);
-		else
+		// if (line && *line == '#')
+		// {
+		// 	if (read_comment(data, line))
+		// 		error
+		// }
+		// else if (line && *line == 'L')
+		// 	error(FORMAT_ERR);
+		// else
 			read_room_name(data, line);
 		free(line);
 	}
@@ -86,11 +86,13 @@ void	read_ants(t_data *data)
 void	init_struct(t_data *data)
 {
 	data->ants = 0;
-	data->rooms = (t_vec *)malloc(sizeof(t_vec));
-	data->rooms->room_names = NULL;
-	data->rooms->length = 0;
-	data->rooms->space_left = 0;
-	data->rooms->space_taken = 0;
+	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
+	if (!data->rooms_vec)
+		error(MALLOC_ERR);
+	data->rooms_vec->rooms = NULL;
+	data->rooms_vec->length = 0;
+	data->rooms_vec->space_left = 0;
+	data->rooms_vec->space_taken = 0;
 }
 
 int main(void)
@@ -105,11 +107,11 @@ int main(void)
 	// read_rooms();
 	// read_links();
 	size_t i = 0;
-	while (i < data.rooms->length)
+	while (i < data.rooms_vec->space_taken)
 	{
-		printf("%s\n", data.rooms->room_names[i]);
+		printf("%s\n", data.rooms_vec->rooms[i]->room_name);
 		i++;
 	}
-	system("leaks lem-in");
+	// system("leaks lem-in");
 	return (0);
 }
