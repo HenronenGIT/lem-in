@@ -12,20 +12,21 @@
 
 #include "../includes/lem_in.h"
 
-int	build_room_arr(t_data *data, char *name)
+void	build_room_arr(t_data *data, char *name)
 {
-	if (vec_insert(data->rooms, name) == -1)
-		exit(-1);
+	vec_insert(&(data->rooms), name);
 }
 
-int	read_room_name(t_data *data, char *line)
+void	read_room_name(t_data *data, char *line)
 {
-	int	i;
+	int		i;
+	char	*name;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')
 		i++;
-	build_room_arr(data, ft_strsub(line, 0, i));
+	name = ft_strsub(line, 0, i);
+	build_room_arr(data, name);
 }
 
 // int	read_comment(t_data *data, char *line)
@@ -38,19 +39,20 @@ int	read_room_name(t_data *data, char *line)
 // 		return (1);
 // }
 
-int	read_rooms(t_data *data)
+void	read_rooms(t_data *data)
 {
 	char	*line;
 
 	while (get_next_line(0, &line))
 	{
-		// if (line && *line == '#')
-		// {
-		// 	if (read_comment(data, line))
-		// 		return (-1);
-		// }
-		// else
+		//if (line && *line == '#')
+		//{
+		//	if (read_comment(data, line))
+		//		return (-1);
+		//}
+		//else 
 			read_room_name(data, line);
+		free(line);
 	}
 }
 
@@ -83,10 +85,10 @@ void	read_ants(t_data *data)
 }
 
 
-void	init_struct(t_data *data, t_vec *rooms_list)
+void	init_struct(t_data *data)
 {
 	data->ants = 0;
-	data->rooms = rooms_list;
+	data->rooms = (t_vec *)malloc(sizeof(t_vec));
 	data->rooms->room_names = NULL;
 	data->rooms->length = 0;
 	data->rooms->space_left = 0;
@@ -96,17 +98,17 @@ void	init_struct(t_data *data, t_vec *rooms_list)
 int main(void)
 {
 	t_data	data;
-	t_vec	rooms_list;
 
-	init_struct(&data, &rooms_list);
+	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
 	// read_links();
-	int i = 0;
-	while (i < 2)
+	size_t i = 0;
+	while (i < data.rooms->length)
 	{
 		printf("%s\n", data.rooms->room_names[i]);
 		i++;
 	}
-	return (0);
+	// system("leaks lem-in");
+	exit(0);
 }

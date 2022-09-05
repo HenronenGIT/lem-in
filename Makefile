@@ -4,7 +4,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g
+FLAGS = -Wall -Wextra -g #-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
