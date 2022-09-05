@@ -38,8 +38,8 @@ void	error(int error_number);
 
 
 /*----------VECTOR------------*/
-int	vec_new(t_vec *dst, size_t len);
-int	vec_insert(t_vec *dst, char *name);
+void	vec_new(t_vec *dst, size_t len);
+void	vec_insert(t_vec **dst, char *name);
 
 
 #endif
