@@ -18,6 +18,11 @@
 # include "../libft/includes/libft.h" // hmaronen library //? temp
 
 # define MALLOC_ERR -2
+# define FORMAT_ERR -4
+
+# define START 1
+# define END 2
+# define NORMAL 3
 
 typedef struct s_vec
 {
@@ -31,11 +36,21 @@ typedef struct s_data
 {
 	unsigned long	ants;
 	struct s_vec	*rooms;
+	char			*start;
+	char			*end;
 }	t_data;
 
-void	read_ants(t_data *data);
 void	error(int error_number);
 
+/*----------PARSING-----------*/
+void	read_ants(t_data *data);
+void	read_rooms(t_data *data);
+void	read_room_name(t_data *data, char *line, int decider);
+int		read_comment(t_data *data, char *line);
+void	read_command(t_data *data, char *line);
+void	read_start(t_data *data, char *line);
+void	read_end(t_data *data, char *line);
+	
 
 /*----------VECTOR------------*/
 void	vec_new(t_vec *dst, size_t len);
