@@ -18,6 +18,7 @@
 # include "../libft/includes/libft.h" // hmaronen library //? temp
 
 # define MALLOC_ERR -2
+# define FORMAT_ERR -4
 
 typedef struct s_vec
 {

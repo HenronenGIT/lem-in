@@ -12,11 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-void	build_room_arr(t_data *data, char *name)
-{
-	vec_insert(&(data->rooms), name);
-}
-
 void	read_room_name(t_data *data, char *line)
 {
 	int		i;
@@ -26,7 +21,7 @@ void	read_room_name(t_data *data, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	name = ft_strsub(line, 0, i);
-	build_room_arr(data, name);
+	vec_insert(&(data->rooms), name);
 }
 
 // int	read_comment(t_data *data, char *line)
@@ -45,13 +40,16 @@ void	read_rooms(t_data *data)
 
 	while (get_next_line(0, &line))
 	{
-		// if (line && *line == '#')
-		// {
-		// 	if (read_comment(data, line))
-		// 		return (-1);
-		// }
-		// else
-		read_room_name(data, line);
+		if (line && *line == '#')
+		{
+			if (read_comment(data, line))
+				return (-1);
+		}
+		else if (line && *line == 'L')
+			error(FORMAT_ERR);
+		else
+			read_room_name(data, line);
+		free(line);
 	}
 }
 
@@ -61,6 +59,8 @@ void	error(int error_number)
 		ft_puterror("Invalid ant input!\n");
 	if (error_number == MALLOC_ERR)
 		ft_puterror("Not enough space for malloc");
+	if (error_number == FORMAT_ERR)
+		ft_puterror("Invalid formatting!\n");
 	exit (error_number);
 }
 
