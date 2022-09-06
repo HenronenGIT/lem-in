@@ -54,7 +54,6 @@ void	error(int error_number);
 void	read_ants(t_data *data);
 void	read_rooms(t_data *data);
 void	read_room_name(t_data *data, char *line, int decider);
-// int		read_hashtag(t_data *data, char *line);
 void	read_hashtag(t_data *data, char *line); //? Testing with void return value
 void	read_command(t_data *data, char *line);
 void	read_start(t_data *data, char *line);
@@ -64,6 +63,5 @@ void	read_links(t_data *data, char *line);
 /*----------VECTOR------------*/
 void	vec_new(t_vec *dst, size_t len);
 void	vec_insert(t_vec **dst, char *name);
-
 
 #endif
