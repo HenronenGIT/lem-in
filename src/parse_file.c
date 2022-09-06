@@ -63,6 +63,10 @@ void	read_hashtag(t_data *data, char *line) //? Testing with void return value
 		get_next_line(0, &test);
 		read_room_name(data, test, END);
 	}
+	else
+		error(FORMAT_ERR);
+		//? One more else if() might need to be added for checking if hashtag was comment.
+		//? In that case just return.
 	// /else
 		// return (1);
 }
@@ -82,5 +86,3 @@ void	read_room_name(t_data *data, char *line, int decider)
 	if (decider == END)
 		data->end = name;
 }
-
-
