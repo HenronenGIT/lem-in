@@ -51,4 +51,7 @@ fclean : clean
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
+#* Easier way to run and test program
+run:
+	./lem-in < ./eval_tests/test_maps/cnysten_tricky.map 
 re : fclean all clean all

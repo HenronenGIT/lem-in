@@ -1,8 +1,8 @@
 main.dSYM/
+debug_lem-in.dSYM/
+lem-in.dSYM/
 a.out
 lem-in
 .DS_Store
-lem-in.dSYM/
 .vscode/*
 obj/*
-
