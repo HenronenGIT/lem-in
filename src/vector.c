@@ -68,6 +68,7 @@ void	vec_insert(t_vec **dst, char *name)
 		error(MALLOC_ERR);
 	(*dst)->rooms[(*dst)->space_taken]->room_name = name;
 	(*dst)->rooms[(*dst)->space_taken]->next = NULL;
+	(*dst)->rooms[(*dst)->space_taken]->head = (*dst)->rooms[(*dst)->space_taken];
 	(*dst)->space_taken++;
 	(*dst)->space_left--;
 }

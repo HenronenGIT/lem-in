@@ -28,6 +28,7 @@
 typedef struct s_room
 {
 	char			*room_name;
+	struct s_room	*head;
 	struct s_room	*next;
 }	t_room;	//? t_room_lst better name - or something similar?
 
@@ -42,14 +43,8 @@ typedef struct s_vec
 typedef struct s_data
 {
 	unsigned long	ants;
-	struct s_vec	*rooms;
-
 	char			*start;
 	char			*end;
-
-	// struct s_room	*start;
-	// struct s_room	*end;
-	
 	struct s_vec	*rooms_vec;
 }	t_data;
 
@@ -64,6 +59,7 @@ void	read_hashtag(t_data *data, char *line); //? Testing with void return value
 void	read_command(t_data *data, char *line);
 void	read_start(t_data *data, char *line);
 void	read_end(t_data *data, char *line);
+void	read_links(t_data *data, char *line);
 
 /*----------VECTOR------------*/
 void	vec_new(t_vec *dst, size_t len);

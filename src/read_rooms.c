@@ -35,7 +35,7 @@ void	read_rooms(t_data *data)
 {
 	char	*line;
 
-	while (get_next_line(0, &line))
+	while (get_next_line(0, &line) && !ft_strchr(line,'-'))
 	{
 		if (line && *line == '#')
 			read_hashtag(data, line);
@@ -43,6 +43,16 @@ void	read_rooms(t_data *data)
 			error(FORMAT_ERR);
 		else
 			read_room_name(data, line, NORMAL);
+		free(line);
+	}
+	if (ft_strchr(line, '-'))
+	{
+		read_links(data, line);
+		free(line);
+	}
+	while (get_next_line(0, &line) && ft_strchr(line, '-'))
+	{
+		read_links(data, line);
 		free(line);
 	}
 }

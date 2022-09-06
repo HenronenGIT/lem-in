@@ -9,7 +9,8 @@ FLAGS = -Wall -Wextra -g #-fsanitize=address
 SRC_DIR = ./src/
 SRC_FILES = main.c \
 			vector.c \
-			parse_file.c
+			read_rooms.c \
+			read_links.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

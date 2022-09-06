@@ -45,11 +45,18 @@ int main(void)
 	// read_links();
 
 	//! temp
+	printf("\nstart = %s\n", data.start);
+	printf("end = %s\n\n", data.end);
 	size_t i = 0;
 	while (i < data.rooms_vec->space_taken)
 	{
-		printf("%s\n", data.rooms_vec->rooms[i]->room_name);
+		while (data.rooms_vec->rooms[i] != NULL)
+		{
+			printf("%s -> ", data.rooms_vec->rooms[i]->room_name);
+			data.rooms_vec->rooms[i] = data.rooms_vec->rooms[i]->next;
+		}
 		i++;
+		printf("\n");
 	}
 	//! temp
 	// system("leaks lem-in");
