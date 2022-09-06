@@ -68,5 +68,4 @@ void	read_end(t_data *data, char *line);
 void	vec_new(t_vec *dst, size_t len);
 void	vec_insert(t_vec **dst, char *name);
 
-
 #endif
