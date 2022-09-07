@@ -22,8 +22,8 @@ size_t	room_compare(t_data *data, char **line)
 	compare = NULL;
 	while (i < data->rooms_vec->space_taken)
 	{
-		len = ft_strlen(data->rooms_vec->rooms[i]->room_name);
-		if (!ft_strncmp(*line, data->rooms_vec->rooms[i]->room_name, len))
+		len = ft_strlen(data->rooms_vec->rooms[i]->head->room_name);
+		if (!ft_strncmp(*line, data->rooms_vec->rooms[i]->head->room_name, len))
 			break;
 		i++;
 	}
@@ -35,16 +35,13 @@ size_t	room_compare(t_data *data, char **line)
 
 void	insert_link(t_data *data, size_t first_link, size_t second_link)
 {
-	while (data->rooms_vec->rooms[first_link]->next != NULL)
-		data->rooms_vec->rooms[first_link] =  data->rooms_vec->rooms[first_link]->next;
 	data->rooms_vec->rooms[first_link]->next = (t_room *)malloc(sizeof(t_room));
 	if (!data->rooms_vec->rooms[first_link]->next)
 		error(MALLOC_ERR);
 	data->rooms_vec->rooms[first_link]->next->head = data->rooms_vec->rooms[first_link]->head;
 	data->rooms_vec->rooms[first_link] = data->rooms_vec->rooms[first_link]->next;
 	data->rooms_vec->rooms[first_link]->next = NULL;
-	data->rooms_vec->rooms[first_link]->room_name = data->rooms_vec->rooms[second_link]->room_name;
-	data->rooms_vec->rooms[first_link] = data->rooms_vec->rooms[first_link]->head;
+	data->rooms_vec->rooms[first_link]->room_name = data->rooms_vec->rooms[second_link]->head->room_name;
 }
 
 void	read_links(t_data *data, char *line)
