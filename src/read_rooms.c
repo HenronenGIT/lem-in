@@ -35,6 +35,7 @@ void	read_rooms(t_data *data)
 {
 	char	*line;
 
+	line = NULL;
 	while (get_next_line(0, &line) && !ft_strchr(line,'-'))
 	{
 		if (line && *line == '#')
@@ -44,21 +45,24 @@ void	read_rooms(t_data *data)
 		else
 			read_room_name(data, line, NORMAL);
 		free(line);
+		line = NULL;
 	}
-	if (ft_strchr(line, '-'))
-	{
-		read_links(data, line);
+	if (line)
 		free(line);
-	}
-	while (get_next_line(0, &line))
-	{
-		if (*line != '#')
-		{
-			if (ft_strchr(line, '-'))
-				read_links(data, line);
-		}
-		free(line);
-	}
+	// if (ft_strchr(line, '-'))
+	// {
+	// 	read_links(data, line);
+	// 	free(line);
+	// }
+	// while (get_next_line(0, &line))
+	// {
+	// 	if (*line != '#')
+	// 	{
+	// 		if (ft_strchr(line, '-'))
+	// 			read_links(data, line);
+	// 	}
+		// free(line);
+	// }
 }
 
 // int	read_hashtag(t_data *data, char *line)
@@ -83,6 +87,7 @@ void	read_hashtag(t_data *data, char *line) //? Testing with void return value
 		error(FORMAT_ERR);
 		//? One more else if() might need to be added for checking if hashtag was comment.
 		//? In that case just return.
+	free(test);
 }
 
 void	read_room_name(t_data *data, char *line, int decider)

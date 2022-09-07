@@ -4,11 +4,12 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -fsanitize=address
+FLAGS = -Wall -Wextra -g #-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
-			vector.c \
+			vector_1.c \
+			vector_2.c \
 			read_rooms.c \
 			read_links.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))

@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector.c                                           :+:      :+:    :+:   */
+/*   vector_1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: igaplich <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 11:09:31 by igaplich          #+#    #+#             */
-/*   Updated: 2022/09/02 11:09:33 by igaplich         ###   ########.fr       */
+/*   Created: 2022/09/07 15:33:00 by hmaronen          #+#    #+#             */
+/*   Updated: 2022/09/07 15:33:01 by hmaronen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/lem_in.h"
 
@@ -63,12 +64,11 @@ void	vec_insert(t_vec **dst, char *name)
 		error(-3);
 	if ((*dst)->space_left == 0)
 		vec_resize(dst);
-	(*dst)->rooms[(*dst)->space_taken] = (t_room *)malloc(sizeof(t_room));
+	vec_allocate_rooms(*dst, (*dst)->space_taken);
+	// (*dst)->rooms[(*dst)->space_taken] = (t_room *)malloc(sizeof(t_room));
 	if (!(*dst)->rooms[(*dst)->space_taken])
 		error(MALLOC_ERR);
 	(*dst)->rooms[(*dst)->space_taken]->room_name = name;
-	(*dst)->rooms[(*dst)->space_taken]->next = NULL;
-	(*dst)->rooms[(*dst)->space_taken]->head = (*dst)->rooms[(*dst)->space_taken];
 	(*dst)->space_taken++;
 	(*dst)->space_left--;
 }

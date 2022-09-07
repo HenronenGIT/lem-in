@@ -25,12 +25,13 @@
 # define END 2
 # define NORMAL 3
 
-typedef struct s_room
+typedef struct s_data
 {
-	char			*room_name;
-	struct s_room	*head;
-	struct s_room	*next;
-}	t_room;	//? t_room_lst better name - or something similar?
+	unsigned long	ants;
+	char			*start;
+	char			*end;
+	struct s_vec	*rooms_vec;
+}	t_data;
 
 typedef struct s_vec
 {
@@ -40,13 +41,19 @@ typedef struct s_vec
 	size_t			space_taken;
 }	t_vec;
 
-typedef struct s_data
+typedef struct s_room
 {
-	unsigned long	ants;
-	char			*start;
-	char			*end;
-	struct s_vec	*rooms_vec;
-}	t_data;
+	char			*room_name;
+	struct s_links	*links_vec;
+}	t_room;
+
+typedef struct s_links
+{
+	struct s_room	**link_ptr;
+	size_t			length;
+	size_t			space_left;
+	size_t			space_taken;
+}	t_links;
 
 void	error(int error_number);
 
@@ -63,5 +70,6 @@ void	read_links(t_data *data, char *line);
 /*----------VECTOR------------*/
 void	vec_new(t_vec *dst, size_t len);
 void	vec_insert(t_vec **dst, char *name);
+void	vec_allocate_rooms(t_vec *dst, size_t	i);
 
 #endif
