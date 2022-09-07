@@ -35,7 +35,6 @@ void	init_struct(t_data *data)
 	data->rooms_vec->space_taken = 0;
 }
 
-
 void	print_rooms(t_data data)
 {
 	size_t i;
@@ -63,8 +62,8 @@ int main(void)
 	read_ants(&data);
 	read_rooms(&data);
 
-
 	print_rooms(data); //! temp
+	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
 	// system("leaks lem-in");
 	// return (0);
 	exit (0);
