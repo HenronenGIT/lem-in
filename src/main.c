@@ -55,11 +55,6 @@ void	print_rooms(t_data data)
 	}
 }
 
-void	print_temp(t_data *data)
-{
-	
-}
-
 int main(void)
 {
 	t_data	data;
@@ -70,7 +65,6 @@ int main(void)
 
 
 	print_rooms(data); //! temp
-	print_temp(&data);
 	// system("leaks lem-in");
 	// return (0);
 	exit (0);
