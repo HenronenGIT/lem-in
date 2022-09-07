@@ -50,9 +50,13 @@ void	read_rooms(t_data *data)
 		read_links(data, line);
 		free(line);
 	}
-	while (get_next_line(0, &line) && ft_strchr(line, '-'))
+	while (get_next_line(0, &line))
 	{
-		read_links(data, line);
+		if (*line != '#')
+		{
+			if (ft_strchr(line, '-'))
+				read_links(data, line);
+		}
 		free(line);
 	}
 }
@@ -85,6 +89,7 @@ void	read_room_name(t_data *data, char *line, int decider)
 {
 	int		i;
 	char	*name;
+	int		hash;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')
