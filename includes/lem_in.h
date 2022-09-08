@@ -44,6 +44,7 @@ typedef struct s_vec
 typedef struct s_room
 {
 	char			*room_name;
+	struct s_room	*next;
 	struct s_links	*links_vec;
 }	t_room;
 
@@ -71,5 +72,8 @@ void	read_links(t_data *data, char *line);
 void	vec_new(t_vec *dst, size_t len);
 void	vec_insert(t_vec **dst, char *name);
 void	vec_allocate_rooms(t_vec *dst, size_t	i);
+
+/*----------HASH--------------*/
+void	sort_hash_values(t_data *data);
 
 #endif

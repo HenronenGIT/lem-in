@@ -12,13 +12,14 @@
 
 #include "../includes/lem_in.h"
 
-void	vec_allocate_rooms(t_vec *dst, size_t	i)
+void	vec_allocate_rooms(t_vec *dst, size_t i)
 {
 	size_t	j;
 
 	dst->rooms[i] = (t_room *)malloc(sizeof(t_room));
 	if (!dst->rooms[i])
 		error(MALLOC_ERR);
+	dst->rooms[i]->next = NULL;
 	dst->rooms[i]->links_vec = (t_links *)malloc(sizeof(t_links));
 	if (!dst->rooms[i]->links_vec)
 		error(MALLOC_ERR);
@@ -26,7 +27,7 @@ void	vec_allocate_rooms(t_vec *dst, size_t	i)
 	if (!dst->rooms[i]->links_vec->link_ptr)
 		error(MALLOC_ERR);
 	j = 0;
-	while(j < 3)
+	while (j < 3)
 	{
 		dst->rooms[i]->links_vec->link_ptr[j] = NULL;
 		j++;

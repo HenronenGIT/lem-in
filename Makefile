@@ -11,7 +11,8 @@ SRC_FILES = main.c \
 			vector_1.c \
 			vector_2.c \
 			read_rooms.c \
-			read_links.c
+			read_links.c \
+			array_hashing.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
