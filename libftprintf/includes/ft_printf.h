@@ -76,5 +76,9 @@ int		precision_parse(char **str, t_parse *parse, int *param, va_list ap);
 int		clean_printf(t_parse *parse);
 int		print_fn(t_parse *parse, long *intpart, char **fraction);
 int		str_build(t_parse *parse, char **ret);
+/*HENRI*/
+
+void	ft_puterror(char *error_msg);
+int		ft_isnumber(char *string);
 
 #endif

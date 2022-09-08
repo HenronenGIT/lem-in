@@ -77,5 +77,6 @@ void	vec_allocate_rooms(t_vec *dst, size_t	i);
 
 /*----------HASH--------------*/
 void	sort_hash_values(t_data *data);
+unsigned long	hashing(t_data *data, char *name);
 
 #endif

@@ -45,6 +45,7 @@ void	vec_resize(t_vec **src)
 {
 	t_vec	*dst;
 
+	// printf("Resizing\n");
 	if (!*src)
 		error(-3);
 	dst = (t_vec *)malloc(sizeof(t_vec));
@@ -57,22 +58,7 @@ void	vec_resize(t_vec **src)
 	*src = dst;
 }
 
-unsigned long	hashing(t_data *data, char *name)
-{
-	size_t			i;
-	unsigned long	hash;
 
-	if (!name)
-		error(-3);
-	hash = 5381;
-	i = 0;
-	while (name[i])
-	{
-		hash = ((hash << 5) + hash) + name[i];
-		i++;
-	}
-	return (hash % data->rooms_vec->length);
-}
 
 void	vec_insert(t_vec **dst, char *name)
 {
