@@ -47,6 +47,7 @@ void	read_rooms(t_data *data)
 		free(line);
 		line = NULL;
 	}
+	sort_hash_values(data);
 	if (line)
 		free(line);
 	// if (ft_strchr(line, '-'))
@@ -94,7 +95,6 @@ void	read_room_name(t_data *data, char *line, int decider)
 {
 	int		i;
 	char	*name;
-	int		hash;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')
