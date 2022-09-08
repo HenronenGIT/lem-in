@@ -18,7 +18,8 @@
 # include "../libft/includes/libft.h" // hmaronen library //? temp
 
 # define MALLOC_ERR -2
-# define FORMAT_ERR -4 //? Why -3 not used
+# define NULL_ERR -3
+# define FORMAT_ERR -4
 # define INPUT_ERR -5
 
 # define START 1

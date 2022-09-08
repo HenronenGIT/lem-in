@@ -48,22 +48,22 @@ void	read_rooms(t_data *data)
 		line = NULL;
 	}
 	sort_hash_values(data);
-	if (line)
-		free(line);
-	// if (ft_strchr(line, '-'))
-	// {
-	// 	read_links(data, line);
+	// if (line)
 	// 	free(line);
-	// }
-	// while (get_next_line(0, &line))
-	// {
-	// 	if (*line != '#')
-	// 	{
-	// 		if (ft_strchr(line, '-'))
-	// 			read_links(data, line);
-	// 	}
-		// free(line);
-	// }
+	if (ft_strchr(line, '-'))
+	{
+		read_links(data, line);
+		free(line);
+	}
+	while (get_next_line(0, &line))
+	{
+		if (*line != '#')
+		{
+			if (ft_strchr(line, '-'))
+				read_links(data, line);
+		}
+		free(line);
+	}
 }
 
 // int	read_hashtag(t_data *data, char *line)

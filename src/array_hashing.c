@@ -18,7 +18,7 @@ unsigned long	hashing(t_data *data, char *name)
 	unsigned long	hash;
 
 	if (!name)
-		error(-3);
+		error(NULL_ERR);
 	hash = 5381;
 	i = 0;
 	while (name[i])
@@ -34,8 +34,14 @@ void	handle_collision(t_room *list_room, t_room *insert_room)
 	t_room	*tmp_room;
 
 	tmp_room = list_room;
+	if (!ft_strcmp(tmp_room->room_name, insert_room->room_name))
+		error(FORMAT_ERR);
 	while (tmp_room->next)
+	{
+		if (!ft_strcmp(tmp_room->room_name, insert_room->room_name))
+			error(FORMAT_ERR);
 		tmp_room = tmp_room->next;
+	}
 	tmp_room->next = insert_room;
 	insert_room->next = NULL;
 }

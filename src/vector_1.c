@@ -16,12 +16,9 @@ void	vec_free(t_vec **array)
 {
 	if (*array)
 	{
-		if (*array)
-		{
-			if ((*array)->rooms)
-				free((*array)->rooms);
-			free(*array);
-		}
+		if ((*array)->rooms)
+			free((*array)->rooms);
+		free(*array);
 	}
 }
 
@@ -30,7 +27,7 @@ void	vec_copy(t_vec **src, t_vec *dst)
 	size_t	i;
 
 	if (!*src || !dst)
-		error(-3);
+		error(NULL_ERR);
 	i = 0;
 	while (i < (*src)->length)
 	{
@@ -47,7 +44,7 @@ void	vec_resize(t_vec **src)
 
 	// printf("Resizing\n");
 	if (!*src)
-		error(-3);
+		error(NULL_ERR);
 	dst = (t_vec *)malloc(sizeof(t_vec));
 	if (!dst)
 		error(MALLOC_ERR);
@@ -58,12 +55,10 @@ void	vec_resize(t_vec **src)
 	*src = dst;
 }
 
-
-
 void	vec_insert(t_vec **dst, char *name)
 {
 	if (!*dst || !name)
-		error(-3);
+		error(NULL_ERR);
 	if ((*dst)->space_left == 0)
 		vec_resize(dst);
 	vec_allocate_rooms(*dst, (*dst)->space_taken);
@@ -80,7 +75,7 @@ void	vec_new(t_vec *dst, size_t len)
 	size_t	i;
 
 	if (!dst || len == 0)
-		error(-3);
+		error(NULL_ERR);
 	dst->length = len;
 	dst->space_taken = 0;
 	dst->space_left = len;

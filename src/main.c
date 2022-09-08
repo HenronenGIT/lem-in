@@ -85,7 +85,7 @@ int main(void)
 	read_rooms(&data);
 	print_rooms(data); //! temp
 	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
-	// system("leaks lem-in");
+	system("leaks lem-in");
 	return (0);
 	// exit (0);
 }
