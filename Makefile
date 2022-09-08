@@ -32,7 +32,7 @@ LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(INC)
+$(NAME): $(OBJ) $(INC) Makefile
 	@make -C $(LIBPRINT_DIR)
 	@echo "$(CYELLOW)Compiling $(NAME)$(CEND)"
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)

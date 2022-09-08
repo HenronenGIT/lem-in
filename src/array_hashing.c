@@ -35,11 +35,9 @@ void	handle_collision(t_room *list_room, t_room *insert_room)
 
 	tmp_room = list_room;
 	while (tmp_room->next)
-	{
 		tmp_room = tmp_room->next;
-		printf("ENTERED");
-	}
 	tmp_room->next = insert_room;
+	insert_room->next = NULL;
 }
 
 void	move_and_clear_array(t_data *data, t_room **tmp_arr)

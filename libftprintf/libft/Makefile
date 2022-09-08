@@ -89,7 +89,9 @@ SRC = ft_strlen.c \
 	ft_itoa_base.c \
 	ft_numlenbase.c \
 	ft_uitoa_base.c \
-	ft_unumlenbase.c
+	ft_unumlenbase.c \
+	ft_puterror.c \
+	ft_isnumber.c
 
 all: $(NAME)
 

@@ -45,6 +45,7 @@ void	vec_resize(t_vec **src)
 {
 	t_vec	*dst;
 
+	// printf("Resizing\n");
 	if (!*src)
 		error(-3);
 	dst = (t_vec *)malloc(sizeof(t_vec));

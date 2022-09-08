@@ -44,28 +44,36 @@ void	init_struct(t_data *data)
 void	print_rooms(t_data data)
 {
 	size_t i;
+	size_t counter;
 	i = 0;
 	t_room	*tmp;
 
-	printf("\nstart = %s\n", data.start);
-	printf("end = %s\n\n", data.end);
+	counter = 0;
+	ft_printf("\nstart = %s\n", data.start);
+	ft_printf("end = %s\n\n", data.end);
 	
 	while (i < data.rooms_vec->length)
 	{
 		if (data.rooms_vec->rooms[i])
 		{
 			tmp = data.rooms_vec->rooms[i];
-			printf("%4s", data.rooms_vec->rooms[i]->room_name);
+			ft_printf("%4s", data.rooms_vec->rooms[i]->room_name);
+			counter += 1;
 			while(data.rooms_vec->rooms[i]->next)
 			{
 				data.rooms_vec->rooms[i] = data.rooms_vec->rooms[i]->next;
-				printf(" -> %4s", data.rooms_vec->rooms[i]->room_name);
+				ft_printf(" -> %4s", data.rooms_vec->rooms[i]->room_name);
+				counter += 1;
 			}
 			data.rooms_vec->rooms[i] = tmp;
-			printf("\n");
+			ft_printf("\n");
 		}
 		i++;
 	}
+	ft_printf("Rooms amount %zu\n", counter);
+	ft_printf("Vec total %zu\n", data.rooms_vec->length);
+	ft_printf("Vec taken %zu\n", data.rooms_vec->space_taken);
+	ft_printf("Vec left %zu\n", data.rooms_vec->space_left);
 }
 
 int main(void)
@@ -77,7 +85,7 @@ int main(void)
 	read_rooms(&data);
 	print_rooms(data); //! temp
 	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
-	system("leaks lem-in");
-	// return (0);
-	exit (0);
+	// system("leaks lem-in");
+	return (0);
+	// exit (0);
 }
