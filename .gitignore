@@ -5,3 +5,4 @@ a.out
 lem-in
 .DS_Store
 obj/*
+.vscode

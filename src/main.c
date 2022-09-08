@@ -56,6 +56,32 @@ void	print_rooms(t_data data)
 	}
 }
 
+void	hashing_rooms(t_data *data)
+{
+	size_t			i;
+	size_t			j;
+	unsigned long	hash;
+
+	i = 0;
+	hash = 5381;
+	j = 0;
+	while (i < data->rooms_vec->space_taken)
+	{
+		while (data->rooms_vec->rooms[i]->room_name[j])
+		{
+			hash = data->rooms_vec->rooms[i]->room_name[j] + (hash << 5) + hash;
+			j++;
+		}
+		printf("%s rooms hash = %lu\n", data->rooms_vec->rooms[i]->room_name, hash % data->rooms_vec->length);
+		hash = 5381;
+		j = 0;
+		i++;
+	}
+	printf("Vector size = %zu\n", data->rooms_vec->length);
+	printf("Vector taken = %zu\n", data->rooms_vec->space_taken);
+	printf("Vector free = %zu\n", data->rooms_vec->space_left);
+}
+
 int main(void)
 {
 	t_data	data;
@@ -63,7 +89,7 @@ int main(void)
 	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-
+	hashing_rooms(&data);
 	// print_rooms(data); //! temp
 	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
 	system("leaks lem-in");
