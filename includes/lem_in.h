@@ -25,6 +25,7 @@
 # define END 2
 # define NORMAL 3
 
+/* Main structure which contains all the data */
 typedef struct s_data
 {
 	unsigned long	ants;
@@ -33,6 +34,7 @@ typedef struct s_data
 	struct s_vec	*rooms_vec;
 }	t_data;
 
+/*  */
 typedef struct s_vec
 {
 	struct s_room	**rooms;
