@@ -49,8 +49,7 @@ void	vec_resize(t_vec **src)
 	if (!dst)
 		error(MALLOC_ERR);
 	vec_new(dst, ((*src)->length * 2));
-	if ((*src)->length != 0)
-		vec_copy(src, dst);
+	vec_copy(src, dst);
 	vec_free(src);
 	*src = dst;
 }

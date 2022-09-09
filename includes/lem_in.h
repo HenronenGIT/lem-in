@@ -30,8 +30,8 @@
 typedef struct s_data
 {
 	unsigned long	ants;
-	char			*start;
-	char			*end;
+	struct s_room	*start;
+	struct s_room	*end;
 	struct s_vec	*rooms_vec;
 }	t_data;
 

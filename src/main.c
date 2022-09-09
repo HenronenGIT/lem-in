@@ -49,8 +49,8 @@ void	print_rooms(t_data data)
 	t_room	*tmp;
 
 	counter = 0;
-	ft_printf("\nstart = %s\n", data.start);
-	ft_printf("end = %s\n\n", data.end);
+	ft_printf("\nstart = %s\n", data.start->room_name);
+	ft_printf("end = %s\n\n", data.end->room_name);
 	
 	while (i < data.rooms_vec->length)
 	{

@@ -102,7 +102,7 @@ void	read_room_name(t_data *data, char *line, int decider)
 	name = ft_strsub(line, 0, i);
 	vec_insert(&(data->rooms_vec), name);
 	if (decider == START)
-		data->start = name;
+		data->start = data->rooms_vec->rooms[data->rooms_vec->space_taken - 1];
 	if (decider == END)
-		data->end = name;
+		data->end = data->rooms_vec->rooms[data->rooms_vec->space_taken - 1];
 }
