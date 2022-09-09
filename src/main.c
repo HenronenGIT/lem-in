@@ -63,6 +63,7 @@ void	print_rooms(t_data data)
 			{
 				data.rooms_vec->rooms[i] = data.rooms_vec->rooms[i]->next;
 				ft_printf(" -> %4s", data.rooms_vec->rooms[i]->room_name);
+
 				counter += 1;
 			}
 			data.rooms_vec->rooms[i] = tmp;
@@ -76,6 +77,41 @@ void	print_rooms(t_data data)
 	ft_printf("Vec left %zu\n", data.rooms_vec->space_left);
 }
 
+void	print_links(t_data data)
+{
+	size_t	i;
+	size_t	j;
+	t_room	*tmp_room;
+
+
+	i = 0;
+	j = 0;
+	while (i < data.rooms_vec->length)
+	{
+		if (data.rooms_vec->rooms[i])
+		{
+			tmp_room = data.rooms_vec->rooms[i];
+			while (tmp_room)
+			{
+				ft_printf("Room name = %s ", tmp_room->room_name);
+				if (tmp_room->links_vec)
+				{
+					// while (tmp_room->links_vec->links_arr[j])
+					while (j < tmp_room->links_vec->space_taken)
+					{
+						ft_printf("-> %s ", tmp_room->links_vec->links_arr[j]->room_name);
+						j++;
+					}
+				}
+				tmp_room = tmp_room->next;
+				j = 0;
+				ft_printf("\n");
+			}
+		}
+		i++;
+	}
+}
+
 int main(void)
 {
 	t_data	data;
@@ -84,6 +120,7 @@ int main(void)
 	read_ants(&data);
 	read_rooms(&data);
 	print_rooms(data); //! temp
+	print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
 	// system("leaks lem-in");
 	return (0);

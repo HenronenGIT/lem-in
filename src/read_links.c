@@ -12,39 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-size_t	room_compare(t_data *data, char **line)
-{
-
-	// char	*compare;
-	// size_t	len;
-	// size_t	i;
-
-	// i = 0;
-	// compare = NULL;
-	// while (i < data->rooms_vec->space_taken)
-	// {
-	// 	len = ft_strlen(data->rooms_vec->rooms[i]->room_name);
-	// 	if (!ft_strncmp(*line, data->rooms_vec->rooms[i]->room_name, len))
-	// 		break;
-	// 	i++;
-	// }
-	// if (i == data->rooms_vec->space_taken)
-	// 	error(FORMAT_ERR);
-	// *line += len;
-	// return (i);
-}
-
-void	insert_link(t_data *data, size_t first_link, size_t second_link)
-{
-	// data->rooms_vec->rooms[first_link]->next = (t_room *)malloc(sizeof(t_room));
-	// if (!data->rooms_vec->rooms[first_link]->next)
-		// error(MALLOC_ERR);
-	// data->rooms_vec->rooms[first_link]->next->head = data->rooms_vec->rooms[first_link]->head;
-	// data->rooms_vec->rooms[first_link] = data->rooms_vec->rooms[first_link]->next;
-	// data->rooms_vec->rooms[first_link]->next = NULL;
-	// data->rooms_vec->rooms[first_link]->room_name = data->rooms_vec->rooms[second_link]->head->room_name;
-}
-
 t_room		*find_room(t_room *room, char *link_name)
 {
 	while (room)
@@ -79,6 +46,4 @@ void	read_links(t_data *data, char *line)
 	free(rooms[0]);
 	free(rooms[1]);
 	free(rooms);
-
-	// find_room(data->rooms_vec->rooms[second_hash]);
 }

@@ -13,95 +13,87 @@
 #include "../includes/lem_in.h"
 
 
-void	vec_free_links(t_room **room)
+void	vec_free_links(t_room *room)
 {	
-	if ((*room)->links_vec)
+	if (room->links_vec)
 	{
-		if ((*room)->links_vec->links_arr)
-			free((*room)->links_vec->links_arr);
-		free((*room)->links_vec);
+		if (room->links_vec->links_arr)
+			free(room->links_vec->links_arr);
+		free(room->links_vec);
 	}
 }
 
-void	vec_copy_links(t_room *new_room, t_room *old_room)
+void	vec_copy_links(t_links *new_vec, t_links *old_vec)
 {
 	size_t	i;
 
 	i = 0;
-	while (i < old_room->links_vec->space_taken)
+	while (i < old_vec->space_taken)
 	{
-		new_room->links_vec->links_arr[i] = old_room->links_vec->links_arr[i];
+		new_vec->links_arr[i] = old_vec->links_arr[i];
 		i++;
 	}
-	new_room->links_vec->space_left = new_room->links_vec->length - i;
-	new_room->links_vec->space_taken = i;
-
+	new_vec->space_left = new_vec->length - i;
+	new_vec->space_taken = i;
 }
 
-void	vec_resize_links(t_room **room)
+void	vec_resize_links(t_room *room)
 {
-	t_links	*new_vec; //!
+	t_links	*new_vec;
 
-	vec_allocate_links(new_vec, (*room)->links_vec->length * 2); //!
-	vec_copy_links(new_vec, (*room));
+	new_vec = NULL;
+	allocate_links_vec(&new_vec, room->links_vec->length * 2);
+	vec_copy_links(new_vec, room->links_vec);
 	vec_free_links(room);
-	(*room) = new_vec;
+	room->links_vec = new_vec;
 }
 
-void	vec_allocate_links(t_room *room, size_t length)
+void	vec_allocate_links_array(t_links **links_vec, size_t length)
 {
 	size_t	i;
 
-	room->links_vec = (t_links *)malloc(sizeof(t_links));
-	if (!room->links_vec)
-		error(MALLOC_ERR);
 	i = 0;
-	room->links_vec->links_arr = (t_room **)malloc(sizeof(t_room *) * length);
-	if (!room->links_vec->links_arr)
+	(*links_vec)->links_arr = (t_room **)malloc(sizeof(t_room *) * length);
+	if (!(*links_vec)->links_arr)
 		error(MALLOC_ERR);
-	while (i < 2)
-		room->links_vec->links_arr[i++] = NULL;
-	room->links_vec->length = length;
-	room->links_vec->space_left = length;
-	room->links_vec->space_taken = 0;
+	while (i < length)
+		(*links_vec)->links_arr[i++] = NULL;
+	(*links_vec)->length = length;
+	(*links_vec)->space_left = length;
+	(*links_vec)->space_taken = 0;
+}
+
+void	allocate_links_vec(t_links **vec, size_t length)
+{
+	(*vec) = (t_links *)malloc(sizeof(t_links));
+	if (!(*vec))
+		error(MALLOC_ERR);
+	vec_allocate_links_array(vec, length);
 }
 
 void	vec_link_insert(t_room *room_1, t_room *room_2)
 {
 	if (!room_1->links_vec)
-		vec_allocate_links(room_1, 2)
+		allocate_links_vec(&room_1->links_vec, 2);
 	if (!room_2->links_vec)
-		vec_allocate_links(room_2, 2);
+		allocate_links_vec(&room_2->links_vec, 2);
 	if (!room_1->links_vec->space_left)
-		vec_resize_links(&room_1);
-
-	room_1->links_vec->links_arr[]
+		vec_resize_links(room_1);
+	if (!room_2->links_vec->space_left)
+		vec_resize_links(room_2);
+	room_1->links_vec->links_arr[room_1->links_vec->space_taken] = room_2;
+	room_1->links_vec->space_left--;
+	room_1->links_vec->space_taken++;
+	room_2->links_vec->links_arr[room_2->links_vec->space_taken] = room_1;
+	room_2->links_vec->space_left--;
+	room_2->links_vec->space_taken++;
 }
 
 void	vec_allocate_rooms(t_vec *dst, size_t i)
 {
-	size_t	j;
-
 	dst->rooms[i] = (t_room *)malloc(sizeof(t_room));
 	if (!dst->rooms[i])
 		error(MALLOC_ERR);
 	dst->rooms[i]->next = NULL;
 	dst->rooms[i]->links_vec = NULL;
-
-	// dst->rooms[i]->links_vec = (t_links *)malloc(sizeof(t_links));
-
-	if (!dst->rooms[i]->links_vec)
-		error(MALLOC_ERR);
-	dst->rooms[i]->links_vec->link_ptr = (t_room **)malloc(sizeof(t_room *) * 3);
-	if (!dst->rooms[i]->links_vec->link_ptr)
-		error(MALLOC_ERR);
-	j = 0;
-	while (j < 3)
-	{
-		dst->rooms[i]->links_vec->link_ptr[j] = NULL;
-		j++;
-	}
-	dst->rooms[i]->links_vec->length = 3;
-	dst->rooms[i]->links_vec->space_taken = 0;
-	dst->rooms[i]->links_vec->space_left = 3;
 }

@@ -76,6 +76,9 @@ void	vec_new(t_vec *dst, size_t len);
 void	vec_insert(t_vec **dst, char *name);
 void	vec_allocate_rooms(t_vec *dst, size_t	i);
 void	vec_link_insert(t_room *room_1, t_room *room_2);
+void	vec_allocate_links_array(t_links **links_vec, size_t length);
+void	allocate_links_vec(t_links **vec, size_t length);
+void	vec_resize_links(t_room *room);
 
 /*----------HASH--------------*/
 void	sort_hash_values(t_data *data);
