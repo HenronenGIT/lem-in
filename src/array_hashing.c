@@ -85,4 +85,5 @@ void	sort_hash_values(t_data *data)
 		error(MALLOC_ERR);
 	move_and_clear_array(data, tmp_arr);
 	hash_and_move_array(data, tmp_arr);
+	free(tmp_arr);
 }

@@ -45,15 +45,15 @@ void	insert_link(t_data *data, size_t first_link, size_t second_link)
 	// data->rooms_vec->rooms[first_link]->room_name = data->rooms_vec->rooms[second_link]->head->room_name;
 }
 
-int		find_room(t_room *room, char *link_name)
+t_room		*find_room(t_room *room, char *link_name)
 {
 	while (room)
 	{
 		if (!ft_strcmp(room->room_name, link_name))
-			return (1);
+			return (room);
 		room = room->next;
 	}
-	return (0);
+	return (NULL);
 }
 
 void	read_links(t_data *data, char *line)
@@ -69,10 +69,16 @@ void	read_links(t_data *data, char *line)
 	rooms = ft_strsplit(line, '-'); //! temp
 	first_hash = hashing(data, rooms[0]);
 	second_hash = hashing(data, rooms[1]);
-	find_room(data->rooms_vec->rooms[first_hash], rooms[0]);
-
+	room_1 = find_room(data->rooms_vec->rooms[first_hash], rooms[0]);
+	if (!room_1)
+		error(FORMAT_ERR);
+	room_2 = find_room(data->rooms_vec->rooms[second_hash], rooms[1]);
+	if (!room_2)
+		error(FORMAT_ERR);
+	vec_link_insert(room_1, room_2);
 	free(rooms[0]);
 	free(rooms[1]);
 	free(rooms);
+
 	// find_room(data->rooms_vec->rooms[second_hash]);
 }
