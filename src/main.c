@@ -26,16 +26,17 @@ void	error(int error_number)
 void	init_struct(t_data *data)
 {
 	size_t	i;
+
 	data->ants = 0;
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
 	if (!data->rooms_vec)
 		error(MALLOC_ERR);
-	data->rooms_vec->rooms = (t_room **)malloc(sizeof(t_room *) * 10);
-	if (!data->rooms_vec->rooms)
+	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * 10);
+	if (!data->rooms_vec->array)
 		error(MALLOC_ERR);
 	i = 0;
 	while (i < 10)
-		data->rooms_vec->rooms[i++] = NULL;
+		data->rooms_vec->array[i++] = NULL;
 	data->rooms_vec->length = 10;
 	data->rooms_vec->space_left = 10;
 	data->rooms_vec->space_taken = 0;
@@ -54,19 +55,19 @@ void	print_rooms(t_data data)
 	
 	while (i < data.rooms_vec->length)
 	{
-		if (data.rooms_vec->rooms[i])
+		if (data.rooms_vec->array[i])
 		{
-			tmp = data.rooms_vec->rooms[i];
-			ft_printf("%4s", data.rooms_vec->rooms[i]->room_name);
+			tmp = data.rooms_vec->array[i];
+			ft_printf("%4s", ((t_room **)data.rooms_vec->array)[i]->room_name);
 			counter += 1;
-			while(data.rooms_vec->rooms[i]->next)
+			while(((t_room **)data.rooms_vec->array)[i]->next)
 			{
-				data.rooms_vec->rooms[i] = data.rooms_vec->rooms[i]->next;
-				ft_printf(" -> %4s", data.rooms_vec->rooms[i]->room_name);
+				data.rooms_vec->array[i] = ((t_room **)data.rooms_vec->array)[i]->next;
+				ft_printf(" -> %4s", ((t_room **)data.rooms_vec->array)[i]->room_name);
 
 				counter += 1;
 			}
-			data.rooms_vec->rooms[i] = tmp;
+			data.rooms_vec->array[i] = tmp;
 			ft_printf("\n");
 		}
 		i++;
@@ -88,18 +89,18 @@ void	print_links(t_data data)
 	j = 0;
 	while (i < data.rooms_vec->length)
 	{
-		if (data.rooms_vec->rooms[i])
+		if (data.rooms_vec->array[i])
 		{
-			tmp_room = data.rooms_vec->rooms[i];
+			tmp_room = data.rooms_vec->array[i];
 			while (tmp_room)
 			{
 				ft_printf("Room name = %s ", tmp_room->room_name);
 				if (tmp_room->links_vec)
 				{
-					// while (tmp_room->links_vec->links_arr[j])
 					while (j < tmp_room->links_vec->space_taken)
 					{
-						ft_printf("-> %s ", tmp_room->links_vec->links_arr[j]->room_name);
+						ft_printf("-> %s ", ((t_room **)tmp_room->links_vec->array)[j]->room_name);
+						// ft_printf("-> %s ", ((t_vec **)tmp_room->links_vec->array)[j]->room_name););
 						j++;
 					}
 				}
@@ -119,9 +120,10 @@ int main(void)
 	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
+	
 	print_rooms(data); //! temp
 	print_links(data); //! temp
-	// printf("%s\n", data.rooms_vec->rooms[0]->room_name);
+	// printf("%s\n", data.rooms_vec->array[0]->room_name);
 	// system("leaks lem-in");
 	return (0);
 	// exit (0);

@@ -46,10 +46,8 @@ void	read_rooms(t_data *data)
 			read_room_name(data, line, NORMAL);
 		free(line);
 		line = NULL;
-	}
+	}	
 	sort_hash_values(data);
-	// if (line)
-	// 	free(line);
 	if (ft_strchr(line, '-'))
 	{
 		read_links(data, line);
@@ -66,8 +64,7 @@ void	read_rooms(t_data *data)
 	}
 }
 
-// int	read_hashtag(t_data *data, char *line)
-void	read_hashtag(t_data *data, char *line) //? Testing with void return value
+void	read_hashtag(t_data *data, char *line)
 {
 	char *test;
 
@@ -100,9 +97,9 @@ void	read_room_name(t_data *data, char *line, int decider)
 	while (line[i] && line[i] != ' ')
 		i++;
 	name = ft_strsub(line, 0, i);
-	vec_insert(&(data->rooms_vec), name);
+	vec_insert(data->rooms_vec, name);
 	if (decider == START)
-		data->start = data->rooms_vec->rooms[data->rooms_vec->space_taken - 1];
+		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	if (decider == END)
-		data->end = data->rooms_vec->rooms[data->rooms_vec->space_taken - 1];
+		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 }

@@ -14,6 +14,7 @@
 # define LEM_IN_H
 
 # include <stdio.h>
+# include <stdbool.h>
 // # include "../libftprintf/includes/ft_printf.h"
 # include "../libft/includes/libft.h" // hmaronen library //? temp
 
@@ -35,10 +36,10 @@ typedef struct s_data
 	struct s_vec	*rooms_vec;
 }	t_data;
 
-/*  */
+/*   */
 typedef struct s_vec
 {
-	struct s_room	**rooms;
+	void	 		**array;
 	size_t			length;
 	size_t			space_left;
 	size_t			space_taken;
@@ -48,16 +49,8 @@ typedef struct s_room
 {
 	char			*room_name;
 	struct s_room	*next;
-	struct s_links	*links_vec;
+	struct s_vec	*links_vec;
 }	t_room;
-
-typedef struct s_links
-{
-	struct s_room	**links_arr;
-	size_t			length;
-	size_t			space_left;
-	size_t			space_taken;
-}	t_links;
 
 void	error(int error_number);
 
@@ -72,16 +65,15 @@ void	read_end(t_data *data, char *line);
 void	read_links(t_data *data, char *line);
 
 /*----------VECTOR------------*/
-void	vec_new(t_vec *dst, size_t len);
-void	vec_insert(t_vec **dst, char *name);
-void	vec_allocate_rooms(t_vec *dst, size_t	i);
+void	vec_new_arr(t_vec *dst, size_t len);
+void	vec_resize(t_vec *src);
+void	vec_insert(t_vec *dst, char *name);
+void	vec_allocate_element(t_vec *dst, size_t i);
 void	vec_link_insert(t_room *room_1, t_room *room_2);
-void	vec_allocate_links_array(t_links **links_vec, size_t length);
-void	allocate_links_vec(t_links **vec, size_t length);
 void	vec_resize_links(t_room *room);
 
 /*----------HASH--------------*/
-void	sort_hash_values(t_data *data);
+void			sort_hash_values(t_data *data);
 unsigned long	hashing(t_data *data, char *name);
 
 #endif

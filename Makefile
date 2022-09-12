@@ -1,18 +1,17 @@
-CYELLOW=\033[0;33m
+]CYELLOW=\033[0;33m
 CEND=\033[0m
 CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g #-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -g -Wimplicit -fsanitize=address#-fno-sanitize=all#-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
 			vector_1.c \
-			vector_2.c \
 			read_rooms.c \
-			read_links.c \
-			array_hashing.c
+			array_hashing.c \
+			read_links.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

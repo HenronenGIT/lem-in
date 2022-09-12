@@ -53,8 +53,8 @@ void	move_and_clear_array(t_data *data, t_room **tmp_arr)
 	i = 0;
 	while (i < data->rooms_vec->space_taken)
 	{
-		tmp_arr[i] = data->rooms_vec->rooms[i];
-		data->rooms_vec->rooms[i] = NULL;
+		tmp_arr[i] = data->rooms_vec->array[i];
+		data->rooms_vec->array[i] = NULL;
 		i++;
 	}
 }
@@ -68,10 +68,10 @@ void	hash_and_move_array(t_data *data, t_room **tmp_arr)
 	while (i < data->rooms_vec->space_taken)
 	{
 		hash = hashing(data, tmp_arr[i]->room_name);
-		if (!data->rooms_vec->rooms[hash])
-			data->rooms_vec->rooms[hash] = tmp_arr[i];
+		if (!data->rooms_vec->array[hash])
+			data->rooms_vec->array[hash] = tmp_arr[i];
 		else
-			handle_collision(data->rooms_vec->rooms[hash], tmp_arr[i]);
+			handle_collision(data->rooms_vec->array[hash], tmp_arr[i]);
 		i++;
 	}
 }
