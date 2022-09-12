@@ -63,7 +63,6 @@ void	print_rooms(t_data data)
 			while(((t_room **)data.rooms_vec->array)[i]->next)
 			{
 				data.rooms_vec->array[i] = ((t_room **)data.rooms_vec->array)[i]->next;
-				ft_printf(" -> %4s", ((t_room **)data.rooms_vec->array)[i]->room_name);
 				ft_printf(" -> %4s depth %d", ((t_room **)data.rooms_vec->array)[i]->room_name, ((t_room **)data.rooms_vec->array)[i]->depth);
 				counter += 1;
 			}
