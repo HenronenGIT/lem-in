@@ -4,14 +4,15 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -Wimplicit -fsanitize=address#-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address#-fno-sanitize=all#-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
 			vector_1.c \
 			read_rooms.c \
 			array_hashing.c \
-			read_links.c
+			read_links.c \
+			bfs.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

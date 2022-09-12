@@ -58,13 +58,13 @@ void	print_rooms(t_data data)
 		if (data.rooms_vec->array[i])
 		{
 			tmp = data.rooms_vec->array[i];
-			ft_printf("%4s", ((t_room **)data.rooms_vec->array)[i]->room_name);
+			ft_printf("%4s depth %d", ((t_room **)data.rooms_vec->array)[i]->room_name, ((t_room **)data.rooms_vec->array)[i]->depth);
 			counter += 1;
 			while(((t_room **)data.rooms_vec->array)[i]->next)
 			{
 				data.rooms_vec->array[i] = ((t_room **)data.rooms_vec->array)[i]->next;
 				ft_printf(" -> %4s", ((t_room **)data.rooms_vec->array)[i]->room_name);
-
+				ft_printf(" -> %4s depth %d", ((t_room **)data.rooms_vec->array)[i]->room_name, ((t_room **)data.rooms_vec->array)[i]->depth);
 				counter += 1;
 			}
 			data.rooms_vec->array[i] = tmp;
@@ -120,7 +120,7 @@ int main(void)
 	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-	
+	bfs(&data);
 	print_rooms(data); //! temp
 	print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);

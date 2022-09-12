@@ -27,6 +27,12 @@
 # define END 2
 # define NORMAL 3
 
+typedef struct s_queue
+{
+	struct s_room	*room;
+	struct s_queue	*next;
+}	t_queue;
+
 /* Main structure which contains all the data */
 typedef struct s_data
 {
@@ -48,6 +54,8 @@ typedef struct s_vec
 typedef struct s_room
 {
 	char			*room_name;
+	bool			visited;
+	int				depth;
 	struct s_room	*next;
 	struct s_vec	*links_vec;
 }	t_room;
@@ -75,5 +83,8 @@ void	vec_resize_links(t_room *room);
 /*----------HASH--------------*/
 void			sort_hash_values(t_data *data);
 unsigned long	hashing(t_data *data, char *name);
+
+/*----------BFS--------------*/
+void	bfs(t_data *data);
 
 #endif

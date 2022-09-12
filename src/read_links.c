@@ -63,5 +63,4 @@ void	vec_link_insert(t_room *dst, t_room *src)
 	dst->links_vec->array[dst->links_vec->space_taken] = src;
 	dst->links_vec->space_left--;
 	dst->links_vec->space_taken++;
-
 }
