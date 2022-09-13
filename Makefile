@@ -8,7 +8,7 @@ FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address#-fno-sanitize=all#-fsani
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
-			vector_1.c \
+			vector.c \
 			read_rooms.c \
 			array_hashing.c \
 			read_links.c \
@@ -56,5 +56,5 @@ fclean : clean
 
 #* Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/cnysten_tricky.map 
+	./lem-in < ./eval_tests/test_maps/augment_1.map 
 re : fclean all clean all
