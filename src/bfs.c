@@ -12,11 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-void	backtrace_path(t_data *data)
+void backtrace_path(t_data *data)
 {
-	t_room	*tmp;
-	t_room	*lowest_depth;
-	size_t	i;
+	t_room *tmp;
+	t_room *lowest_depth;
+	size_t i;
 
 	i = 0;
 	tmp = data->end;
@@ -34,7 +34,6 @@ void	backtrace_path(t_data *data)
 		tmp = lowest_depth;
 	}
 	printf("%s\n", tmp->room_name);
-
 }
 
 void bfs(t_data *data)
@@ -48,24 +47,23 @@ void bfs(t_data *data)
 	if (!data->start || !data->end || !data->start->links_vec || !data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
 	head = (t_queue *)malloc(sizeof(t_queue));
-	head->room = data->start;
 	if (!head)
 		error(MALLOC_ERR);
-	printf("head = %s\n", head->room->room_name);
+	head->room = data->start;
 	tail = head;
 	i = 0;
-	data->start->depth = 0;
 	j = 0;
+	data->start->depth = 0;
 	while (head)
 	{
 		if (!head->room->visited)
 		{
-			head->room->visited = 1;
 			while (i < head->room->links_vec->space_taken)
 			{
+				head->room->visited = 1;
 				if (!((t_room **)head->room->links_vec->array)[i]->visited)
 				{
-					if (((t_room **)head->room->links_vec->array)[i]->depth == 0) //?
+					if (((t_room **)head->room->links_vec->array)[i]->depth == 0)
 						((t_room **)head->room->links_vec->array)[i]->depth = head->room->depth + 1;
 					tail->next = (t_queue *)malloc(sizeof(t_queue));
 					tail->next->room = head->room->links_vec->array[i];
@@ -81,9 +79,7 @@ void bfs(t_data *data)
 		i = 0;
 		tmp = head;
 		head = head->next;
-
 	}
 	printf("Amount of rooms visited = %zu\n", j);
 	backtrace_path(data);
 }
-
