@@ -48,11 +48,26 @@ void print_queue(t_queue *head)
 	}
 }
 
+void	reset_graph_values(t_queue **head)
+{
+	t_queue	*tmp;
+
+	tmp = *head;
+	while (tmp)
+	{
+		tmp->room->parent = NULL;
+		tmp->room->visited = 0;
+		tmp = tmp->next;
+	}
+}
+
 void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 {
 	if (!data->start || !data->end || !data->start->links_vec ||
 		!data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
+	if (*head)
+		reset_graph_values(head);
 	*head = (t_queue *)malloc(sizeof(t_queue));
 	if (!head)
 		error(MALLOC_ERR);
@@ -76,24 +91,69 @@ void	recreate_path(t_data *data)
 		while (((t_room **)parent->links_vec->array)[i] != tmp)
 			i++;
 		parent->flows[i] = 1;
+		parent->is_path = 1;
 		i = 0;
 		parent = parent->parent;
 		tmp = tmp->parent;
 	}
 }
 
-void	bfs(t_data *data)
+void	print_all_paths_flow(t_data *data)
+{
+	size_t	i;
+	size_t	j;
+	t_room	*room;
+
+	i = 0;
+	j = 0;
+	room = data->start;
+	while (i < data->start->links_vec->space_taken)
+	{
+		if (data->start->flows[i])
+		{
+			room = data->start->links_vec->array[i];
+			printf("New Path\n");
+			while (room != data->end)
+			{
+				while (j < room->links_vec->space_taken)
+				{
+					if (room->flows[j])
+					{
+						printf("%s ", room->room_name);
+						room = room->links_vec->array[j];
+					}
+					j++;
+				}
+				j = 0;
+			}
+			printf("\n");
+		}
+		i++;
+	}
+}
+
+void	bfs_driver(t_data *data)
 {
 	t_queue	*head;
+	size_t	i;
+
+	i = 0;
+	head = NULL;
+	while (bfs(data, &head))
+		;
+	print_all_paths_flow(data);
+}
+
+int	bfs(t_data *data, t_queue **head)
+{
 	t_queue	*cur;
 	t_queue	*tail;
 	t_room	**room_arr;
 	size_t	i;
 
-	head = NULL;
 	cur = NULL;
 	tail = NULL;
-	bfs_init(data, &head, &tail, &cur);
+	bfs_init(data, head, &tail, &cur);
 	while (data->end->parent == NULL && cur != NULL)
 	{
 		cur->room->visited += 1;
@@ -102,7 +162,7 @@ void	bfs(t_data *data)
 		{
 			room_arr = (t_room **)cur->room->links_vec->array;
 			if (room_arr[i]->visited < 2 && !cur->room->flows[i]
-				&& room_arr[i] != cur->room->parent)
+				&& room_arr[i] != cur->room->parent && !room_arr[i]->is_path)
 			{
 				if (room_arr[i]->visited == 0)
 					room_arr[i]->parent = cur->room;
@@ -116,9 +176,9 @@ void	bfs(t_data *data)
 		cur = cur->next;
 	}
 	if (!data->end->parent)
-		error(NO_PATH);
+		return(0);
 	recreate_path(data);
-	// print_queue(head);
+	return(1);
 }
 
 /*

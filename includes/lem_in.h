@@ -54,6 +54,7 @@ typedef struct s_vec
 
 typedef struct s_room
 {
+	bool			is_path;
 	char			*room_name;
 	struct s_vec	*links_vec;
 	struct s_room	*parent;
@@ -87,7 +88,8 @@ void			sort_hash_values(t_data *data);
 unsigned long	hashing(t_data *data, char *name);
 
 /*----------BFS--------------*/
-void	bfs(t_data *data);
+int		bfs(t_data *data, t_queue **head);
+void	bfs_driver(t_data *data);
 void	allocate_flows(t_vec *vector);
 
 #endif
