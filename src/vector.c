@@ -33,8 +33,9 @@ void	vec_allocate_element(t_vec *dst, size_t i)
 		error(MALLOC_ERR);
 	((t_room **)dst->array)[i]->next = NULL;
 	((t_room **)dst->array)[i]->links_vec = NULL;
-	((t_room **)dst->array)[i]->depth = 0;
+	((t_room **)dst->array)[i]->flows = NULL;
 	((t_room **)dst->array)[i]->visited = 0;
+	((t_room **)dst->array)[i]->parent = NULL;
 }
 
 static void	vec_free(t_vec *vector)

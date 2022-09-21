@@ -22,6 +22,7 @@
 # define NULL_ERR -3
 # define FORMAT_ERR -4
 # define INPUT_ERR -5
+# define NO_PATH -6
 
 # define START 1
 # define END 2
@@ -54,10 +55,11 @@ typedef struct s_vec
 typedef struct s_room
 {
 	char			*room_name;
-	bool			visited;
-	int				depth;
-	struct s_room	*next;
 	struct s_vec	*links_vec;
+	struct s_room	*parent;
+	bool			*flows;
+	short			visited;
+	struct s_room	*next;
 }	t_room;
 
 void	error(int error_number);
@@ -86,5 +88,6 @@ unsigned long	hashing(t_data *data, char *name);
 
 /*----------BFS--------------*/
 void	bfs(t_data *data);
+void	allocate_flows(t_vec *vector);
 
 #endif
