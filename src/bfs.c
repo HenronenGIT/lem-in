@@ -12,31 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-// void	backtrace_path(t_data *data)
-// {
-// 	t_room	*tmp;
-// 	t_room	*lowest_depth;
-// 	size_t	i;
-
-// 	i = 0;
-// 	tmp = data->end;
-// 	while (tmp != data->start)
-// 	{
-// 		lowest_depth = tmp->links_vec->array[0];
-// 		while (i < tmp->links_vec->space_taken)
-// 		{
-// 			if (((t_room **)tmp->links_vec->array)[i]->depth < lowest_depth->depth)
-// 				lowest_depth = tmp->links_vec->array[i];
-// 			i++;
-// 		}
-// 		printf("%s\n", tmp->room_name);
-// 		i = 0;
-// 		tmp = lowest_depth;
-// 	}
-// 	printf("%s\n", tmp->room_name);
-
-// }
-
 void	allocate_flows(t_vec *vector)
 {
 	size_t	i;
