@@ -28,6 +28,7 @@
 # define END 2
 # define NORMAL 3
 
+/* Linked list structure for BFS */
 typedef struct s_queue
 {
 	struct s_room	*room;
@@ -43,7 +44,7 @@ typedef struct s_data
 	struct s_vec	*rooms_vec;
 }	t_data;
 
-/*   */
+/* General Dynamic Vector structure*/
 typedef struct s_vec
 {
 	void	 		**array;
@@ -54,13 +55,13 @@ typedef struct s_vec
 
 typedef struct s_room
 {
-	bool			is_path;
 	char			*room_name;
 	struct s_vec	*links_vec;
 	struct s_room	*parent;
-	bool			*flows;
 	short			visited;
 	struct s_room	*next;
+	bool			is_path;
+	bool			*flows;
 }	t_room;
 
 void	error(int error_number);
