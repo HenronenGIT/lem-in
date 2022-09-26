@@ -126,7 +126,7 @@ void	set_flows(t_data *data)
 	parent = current->parent;
 	while (parent)
 	{
-		ft_printf("%s - ", current->room_name); //! TEMP
+		// ft_printf("%s - ", current->room_name); //! TEMP
 		while (((t_room **)parent->links_vec->array)[i] != current)
 			i++;
 		parent->flows[i] = 1;
@@ -136,9 +136,8 @@ void	set_flows(t_data *data)
 		current = current->parent;
 		parent = current->parent;
 	}
-	ft_printf("%s - ", current->room_name); //! TEMP
-	ft_printf("\n"); //! TEMP
-
+	// ft_printf("%s - ", current->room_name); //! TEMP
+	// ft_printf("\n"); //! TEMP
 }
 
 
@@ -151,7 +150,7 @@ void	bfs_driver(t_data *data)
 	head = NULL;
 	while (bfs(data, &head))
 		;
-	// print_all_paths_flow(data);
+	print_all_paths_flow(data);
 }
 
 void	found_old_path(t_data *data, t_queue **tail, t_queue *que)
@@ -172,10 +171,13 @@ void	found_old_path(t_data *data, t_queue **tail, t_queue *que)
 				if (link->links_vec->array[j] == que->room && link->flows[j] == true && link->parent != que->room)
 				{
 					(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
+					if (link->second_step == false)
+						link->second_step = true;
 					(*tail) = (*tail)->next;
 					(*tail)->room = link;
 					(*tail)->next = NULL;
-					link->parent = que->room;
+					if (link->parent)
+						link->parent = que->room;
 					return;
 				}
 				j += 1;
