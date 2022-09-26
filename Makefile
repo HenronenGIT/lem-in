@@ -56,5 +56,5 @@ fclean : clean
 
 #* Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/augment_1.map 
+	./lem-in < ./eval_tests/test_maps/augment_6.map 
 re : fclean all clean all

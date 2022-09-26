@@ -95,7 +95,7 @@ void	reset_graph_values(t_queue **head)
 	}
 }
 
-void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **que)
+void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 {
 	if (!data->start || !data->end || !data->start->links_vec ||
 		!data->end->links_vec || data->start == data->end)
@@ -108,7 +108,7 @@ void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **que)
 	(*head)->room = data->start;
 	(*head)->next = NULL;
 	*tail = *head;
-	*que = *head;
+	*cur = *head;
 }
 
 /*	Find path from sink to source.
@@ -130,7 +130,8 @@ void	set_flows(t_data *data)
 		while (((t_room **)parent->links_vec->array)[i] != current)
 			i++;
 		parent->flows[i] = 1;
-		parent->is_path = 1;
+		if (parent != data->start)
+			parent->is_path = 1;
 		i = 0;
 		current = current->parent;
 		parent = current->parent;
@@ -150,8 +151,38 @@ void	bfs_driver(t_data *data)
 	head = NULL;
 	while (bfs(data, &head))
 		;
-
 	// print_all_paths_flow(data);
+}
+
+void	found_old_path(t_data *data, t_queue **tail, t_queue *que)
+{
+	size_t	i;
+	size_t	j;
+	t_room	*link;
+
+	i = 0;
+	while (i < que->room->links_vec->space_taken)
+	{
+		j = 0;
+		link = que->room->links_vec->array[i];
+		if (link != data->start && link->visited < 2)
+		{
+			while (j < link->links_vec->space_taken)
+			{
+				if (link->links_vec->array[j] == que->room && link->flows[j] == true && link->parent != que->room)
+				{
+					(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
+					(*tail) = (*tail)->next;
+					(*tail)->room = link;
+					(*tail)->next = NULL;
+					link->parent = que->room;
+					return;
+				}
+				j += 1;
+			}
+		}
+		i += 1;
+	}
 }
 
 int	bfs(t_data *data, t_queue **head)
@@ -171,24 +202,30 @@ int	bfs(t_data *data, t_queue **head)
 		link_array = (t_room **)que->room->links_vec->array;
 		que->room->visited += 1;
 		i = 0;
+		if (que->room->is_path)
+			found_old_path(data, &tail, que);
 		/* Inspect all the links */
-		while (i < que->room->links_vec->space_taken)
+		else
 		{
-			link = link_array[i];
-			if (link->visited < 2
-				&& que->room->flows[i] == false
-				&& link != que->room->parent)
-				// && link->is_path == false) //? Fixed the issue - now find all paths
+			while (i < que->room->links_vec->space_taken)
 			{
-				/* Mark current room as parent of next room what we are inspecting */
-				if (link->visited == 0) //? Inits sink rooms parent to sink. Can cause errors?
-					link->parent = que->room;
-				tail->next = (t_queue *)malloc(sizeof(t_queue));
-				tail = tail->next;
-				tail->room = link;
-				tail->next = NULL;
+				link = link_array[i];
+	
+				if (link->visited < 2
+					&& que->room->flows[i] == false
+					&& link != que->room->parent)
+					// && link->is_path == false) //? Fixed the issue - now find all paths
+				{
+					/* Mark current room as parent of next room what we are inspecting */
+					if (link->visited == 0) //? Inits sink rooms parent to sink. Can cause errors?
+						link->parent = que->room;
+					tail->next = (t_queue *)malloc(sizeof(t_queue));
+					tail = tail->next;
+					tail->room = link;
+					tail->next = NULL;
+				}
+				i++;
 			}
-			i++;
 		}
 		que = que->next;
 	}
