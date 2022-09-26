@@ -12,6 +12,40 @@
 
 #include "../includes/lem_in.h"
 
+void	print_all_paths_flow(t_data *data)
+{
+	size_t	i;
+	size_t	j;
+	t_room	*room;
+
+	i = 0;
+	j = 0;
+	room = data->start;
+	while (i < data->start->links_vec->space_taken)
+	{
+		if (data->start->flows[i])
+		{
+			room = data->start->links_vec->array[i];
+			printf("New Path\n");
+			while (room != data->end)
+			{
+				while (j < room->links_vec->space_taken)
+				{
+					if (room->flows[j])
+					{
+						printf("%s ", room->room_name);
+						room = room->links_vec->array[j];
+					}
+					j++;
+				}
+				j = 0;
+			}
+			printf("\n");
+		}
+		i++;
+	}
+}
+
 void	allocate_flows(t_vec *vector)
 {
 	size_t	i;
@@ -80,67 +114,32 @@ void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **que)
 /*	Find path from sink to source.
 	When we are jumping from one room to another, same time we mark the flows.
 */
-void	recreate_path(t_data *data)
+// void	recreate_path(t_data *data)
+void	set_flows(t_data *data)
 {
-	// t_room	*tmp;
-	// t_room	*parent;
-	// size_t	i;
-
-	// i = 0;
-	// tmp = data->end;
-	// parent = tmp->parent;
-	// while ()
-// 	while (parent)
-// 	{
-// 		while (((t_room **)parent->links_vec->array)[i] != tmp)
-// 			i++;
-// 		parent->flows[i] = 1;
-// 		parent->is_path = 1;
-// 		i = 0;
-// 		parent = parent->parent;
-// 		tmp = tmp->parent;
-// 	}
-	t_room	*iterator;
-	
-	while (iterator != data->start)
-	{
-		
-	}
-}
-
-void	print_all_paths_flow(t_data *data)
-{
+	t_room	*current;
+	t_room	*parent;
 	size_t	i;
-	size_t	j;
-	t_room	*room;
 
 	i = 0;
-	j = 0;
-	room = data->start;
-	while (i < data->start->links_vec->space_taken)
+	current = data->end;
+	parent = current->parent;
+	while (parent)
 	{
-		if (data->start->flows[i])
-		{
-			room = data->start->links_vec->array[i];
-			printf("New Path\n");
-			while (room != data->end)
-			{
-				while (j < room->links_vec->space_taken)
-				{
-					if (room->flows[j])
-					{
-						printf("%s ", room->room_name);
-						room = room->links_vec->array[j];
-					}
-					j++;
-				}
-				j = 0;
-			}
-			printf("\n");
-		}
-		i++;
+		ft_printf("%s - ", current->room_name); //! TEMP
+		while (((t_room **)parent->links_vec->array)[i] != current)
+			i++;
+		parent->flows[i] = 1;
+		parent->is_path = 1;
+		i = 0;
+		current = current->parent;
+		parent = current->parent;
 	}
+	ft_printf("%s - ", current->room_name); //! TEMP
+	ft_printf("\n"); //! TEMP
+
 }
+
 
 void	bfs_driver(t_data *data)
 {
@@ -151,14 +150,14 @@ void	bfs_driver(t_data *data)
 	head = NULL;
 	while (bfs(data, &head))
 		;
-	print_all_paths_flow(data);
+
+	// print_all_paths_flow(data);
 }
 
 int	bfs(t_data *data, t_queue **head)
 {
 	t_queue	*que;
 	t_queue	*tail;
-	// t_room	**room_arr; //! old
 	t_room	**link_array; //? links_vec_cpy
 	t_room	*link;
 	size_t	i;
@@ -176,18 +175,16 @@ int	bfs(t_data *data, t_queue **head)
 		while (i < que->room->links_vec->space_taken)
 		{
 			link = link_array[i];
-			// link = que->room->links_vec->array[i];
 			if (link->visited < 2
 				&& que->room->flows[i] == false
-				&& link != que->room->parent
-				&& link->is_path == false)
+				&& link != que->room->parent)
+				// && link->is_path == false) //? Fixed the issue - now find all paths
 			{
 				/* Mark current room as parent of next room what we are inspecting */
 				if (link->visited == 0) //? Inits sink rooms parent to sink. Can cause errors?
 					link->parent = que->room;
 				tail->next = (t_queue *)malloc(sizeof(t_queue));
 				tail = tail->next;
-				// tail->room = que->room->links_vec->array[i];
 				tail->room = link;
 				tail->next = NULL;
 			}
@@ -197,7 +194,8 @@ int	bfs(t_data *data, t_queue **head)
 	}
 	if (!data->end->parent)
 		return(0);
-	recreate_path(data);
+	set_flows(data);
+	// recreate_path(data);
 	return(1);
 }
 
@@ -205,5 +203,5 @@ int	bfs(t_data *data, t_queue **head)
 current room
 	for each room connected to the current
 		can go to the next room if edge is not visited
-		and if edge is not visited in the current BFS cycle
+		and if edge is not visited in the current BFS cyclew
 */

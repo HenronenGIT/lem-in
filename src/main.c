@@ -133,8 +133,8 @@ int main(void)
 	read_rooms(&data);
 	allocate_flows(data.rooms_vec);
 	bfs_driver(&data);
-	print_rooms(data); //! temp
-	print_links(data); //! temp
+		// print_rooms(data); //! temp
+		// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
 	// system("leaks lem-in");
 	return (0);
