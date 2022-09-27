@@ -35,6 +35,8 @@ void print_all_paths_flow(t_data *data)
 					{
 						printf("%s ", room->room_name);
 						room = room->links_vec->array[j];
+						room->is_path = 1;
+						j = 0;
 					}
 					j++;
 				}
@@ -44,6 +46,7 @@ void print_all_paths_flow(t_data *data)
 		}
 		i++;
 	}
+	printf("\n");
 }
 
 void allocate_flows(t_vec *vector)
@@ -82,14 +85,15 @@ void print_queue(t_queue *head)
 	}
 }
 
-void reset_graph_values(t_queue **head)
+void reset_graph_values(t_queue *head)
 {
 	t_queue *tmp;
 
-	tmp = *head;
+	tmp = head;
 	while (tmp)
 	{
 		tmp->room->parent = NULL;
+		tmp->room->is_path = 0;
 		tmp->room->visited = 0;
 		tmp->room->second_step = 0;
 		tmp = tmp->next;
@@ -101,8 +105,7 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	if (!data->start || !data->end || !data->start->links_vec ||
 		!data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
-	if (*head)
-		reset_graph_values(head);
+	
 	*head = (t_queue *)malloc(sizeof(t_queue));
 	if (!head)
 		error(MALLOC_ERR);
@@ -157,15 +160,18 @@ void bfs_driver(t_data *data)
 	i = 0;
 	head = NULL;
 	while (bfs(data, &head))
-		;
-	print_all_paths_flow(data);
+	{
+		if (head)
+			reset_graph_values(head);
+		print_all_paths_flow(data);
+	}
 }
 
 void add_to_que(t_queue **tail, t_room *link, t_queue *current)
 {
 	size_t	i;
 	(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
-	if (link->second_step == false && link->is_path)
+	if (link->second_step == false)
 	{
 		i = 0;
 		while (i < link->links_vec->space_taken)
