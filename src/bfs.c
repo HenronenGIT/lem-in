@@ -139,7 +139,7 @@ void set_flows(t_data *data)
 			parent = current->parent;
 			current->flows[i] = 0;
 		}
-		while (((t_room **)parent->links_vec->array)[i] != current)
+		while (i < parent->links_vec->space_taken && ((t_room **)parent->links_vec->array)[i] != current)
 			i++;
 		parent->flows[i] = 1;
 		if (parent != data->start)
