@@ -27,6 +27,7 @@ void	print_all_paths_flow(t_data *data)
 		{
 			room = data->start->links_vec->array[i];
 			printf("New Path\n");
+			printf("%s ", data->start->room_name);
 			while (room != data->end)
 			{
 				while (j < room->links_vec->space_taken)
@@ -42,7 +43,7 @@ void	print_all_paths_flow(t_data *data)
 				}
 				j = 0;
 			}
-			printf("\n");
+			printf("%s \n", data->end->room_name);
 		}
 		i++;
 	}
@@ -77,12 +78,17 @@ void	allocate_flows(t_vec *vector)
 
 void	print_queue(t_queue *head)
 {
+	t_queue	*tmp;
+
+	tmp = head;
 	printf("Queue\n");
 	while (head)
 	{
-		printf("%s\n", head->room->room_name);
+		printf("%s ", head->room->room_name);
 		head = head->next;
 	}
+		printf("\n");
+	head = tmp;
 }
 
 void	reset_graph_values(t_queue *head)
@@ -132,13 +138,14 @@ void	set_flows(t_data *data)
 	while (parent)
 	{
 		i = 0;
-		ft_printf("%s - ", current->room_name); //! TEMP
+		// ft_printf("%s - ", current->room_name); //! TEMP
 		if (current->second_step)
 		{
 			while (current->flows[i] == false) //! might segfault :D
 				i++;
 			current->parent = current->links_vec->array[i];
 			parent = current->parent;
+			parent->second_step = 0;
 			current->flows[i] = 0;
 		}
 		else
@@ -150,8 +157,8 @@ void	set_flows(t_data *data)
 		current = current->parent;
 		parent = current->parent;
 	}
-	ft_printf("%s - ", current->room_name); //! TEMP
-	ft_printf("\n");						//! TEMP
+	// ft_printf("%s - ", current->room_name); //! TEMP
+	// ft_printf("\n");						//! TEMP
 }
 
 void	bfs_driver(t_data *data)
@@ -163,6 +170,7 @@ void	bfs_driver(t_data *data)
 	head = NULL;
 	while (bfs(data, &head))
 	{
+		// print_queue(head);
 		if (head)
 			reset_graph_values(head);
 		print_all_paths_flow(data);
@@ -190,7 +198,8 @@ void	add_to_que(t_queue **tail, t_room *link, t_queue *current, int option)
 	(*tail) = (*tail)->next;
 	(*tail)->room = link;
 	(*tail)->next = NULL;
-	if (!link->visited)
+	// if (!link->visited)
+	if (!link->parent && !link->visited)
 		link->parent = current->room;
 }
 
@@ -263,6 +272,7 @@ int	bfs(t_data *data, t_queue **head)
 			found_old_path(data, &tail, que);
 		else
 			not_old_path(que, &tail, link_array);
+		// print_queue(*head); //! temp
 		que = que->next;
 	}
 	if (!data->end->parent)

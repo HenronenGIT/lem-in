@@ -4,7 +4,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -Wimplicit -fsanitize=address#-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address#-fno-sanitize=all#-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -56,5 +56,5 @@ fclean : clean
 
 #* Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/augment_6.map 
+	./lem-in < ./eval_tests/test_maps/augment_8.map 
 re : fclean all clean all
