@@ -12,11 +12,11 @@
 
 #include "../includes/lem_in.h"
 
-void print_all_paths_flow(t_data *data)
+void	print_all_paths_flow(t_data *data)
 {
 	size_t	i;
 	size_t	j;
-	t_room 	*room;
+	t_room	*room;
 
 	i = 0;
 	j = 0;
@@ -49,7 +49,7 @@ void print_all_paths_flow(t_data *data)
 	printf("\n");
 }
 
-void allocate_flows(t_vec *vector)
+void	allocate_flows(t_vec *vector)
 {
 	size_t i;
 	size_t j;
@@ -75,7 +75,7 @@ void allocate_flows(t_vec *vector)
 	}
 }
 
-void print_queue(t_queue *head)
+void	print_queue(t_queue *head)
 {
 	printf("Queue\n");
 	while (head)
@@ -85,9 +85,9 @@ void print_queue(t_queue *head)
 	}
 }
 
-void reset_graph_values(t_queue *head)
+void	reset_graph_values(t_queue *head)
 {
-	t_queue *tmp;
+	t_queue	*tmp;
 
 	tmp = head;
 	while (tmp)
@@ -102,10 +102,10 @@ void reset_graph_values(t_queue *head)
 	}
 }
 
-void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
+void	bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 {
-	if (!data->start || !data->end || !data->start->links_vec ||
-		!data->end->links_vec || data->start == data->end)
+	if (!data->start || !data->end || !data->start->links_vec
+		|| !data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
 	
 	*head = (t_queue *)malloc(sizeof(t_queue));
@@ -121,11 +121,11 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	When we are jumping from one room to another, same time we mark the flows.
 */
 
-void set_flows(t_data *data)
+void	set_flows(t_data *data)
 {
-	t_room *current;
-	t_room *parent;
-	size_t i;
+	t_room	*current;
+	t_room	*parent;
+	size_t	i;
 
 	current = data->end;
 	parent = current->parent;
@@ -141,10 +141,12 @@ void set_flows(t_data *data)
 			parent = current->parent;
 			current->flows[i] = 0;
 		}
-		while (((t_room **)parent->links_vec->array)[i] != current)
-			i++;
-		parent->flows[i] = 1;
-		i = 0;
+		else
+		{
+			while (((t_room **)parent->links_vec->array)[i] != current)
+				i++;
+			parent->flows[i] = 1;
+		}
 		current = current->parent;
 		parent = current->parent;
 	}
@@ -152,10 +154,10 @@ void set_flows(t_data *data)
 	ft_printf("\n");						//! TEMP
 }
 
-void bfs_driver(t_data *data)
+void	bfs_driver(t_data *data)
 {
-	t_queue *head;
-	size_t i;
+	t_queue	*head;
+	size_t	i;
 
 	i = 0;
 	head = NULL;
@@ -167,11 +169,14 @@ void bfs_driver(t_data *data)
 	}
 }
 
-void add_to_que(t_queue **tail, t_room *link, t_queue *current)
+void	add_to_que(t_queue **tail, t_room *link, t_queue *current, int option)
 {
 	size_t	i;
+
 	(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
-	if (link->second_step == false)
+	if (!(*tail)->next)
+		error(MALLOC_ERR);
+	if (option && link->second_step == false)
 	{
 		i = 0;
 		while (i < link->links_vec->space_taken)
@@ -185,12 +190,12 @@ void add_to_que(t_queue **tail, t_room *link, t_queue *current)
 	(*tail) = (*tail)->next;
 	(*tail)->room = link;
 	(*tail)->next = NULL;
-	if (!link->parent)
+	if (!link->visited)
 		link->parent = current->room;
 }
 
 /* Check that if all rules passes and room is valid for que */
-int valid_room(t_room *current, t_room *link, bool flow)
+int	valid_room(t_room *current, t_room *link, bool flow)
 {
 	if (current->second_step && !link->parent)
 		return (1);
@@ -200,11 +205,11 @@ int valid_room(t_room *current, t_room *link, bool flow)
 		return (0);
 }
 
-void found_old_path(t_data *data, t_queue **tail, t_queue *que)
+void	found_old_path(t_data *data, t_queue **tail, t_queue *que)
 {
-	size_t i;
-	size_t j;
-	t_room *link;
+	size_t	i;
+	size_t	j;
+	t_room	*link;
 
 	i = 0;
 	while (i < que->room->links_vec->space_taken)
@@ -217,7 +222,7 @@ void found_old_path(t_data *data, t_queue **tail, t_queue *que)
 			{
 				if (link->links_vec->array[j] == que->room)			 //? can be optimized
 					if (valid_room(que->room, link, link->flows[j])) //? or "valid_edge"
-						add_to_que(tail, link, que);
+						add_to_que(tail, link, que, 1);
 				j += 1;
 			}
 		}
@@ -225,13 +230,27 @@ void found_old_path(t_data *data, t_queue **tail, t_queue *que)
 	}
 }
 
-int bfs(t_data *data, t_queue **head)
+void	not_old_path(t_queue *que, t_queue **tail, t_room **link_array)
 {
-	t_queue *que;
-	t_queue *tail;
-	t_room **link_array; //? links_vec_cpy
-	t_room *link;
-	size_t i;
+	t_room	*link;
+	size_t	i;
+
+	link = NULL;
+	i = 0;
+	while (i < que->room->links_vec->space_taken)
+	{
+		link = link_array[i];
+		if (link->visited < 2 && que->room->flows[i] == false && link != que->room->parent)
+			add_to_que(tail, link, que, 0);
+		i++;
+	}
+}
+
+int	bfs(t_data *data, t_queue **head)
+{
+	t_queue	*que;
+	t_queue	*tail;
+	t_room	**link_array; //? links_vec_cpy
 
 	que = NULL;
 	tail = NULL;
@@ -240,27 +259,10 @@ int bfs(t_data *data, t_queue **head)
 	{
 		link_array = (t_room **)que->room->links_vec->array;
 		que->room->visited += 1;
-		i = 0;
 		if (que->room->path_number)
 			found_old_path(data, &tail, que);
 		else
-		{
-			while (i < que->room->links_vec->space_taken)
-			{
-				link = link_array[i];
-				if (link->visited < 2 && que->room->flows[i] == false && link != que->room->parent)
-				{
-					/* Inits link->parent to room where we are currently*/
-					if (link->visited == 0) //? Inits sink rooms parent to sink. Can cause errors?
-						link->parent = que->room;
-					tail->next = (t_queue *)malloc(sizeof(t_queue));
-					tail = tail->next;
-					tail->room = link;
-					tail->next = NULL;
-				}
-				i++;
-			}
-		}
+			not_old_path(que, &tail, link_array);
 		que = que->next;
 	}
 	if (!data->end->parent)
@@ -268,10 +270,3 @@ int bfs(t_data *data, t_queue **head)
 	set_flows(data);
 	return (1);
 }
-
-/*
-current room
-	for each room connected to the current
-		can go to the next room if edge is not visited
-		and if edge is not visited in the current BFS cyclew
-*/
