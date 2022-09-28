@@ -14,9 +14,9 @@
 
 void print_all_paths_flow(t_data *data)
 {
-	size_t i;
-	size_t j;
-	t_room *room;
+	size_t	i;
+	size_t	j;
+	t_room 	*room;
 
 	i = 0;
 	j = 0;
@@ -35,7 +35,7 @@ void print_all_paths_flow(t_data *data)
 					{
 						printf("%s ", room->room_name);
 						room = room->links_vec->array[j];
-						room->is_path = 1;
+						room->path_number = i + 1;
 						j = 0;
 					}
 					j++;
@@ -93,10 +93,12 @@ void reset_graph_values(t_queue *head)
 	while (tmp)
 	{
 		tmp->room->parent = NULL;
-		tmp->room->is_path = 0;
+		tmp->room->path_number = 0;
 		tmp->room->visited = 0;
 		tmp->room->second_step = 0;
-		tmp = tmp->next;
+		head = head->next;
+		free(tmp);
+		tmp = head;
 	}
 }
 
@@ -139,11 +141,9 @@ void set_flows(t_data *data)
 			parent = current->parent;
 			current->flows[i] = 0;
 		}
-		while (i < parent->links_vec->space_taken && ((t_room **)parent->links_vec->array)[i] != current)
+		while (((t_room **)parent->links_vec->array)[i] != current)
 			i++;
 		parent->flows[i] = 1;
-		if (parent != data->start)
-			parent->is_path = 1;
 		i = 0;
 		current = current->parent;
 		parent = current->parent;
@@ -241,7 +241,7 @@ int bfs(t_data *data, t_queue **head)
 		link_array = (t_room **)que->room->links_vec->array;
 		que->room->visited += 1;
 		i = 0;
-		if (que->room->is_path)
+		if (que->room->path_number)
 			found_old_path(data, &tail, que);
 		else
 		{

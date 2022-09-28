@@ -60,7 +60,7 @@ typedef struct s_room
 	struct s_room	*parent;
 	short			visited;
 	struct s_room	*next;
-	bool			is_path;
+	int				path_number;
 	bool			second_step;
 	bool			*flows;
 }	t_room;
