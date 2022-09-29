@@ -54,7 +54,11 @@ fclean : clean
 	@rm -rf $(NAME)
 	@echo "$(CGREEN)OK$(CEND)"
 
-#* Easier way to run and test program
+re : fclean all clean all
+
+# Easier way to run and test program
 run:
 	./lem-in < ./eval_tests/test_maps/augment_8.map 
-re : fclean all clean all
+
+python:
+	python3 ./eval_tests/scripts/run_maps.py
