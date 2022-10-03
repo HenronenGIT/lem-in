@@ -169,13 +169,16 @@ void set_flows(t_data *data)
 {
 	t_room *current;
 	t_room *parent;
+	t_room *link;
 	size_t i;
 	size_t j;
+	size_t direction;
 	bool second_step;
 
 	second_step = false;
 	current = data->end;
 	parent = current->parent;
+	direction = 0;
 	while (parent)
 	{
 		i = 0;
@@ -202,14 +205,36 @@ void set_flows(t_data *data)
 		}
 		else if (current->is_path) //? && operation 
 		{
-			while (current->flows[i] == false) //! might segfault :D
-				i++;
-			current->flows[i] = 0;
-			current = current->links_vec->array[i]; //* Move towards the flow
+			// while (current->flows[i] == false) //? Working on map 3, but not in 8
+				// i++;
+			while (i < current->links_vec->space_taken)//disconnect flows
+			{
+				link = current->links_vec->array[i];
+				if (current->flows[i] == true && link->flows[i] == true)
+				{
+					current->flows[i] = false;
+					direction = i;
+				}
+				i += 1;
+			}
+			// current->flows[i] = 0;
+			current = current->links_vec->array[direction];
+			// current = current->links_vec->array[i]; //* Move towards the flow
 			parent = current->parent;
 			second_step = true; //? might cause issues if next step is not a path... if that is even possible situtation
 
 		}
+		// Works all other expect map 8
+		// else if (current->is_path) //? && operation 
+		// {
+		// 	// while (current->flows[i] == false) //! might segfault :D
+		// 	while (current->flows[i] == false && ((t_room **)current->links_vec->array)[i]->flows[i] == true)
+		// 		i++;
+		// 	current->flows[i] = 0;
+		// 	current = current->links_vec->array[i]; //* Move towards the flow
+		// 	parent = current->parent;
+		// 	second_step = true; //? might cause issues if next step is not a path... if that is even possible situtation
+		// }
 		else
 		{
 			while (parent->links_vec->array[i] != current) //? better way to find current room?
