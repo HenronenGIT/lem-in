@@ -56,3 +56,7 @@ start-18
 #    \                 /
 #     14 - 15 - 16 - 17
 # Here is the number of lines required: 9
+#
+# Correct paths: 
+#	1 -> 2 -> 6 -> 7 -> 8 -> 9 -> end
+#	14 -> 15 -> 16 -> 17 -> 4 -> 5 -> end

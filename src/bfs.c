@@ -393,7 +393,6 @@ int bfs(t_data *data, t_queue **head)
 	{
 		link_array = (t_room **)que->room->links_vec->array;
 		que->room->visited += 1;
-		// if (que->room->path_number)
 		if (que->room->is_path)
 			found_old_path(data, &tail, que);
 		else
