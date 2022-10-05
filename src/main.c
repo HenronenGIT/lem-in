@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-void	error(int error_number)
+void error(int error_number)
 {
 	if (error_number == INPUT_ERR)
 		ft_puterror("Invalid ant input!\n");
@@ -22,12 +22,12 @@ void	error(int error_number)
 		ft_puterror("Invalid formatting!\n");
 	if (error_number == NO_PATH)
 		ft_puterror("No path found!\n");
-	exit (error_number);
+	exit(error_number);
 }
 
-void	init_struct(t_data *data)
+void init_struct(t_data *data)
 {
-	size_t	i;
+	size_t i;
 
 	data->ants = 0;
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
@@ -42,6 +42,38 @@ void	init_struct(t_data *data)
 	data->rooms_vec->length = 10;
 	data->rooms_vec->space_left = 10;
 	data->rooms_vec->space_taken = 0;
+}
+
+void allocate_flow_pointers(t_vec *vector)
+{
+	size_t i;
+	size_t j;
+
+	t_room *room_ptr;
+	i = 0;
+	j = 0;
+	while (i < vector->length)
+	{
+		if (vector->array[i])
+		{
+			room_ptr = vector->array[i];
+			while (room_ptr)
+			{
+				room_ptr->flow = (t_room **)malloc(sizeof(t_room *));
+				// room_ptr->flow = NULL;
+				room_ptr->flow[0] = (t_room *)malloc(sizeof(t_room));
+				room_ptr->flow[0] = NULL;
+
+				// }
+				// tmp->flows = (bool *)malloc(sizeof(tmp->links_vec->space_taken));
+				// while (tmp->links_vec && j < tmp->links_vec->space_taken)
+				// tmp->flows[j++] = 0;
+				room_ptr = room_ptr->next;
+				j = 0;
+			}
+		}
+		i++;
+	}
 }
 
 // void	print_rooms(t_data data)
@@ -90,11 +122,11 @@ void	init_struct(t_data *data)
 // 	ft_printf("Vec left %zu\n", data.rooms_vec->space_left);
 // }
 
-void	print_links(t_data data)
+void print_links(t_data data)
 {
-	size_t	i;
-	size_t	j;
-	t_room	*tmp_room;
+	size_t i;
+	size_t j;
+	t_room *tmp_room;
 
 	i = 0;
 	j = 0;
@@ -126,12 +158,12 @@ void	print_links(t_data data)
 
 int main(void)
 {
-	t_data	data;
+	t_data data;
 
 	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-	// allocate_flows(data.rooms_vec);
+	allocate_flow_pointers(data.rooms_vec);
 	bfs_driver(&data);
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
