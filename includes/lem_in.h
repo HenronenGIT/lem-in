@@ -28,6 +28,13 @@
 # define END 2
 # define NORMAL 3
 
+// typedef enum e_visit
+// {
+// 	not_visited,
+// 	flow,
+// 	no_flow
+// } t_visit;
+
 /* Linked list structure for BFS */
 typedef struct s_queue
 {
@@ -61,9 +68,12 @@ typedef struct s_room
 	short			visited;
 	struct s_room	*next;
 	// int				path_number;
-	bool				is_path;
+	bool			flow_visit;
+	bool			no_flow_visit;
+	bool			is_path;
 	bool			second_step;
-	bool			*flows;
+	// bool			*flows;
+	struct s_room	*flow;
 }	t_room;
 
 void	error(int error_number);
