@@ -73,6 +73,7 @@ void reset_graph_values(t_queue *head)
 	while (tmp)
 	{
 		tmp->room->parent = NULL;
+		tmp->room->flow_parent = NULL;
 		// tmp->room->path_number = 0;
 		tmp->room->non_flow_visit = false;
 		tmp->room->flow_visit = false;
@@ -97,9 +98,9 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	*cur = *head;
 }
 
-void	allocate_flow_pointer(t_room *start_room)
+void allocate_flow_pointer(t_room *start_room, t_room *current)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (start_room->flow[i])
@@ -107,9 +108,17 @@ void	allocate_flow_pointer(t_room *start_room)
 	start_room->flow[i] = (t_room *)malloc(sizeof(t_room));
 	if (!start_room->flow[i])
 		error(MALLOC_ERR);
+	start_room->flow[i] = current;
 }
 
-// void set_flows(t_data *data)
+void allocate_flow_from_pointer(t_room *current, t_room *parent)
+{
+	current->flow_from = (t_room *)malloc(sizeof(t_room));
+	if (!current->flow_from)
+		error(MALLOC_ERR);
+	current->flow_from = parent;
+}
+
 void set_flows(t_data *data)
 {
 	t_room *current;
@@ -122,28 +131,35 @@ void set_flows(t_data *data)
 	while (current != data->start)
 	{
 		if (parent == data->start)
-			allocate_flow_pointer(data->start);
+			allocate_flow_pointer(data->start, current);
 		else
-		{
 			*parent->flow = current;
-			current->is_path = true;
-			current = parent;
-			parent = current->parent;
-		}
+		if (current != data->end)
+			allocate_flow_from_pointer(current, parent);
+		parent = parent->parent;
+		current = current->parent;
 	}
 }
 
 void print_path(t_data *data)
 {
 	t_room *iterator;
+	size_t i;
 
-	iterator = data->start;
-	while (iterator != data->end)
+	i = 0;
+	while (data->start->flow[i])
 	{
-		ft_printf("%s -> ", iterator->room_name);
-		iterator = *iterator->flow;
+		ft_printf("%s -> ", data->start->room_name);
+		iterator = data->start->flow[i];
+		while (iterator != data->end)
+		{
+			ft_printf("%s -> ", iterator->room_name);
+			iterator = *iterator->flow;
+		}
+		ft_printf("%s\n", iterator->room_name);
+		i += 1;
 	}
-	ft_printf("%s\n", iterator->room_name);
+	ft_printf("\n");
 }
 
 void bfs_driver(t_data *data)
@@ -164,7 +180,7 @@ void bfs_driver(t_data *data)
 }
 
 // void add_to_que(t_queue **tail, t_room *link, t_queue *current, int option)
-void add_to_que(t_queue **tail, t_room *link, t_queue *current)
+void add_to_que(t_queue **tail, t_room *link)
 {
 	(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
 	if (!(*tail)->next)
@@ -172,20 +188,9 @@ void add_to_que(t_queue **tail, t_room *link, t_queue *current)
 	(*tail) = (*tail)->next;
 	(*tail)->room = link;
 	(*tail)->next = NULL;
-	if (!link->parent)
-		link->parent = current->room;
+	// if (!link->parent)
+		// link->parent = current->room;
 }
-
-/* Check that if all rules passes and room is valid for que */
-// int valid_room(t_room *current, t_room *link, bool flow)
-// {
-// 	if (current->second_step && !link->parent)
-// 		return (1);
-// 	else if (!current->second_step && flow == true && link->parent != current)
-// 		return (1);
-// 	else
-// 		return (0);
-// }
 
 void visit_using_flow_edge(t_queue **tail, t_queue *que, t_room *link)
 {
@@ -193,7 +198,7 @@ void visit_using_flow_edge(t_queue **tail, t_queue *que, t_room *link)
 		return;
 	if (link == que->room->parent)
 		return;
-	add_to_que(tail, link, que);
+	add_to_que(tail, link);
 	link->flow_visit = true;
 }
 
@@ -209,38 +214,47 @@ void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link)
 		return;
 	if (link == que->room->parent)
 		return;
-	add_to_que(tail, link, que);
+	add_to_que(tail, link);
+	link->parent = que->room;
 	link->non_flow_visit = true;
-	// while (i < que->room->links_vec->space_taken)
-	// {
-	// 	j = 0;
-	// 	link = que->room->links_vec->array[i];
-	// 	if (link != data->start && link->visited < 2)
-	// 	{
-	// 		while (j < link->links_vec->space_taken)
-	// 		{
-	// 			if (link->links_vec->array[j] == que->room)			 //? can be optimized
-	// 				if (valid_room(que->room, link, link->flows[j])) //? or "valid_edge"
-	// 					add_to_que(tail, link, que, 1);
-	// 			j += 1;
-	// 		}
-	// 	}
-	// 	i += 1;
-	// }
 }
 
-void follow_old_path(t_queue **tail, t_queue *que, t_room *link)
+void found_old_path(t_queue **tail, t_queue *que)
 {
 	size_t i;
 	t_room **link_array;
 
 	link_array = (t_room **)que->room->links_vec->array;
 	i = 0;
-	while (link_array[i]->flow[0] != que->room)
+
+	if (que->room->flow_from->flow_visit == true)
+		return;
+	add_to_que(tail, que->room->flow_from);
+	que->room->flow_from->flow_parent = que->room;
+}
+
+int positive_flow(t_room **flows, t_room *link)
+{
+	size_t i;
+
+	i = 0;
+	while (flows[i])
+	{
+		if (flows[i] == link)
+			return (1);
 		i += 1;
-	if (link_array[i]->flow_visit == false)
-		add_to_que(tail, link, que);
-	//? second step boolean?
+	}
+	return (0);
+}
+
+void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
+{
+	if (link->flow_parent)
+		return ;
+	if (link->parent)
+		return ;
+	add_to_que(tail, link);
+	link->parent = current;
 }
 
 void iterate_links(t_queue **tail, t_queue *que)
@@ -253,17 +267,21 @@ void iterate_links(t_queue **tail, t_queue *que)
 	i = -1;
 	while (link_array[++i]) //? jump table possibility
 	{
-		if (que->room->flow[0] == link_array[i])
+		if (positive_flow(que->room->flow, link_array[i]))
 			continue;
-		else if (que->room->is_path)
+		// else if (link_array[i]->flow_from && link_array[i]->parent == NULL) //? handle first step
+		else if (que->room->flow_from && !que->room->flow_parent) //? handle first step
 		{
-			follow_old_path(tail, que, link_array[i]);
+			found_old_path(tail, que); //? handle first step.
 			return;
+		}
+		else if (que->room->flow_from && que->room->flow_parent)//? handle second step
+		{
+			can_go_everywhere(que->room, link_array[i], tail);
+			// visit_using_unused_edge(tail, que, link_array[i]);
 		}
 		else if (link_array[i]->non_flow_visit == false && link_array[i]->parent != que->room)
 			visit_using_unused_edge(tail, que, link_array[i]);
-		else if (link_array[i]->flow_visit == false && link_array[i]->flow[0] == que->room)
-			visit_using_flow_edge(tail, que, link_array[i]);
 	}
 }
 

@@ -64,12 +64,15 @@ typedef struct s_room
 {
 	char			*room_name;
 	struct s_vec	*links_vec;
-	struct s_room	*parent;
+	// struct s_room	*parent;
+	struct s_room	*parent;//? change name
+	struct s_room	*flow_parent;
 	struct s_room	*next;
 	bool			flow_visit;
 	bool			non_flow_visit;
-	bool			is_path;
+	bool			first_step;
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
+	struct s_room	*flow_from;
 }	t_room;
 
 void	error(int error_number);
@@ -100,6 +103,6 @@ unsigned long	hashing(t_data *data, char *name);
 int		bfs(t_data *data, t_queue **head);
 void	bfs_driver(t_data *data);
 // void	allocate_flows(t_vec *vector);
-void	allocate_flow_pointers(t_vec *vector);
+void allocate_flow_pointers(t_data *data);
 
 #endif

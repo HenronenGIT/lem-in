@@ -44,14 +44,18 @@ void init_struct(t_data *data)
 	data->rooms_vec->space_taken = 0;
 }
 
-void allocate_flow_pointers(t_vec *vector)
+// void allocate_flow_pointers(t_vec *vector)
+void allocate_flow_pointers(t_data *data)
 {
 	size_t i;
 	size_t j;
+	t_vec *vector;
+	size_t end_links;
 
+	end_links = data->end->links_vec->space_taken;
+	vector = data->rooms_vec;
 	t_room *room_ptr;
 	i = 0;
-	j = 0;
 	while (i < vector->length)
 	{
 		if (vector->array[i])
@@ -59,17 +63,37 @@ void allocate_flow_pointers(t_vec *vector)
 			room_ptr = vector->array[i];
 			while (room_ptr)
 			{
-				room_ptr->flow = (t_room **)malloc(sizeof(t_room *));
-				// room_ptr->flow = NULL;
-				room_ptr->flow[0] = (t_room *)malloc(sizeof(t_room));
-				room_ptr->flow[0] = NULL;
+				//! Allocates that many flow indexes to start room as they are links in end room
+				//? Can cause problems if end room links does not lead anywhere
+				//? 	At the moment allocates 1 pointer for EVERY room. This may be unneccessary, because there is not flow from every room
+				//?	Allocation can be moved to "set_flows() func."
+				if (room_ptr == data->start) //* FOR START ROOM
+				{
+					room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * (end_links + 1));
+					if (!room_ptr)
+						error(MALLOC_ERR);
+					j = 0;
+					while (j <= end_links) //! can cause issues
+					{
+						room_ptr->flow[j] = NULL;
+						j += 1;
+					}
+				}
+				//!
+				else //* FOR ALL OTHER ROOM THAN START
+				{
 
-				// }
-				// tmp->flows = (bool *)malloc(sizeof(tmp->links_vec->space_taken));
-				// while (tmp->links_vec && j < tmp->links_vec->space_taken)
-				// tmp->flows[j++] = 0;
+					room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * 2);
+					if (!room_ptr->flow)
+						error(MALLOC_ERR);
+					room_ptr->flow[0] = (t_room *)malloc(sizeof(t_room));
+					room_ptr->flow[1] = (t_room *)malloc(sizeof(t_room));
+					if (!room_ptr->flow[0] || !room_ptr->flow[1])
+						error(MALLOC_ERR);
+					room_ptr->flow[0] = NULL;
+					room_ptr->flow[1] = NULL;
+				}
 				room_ptr = room_ptr->next;
-				j = 0;
 			}
 		}
 		i++;
@@ -163,7 +187,8 @@ int main(void)
 	init_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-	allocate_flow_pointers(data.rooms_vec);
+	// allocate_flow_pointers(data.rooms_vec);
+	allocate_flow_pointers(&data);
 	bfs_driver(&data);
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
