@@ -1,0 +1,30 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "C/C++: lem-in",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/lem-in", // Binary name
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"MIMode": "lldb",
+			"preLaunchTask": "C/C++: lem-in", // Task name
+			"setupCommands": [
+                {
+                    // "text": "settings set target.input-path /Users/igaplich/Documents/Curriculum/current/lem_in/eval_tests/test_maps/augment_9.map"
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_1.map"
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_7.map"
+                    "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_8.map"
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_3.map"
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_2.map"
+                }
+            ]
+		}
+	]
+}
