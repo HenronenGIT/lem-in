@@ -98,17 +98,20 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	*cur = *head;
 }
 
-void allocate_flow_pointer(t_room *start_room, t_room *current)
+// void allocate_flow_pointer(t_room *start_room, t_room *current)
+void allocate_flow_pointer(t_data *data, t_room *current)
 {
 	size_t i;
 
 	i = 0;
-	while (start_room->flow[i])
+	// while (start_room->flow[i])
+	while (data->start->flow[i])
 		i += 1;
-	start_room->flow[i] = (t_room *)malloc(sizeof(t_room));
-	if (!start_room->flow[i])
+	data->start->flow[i] = (t_room *)malloc(sizeof(t_room));
+	// start_room->flow[i] = (t_room *)malloc(sizeof(t_room));
+	if (!data->start->flow[i])
 		error(MALLOC_ERR);
-	start_room->flow[i] = current;
+	data->start->flow[i] = current;
 }
 
 void allocate_flow_from_pointer(t_room *current, t_room *parent)
@@ -131,13 +134,23 @@ void set_flows(t_data *data)
 	while (current != data->start)
 	{
 		if (parent == data->start)
-			allocate_flow_pointer(data->start, current);
+			allocate_flow_pointer(data, current);
+		if (current->flow_parent) //* move towards parent and cut the flow.
+		{
+			current->flow_parent->flow_from = NULL;
+			current = current->flow_parent;
+			parent = current->parent; //!
+			current->flow_parent = NULL;
+		}
 		else
-			*parent->flow = current;
-		if (current != data->end)
-			allocate_flow_from_pointer(current, parent);
-		parent = parent->parent;
-		current = current->parent;
+		{
+			if (parent != data->start)
+				*parent->flow = current;
+			if (current != data->end)
+				allocate_flow_from_pointer(current, parent);
+			current = current->parent;
+			parent = parent->parent;
+		}
 	}
 }
 
@@ -189,7 +202,7 @@ void add_to_que(t_queue **tail, t_room *link)
 	(*tail)->room = link;
 	(*tail)->next = NULL;
 	// if (!link->parent)
-		// link->parent = current->room;
+	// link->parent = current->room;
 }
 
 void visit_using_flow_edge(t_queue **tail, t_queue *que, t_room *link)
@@ -247,12 +260,12 @@ int positive_flow(t_room **flows, t_room *link)
 	return (0);
 }
 
-void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
+void can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 {
 	if (link->flow_parent)
-		return ;
+		return;
 	if (link->parent)
-		return ;
+		return;
 	add_to_que(tail, link);
 	link->parent = current;
 }
@@ -275,12 +288,12 @@ void iterate_links(t_queue **tail, t_queue *que)
 			found_old_path(tail, que); //? handle first step.
 			return;
 		}
-		else if (que->room->flow_from && que->room->flow_parent)//? handle second step
+		else if (que->room->flow_from && que->room->flow_parent) //? handle second step
 		{
 			can_go_everywhere(que->room, link_array[i], tail);
 			// visit_using_unused_edge(tail, que, link_array[i]);
 		}
-		else if (link_array[i]->non_flow_visit == false && link_array[i]->parent != que->room)
+		else if (link_array[i]->parent == NULL && link_array[i]->parent != que->room) //? first statement useless ?
 			visit_using_unused_edge(tail, que, link_array[i]);
 	}
 }
