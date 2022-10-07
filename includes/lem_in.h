@@ -98,7 +98,15 @@ unsigned long	hashing(t_data *data, char *name);
 /*----------BFS--------------*/
 int		bfs(t_data *data, t_queue **head);
 void	bfs_driver(t_data *data);
-// void	allocate_flows(t_vec *vector);
-void allocate_flow_pointers(t_data *data);
+int		positive_flow(t_room **flows, t_room *link);
+void	allocate_flow_pointers(t_data *data);
+void add_to_que(t_queue **tail, t_room *link);
+void found_old_path(t_queue **tail, t_queue *que);
+void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link);
+void can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
+
+/*------SETTING FLOWS--------*/
+void set_flows(t_data *data);
+void allocate_flow_pointer(t_data *data, t_room *current);
 
 #endif

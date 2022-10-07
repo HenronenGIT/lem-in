@@ -4,7 +4,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -Wimplicit -fsanitize=address#-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address#-fno-sanitize=all#-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -12,7 +12,9 @@ SRC_FILES = main.c \
 			read_rooms.c \
 			array_hashing.c \
 			read_links.c \
-			bfs.c
+			bfs.c	\
+			bfs_utils.c	\
+			set_flow_utils.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
@@ -58,7 +60,10 @@ re : fclean all clean all
 
 # Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/augment_8.map 
+	./lem-in < ./eval_tests/test_maps/augment_5.map 
+
+test:
+	make python > test.txt
 
 python:
 	python3 ./eval_tests/scripts/run_maps.py
