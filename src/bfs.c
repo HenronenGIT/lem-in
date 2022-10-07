@@ -272,17 +272,21 @@ void can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 
 void iterate_links(t_queue **tail, t_queue *que)
 {
-	// size_t i;
-	int i;
+	size_t i;
+	// int i;
 	t_room **link_array;
 
 	link_array = (t_room **)que->room->links_vec->array;
-	i = -1;
-	while (link_array[++i]) //? jump table possibility
+	i = 0;
+	// while (link_array[++i]) //? jump table possibility
+	while (i < que->room->links_vec->space_taken) //? jump table possibility
 	{
 		if (positive_flow(que->room->flow, link_array[i]))
-			continue;
-		// else if (link_array[i]->flow_from && link_array[i]->parent == NULL) //? handle first step
+		{
+			i++;
+			continue ;
+			// continue;
+		}
 		else if (que->room->flow_from && !que->room->flow_parent) //? handle first step
 		{
 			found_old_path(tail, que); //? handle first step.
@@ -293,8 +297,9 @@ void iterate_links(t_queue **tail, t_queue *que)
 			can_go_everywhere(que->room, link_array[i], tail);
 			// visit_using_unused_edge(tail, que, link_array[i]);
 		}
-		else if (link_array[i]->parent == NULL && link_array[i]->parent != que->room) //? first statement useless ?
+		else if (link_array[i]->parent == NULL && link_array[i]->parent != que->room)
 			visit_using_unused_edge(tail, que, link_array[i]);
+		i++;
 	}
 }
 
