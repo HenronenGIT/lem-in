@@ -36,11 +36,11 @@ void	vec_allocate_element(t_vec *dst, size_t i)
 	((t_room **)dst->array)[i]->parent = NULL;
 	((t_room **)dst->array)[i]->flow_parent = NULL;
 	// ((t_room **)dst->array)[i]->is_path = 0;
-	((t_room **)dst->array)[i]->non_flow_visit = false;
-	((t_room **)dst->array)[i]->flow_visit = false;
+	// ((t_room **)dst->array)[i]->non_flow_visit = false;
+	// ((t_room **)dst->array)[i]->flow_visit = false;
 	((t_room **)dst->array)[i]->flow = NULL;
 	((t_room **)dst->array)[i]->flow_from = false;
-	((t_room **)dst->array)[i]->first_step = true;
+	// ((t_room **)dst->array)[i]->first_step = true;
 
 
 }
