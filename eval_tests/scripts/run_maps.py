@@ -17,4 +17,3 @@ for file in files_arr:
 	print("===== " + path_array[2] +" =====", flush=True)
 	# input("Press Enter to continue...")
 	os.system(lem_in + "<" + file)
-	# os.system(lem_in + "<" + file + ">" + (f"correct_{i}.txt"))

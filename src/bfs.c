@@ -119,9 +119,7 @@ void set_flows(t_data *data)
 {
 	t_room *current;
 	t_room *parent;
-	size_t i;
 
-	i = 0;
 	current = data->end;
 	parent = current->parent;
 	while (current != data->start)
@@ -147,14 +145,17 @@ void set_flows(t_data *data)
 	}
 }
 
-void print_path(t_data *data)
+void print_paths(t_data *data)
 {
 	t_room *iterator;
 	size_t i;
+	size_t path;
 
+	path = 1;
 	i = 0;
 	while (data->start->flow[i])
 	{
+		ft_printf("PATH [%zu] = ", path++);
 		ft_printf("%s -> ", data->start->room_name);
 		iterator = data->start->flow[i];
 		while (iterator != data->end)
@@ -166,23 +167,6 @@ void print_path(t_data *data)
 		i += 1;
 	}
 	ft_printf("\n");
-}
-
-void bfs_driver(t_data *data)
-{
-	t_queue *head;
-	size_t i;
-
-	i = 0;
-	head = NULL;
-	while (bfs(data, &head))
-	{
-		// print_queue(head);
-		if (head)
-			reset_graph_values(head);
-		print_path(data);
-		// print_all_paths_flow(data); //* Print after every bfs
-	}
 }
 
 void add_to_que(t_queue **tail, t_room *link)
@@ -241,8 +225,8 @@ int positive_flow(t_room **flows, t_room *link)
 
 void can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 {
-	if (link->flow_parent)
-		return;
+	// if (link->flow_parent)
+	// return;
 	if (link->parent)
 		return;
 	add_to_que(tail, link);
@@ -256,16 +240,16 @@ void iterate_links(t_queue **tail, t_queue *que)
 
 	link_array = (t_room **)que->room->links_vec->array;
 	i = 0;
-	while (i < que->room->links_vec->space_taken) //? jump table possibility
+	while (i < que->room->links_vec->space_taken)
 	{
 		if (positive_flow(que->room->flow, link_array[i]))
 		{
 			i++;
-			continue ;
+			continue;
 		}
 		else if (que->room->flow_from && !que->room->flow_parent) //? handle first step
 		{
-			found_old_path(tail, que); //? handle first step.
+			found_old_path(tail, que); //? handle first step better name ?.
 			return;
 		}
 		else if (que->room->flow_from && que->room->flow_parent) //? handle second step
@@ -276,7 +260,7 @@ void iterate_links(t_queue **tail, t_queue *que)
 	}
 }
 
-int bfs(t_data *data, t_queue **head)
+int	bfs(t_data *data, t_queue **head)
 {
 	t_queue *que;
 	t_queue *tail;
@@ -287,11 +271,25 @@ int bfs(t_data *data, t_queue **head)
 	while (data->end->parent == NULL && que != NULL)
 	{
 		iterate_links(&tail, que);
-		// print_queue(*head); //! temp
 		que = que->next;
 	}
 	if (!data->end->parent)
 		return (0);
 	set_flows(data);
 	return (1);
+}
+
+void	bfs_driver(t_data *data)
+{
+	t_queue *head;
+	size_t i;
+
+	i = 0;
+	head = NULL;
+	while (bfs(data, &head))
+	{
+		if (head)
+			reset_graph_values(head);
+	}
+	print_paths(data);
 }

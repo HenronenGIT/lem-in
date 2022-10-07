@@ -64,7 +64,7 @@ typedef struct s_room
 {
 	char			*room_name;
 	struct s_vec	*links_vec;
-	struct s_room	*parent;//? change name to "no_flow_parent"
+	struct s_room	*parent;//? change name to "no_flow_parent" or similar
 	struct s_room	*flow_parent;
 	struct s_room	*next;
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
