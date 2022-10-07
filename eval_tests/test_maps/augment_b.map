@@ -58,3 +58,9 @@ start-11
 #   |               /
 #  12 - 13 - 14 - 15
 #Here is the number of lines required: 11
+#
+# Correct paths:
+#
+# PATH [1] = start -> 1 -> 16 -> 17 -> 18 -> 19 -> 20 -> end
+# PATH [2] = start -> 5 -> 6 -> 7 -> 3 -> 2 -> 8 -> 9 -> 10 -> end
+# PATH [3] = start -> 11 -> 12 -> 13 -> 14 -> 15 -> 4 -> end

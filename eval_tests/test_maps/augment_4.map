@@ -57,6 +57,7 @@ start-18
 #     14 - 15 - 16 - 17
 # Here is the number of lines required: 9
 #
-# Correct paths: 
-#	1 -> 2 -> 6 -> 7 -> 8 -> 9 -> end
-#	14 -> 15 -> 16 -> 17 -> 4 -> 5 -> end
+# Correct Vertex disjoint paths:
+#
+# PATH [1] = start -> 1 -> 2 -> 6 -> 7 -> 8 -> 9 -> end
+# PATH [2] = start -> 10 -> 11 -> 12 -> 13 -> 3 -> 4 -> 5 -> end

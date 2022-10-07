@@ -33,3 +33,8 @@ j-k
 k-l
 l-end
 #Here is the number of lines required: 10
+# 
+# Corrext Vertex disjoint paths:
+#
+# PATH [1] = start -> a -> g -> h -> i -> j -> k -> l -> end
+# PATH [2] = start -> d -> e -> f -> b -> c -> end

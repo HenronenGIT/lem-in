@@ -61,4 +61,10 @@ q-d
 #        \ / \ /
 #         m - l
 # Here is the number of lines required: 9
-
+#
+#
+# Correct Vertex disjoint paths:
+#
+# PATH [1] = a -> b -> p -> j -> k
+# PATH [2] = a -> o -> c -> q -> k
+# PATH [3] = a -> f -> e -> d -> m -> l -> k

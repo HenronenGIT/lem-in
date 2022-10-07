@@ -44,3 +44,8 @@ start-11
 #                \  /
 #                 5
 # Here is the number of lines required: 9
+#
+# Correct Vertex disijoint paths:
+#
+# PATH [1] = start -> 1 -> 6 -> 7 -> 8 -> 9 -> 10 -> end
+# PATH [2] = start -> 11 -> 12 -> 2 -> 3 -> 4 -> end

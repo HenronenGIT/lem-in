@@ -37,3 +37,9 @@ start-8
 #    |            |
 #    8 - 9 - 10 - 11
 #Here is the number of lines required: 10
+#
+# Correct Vertex disjoint paths:
+#
+# PATH [1] = start -> 1 -> 2 -> 4 -> 5 -> end
+# PATH [2] = start -> 8 -> 9 -> 10 -> 11 -> 3 -> end
+
