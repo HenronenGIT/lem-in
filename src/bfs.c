@@ -20,6 +20,7 @@ void print_paths(t_data *data)
 
 	path = 1;
 	i = 0;
+	printf("\033[0;32mSet of all POSSIBLE paths, after all BFSs\033[0m\n");
 	while (data->start->flow[i])
 	{
 		ft_printf("PATH [%zu] = ", path++);
@@ -122,6 +123,8 @@ void	bfs_driver(t_data *data)
 	{
 		if (head)
 			reset_graph_values(head);
+		best_paths_set_operations(data, i);
+		i++;
 	}
 	print_paths(data);
 }

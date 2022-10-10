@@ -42,6 +42,8 @@ void init_struct(t_data *data)
 	data->rooms_vec->length = 10;
 	data->rooms_vec->space_left = 10;
 	data->rooms_vec->space_taken = 0;
+	data->best_set = NULL;
+	data->best_speed = 0;
 }
 
 // void allocate_flow_pointers(t_vec *vector)

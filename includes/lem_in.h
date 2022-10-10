@@ -49,6 +49,8 @@ typedef struct s_data
 	struct s_room	*start;
 	struct s_room	*end;
 	struct s_vec	*rooms_vec;
+	struct s_set	*best_set;
+	size_t			best_speed;
 }	t_data;
 
 /* General Dynamic Vector structure*/
@@ -59,6 +61,13 @@ typedef struct s_vec
 	size_t			space_left;
 	size_t			space_taken;
 }	t_vec;
+
+typedef struct s_set
+{
+	struct s_room	***paths;
+	size_t			*lengths;
+	size_t			paths_amount;
+}	t_set;
 
 typedef struct s_room
 {
@@ -100,13 +109,14 @@ int		bfs(t_data *data, t_queue **head);
 void	bfs_driver(t_data *data);
 int		positive_flow(t_room **flows, t_room *link);
 void	allocate_flow_pointers(t_data *data);
-void add_to_que(t_queue **tail, t_room *link);
-void found_old_path(t_queue **tail, t_queue *que);
-void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link);
-void can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
+void	add_to_que(t_queue **tail, t_room *link);
+void	found_old_path(t_queue **tail, t_queue *que);
+void	visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link);
+void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
 
 /*------SETTING FLOWS--------*/
-void set_flows(t_data *data);
-void allocate_flow_pointer(t_data *data, t_room *current);
+void	set_flows(t_data *data);
+void	allocate_flow_pointer(t_data *data, t_room *current);
+void	best_paths_set_operations(t_data *data, size_t bfs_times);
 
 #endif
