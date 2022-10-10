@@ -44,8 +44,7 @@ void read_rooms(t_data *data)
 			error(FORMAT_ERR);
 		else
 			read_room_name(data, line, NORMAL);
-		free(line);
-		line = NULL;
+		ft_strdel(&line);
 	}
 	sort_hash_values(data);
 	if (ft_strchr(line, '-'))
@@ -64,7 +63,7 @@ void read_rooms(t_data *data)
 	}
 }
 
-bool handle_command(t_data *data, char *command, int decider)
+bool handle_command(t_data *data, int decider)
 {
 	char *room_info;
 
@@ -87,9 +86,9 @@ void read_hashtag(t_data *data, char *line)
 
 	new_line = NULL;
 	if (!ft_strcmp("##start", line) && is_start == false)
-		is_start = handle_command(data, line, START);
+		is_start = handle_command(data, START);
 	else if (!ft_strcmp("##end", line) && is_end == false)
-		is_end = handle_command(data, line, END);
+		is_end = handle_command(data, END);
 	else if (*line == '#' && line[1] != '#')
 		return;
 	else
