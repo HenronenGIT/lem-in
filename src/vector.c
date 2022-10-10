@@ -12,16 +12,15 @@
 
 #include "../includes/lem_in.h"
 
-void	vec_insert(t_vec *dst, char *name)
+void	vec_insert(t_vec *dst, char *name, t_coords *coordinates)
 {
 	if (!dst || !name)
 		error(NULL_ERR);
 	if (dst->space_left == 0)
 		vec_resize(dst);
 	vec_allocate_element(dst, dst->space_taken);
-	if (!dst->array[dst->space_taken])
-		error(MALLOC_ERR);
 	((t_room **)(dst->array))[dst->space_taken]->room_name = name;
+	((t_room **)(dst->array))[dst->space_taken]->coords = coordinates;
 	dst->space_taken++;
 	dst->space_left--;
 }
@@ -31,18 +30,13 @@ void	vec_allocate_element(t_vec *dst, size_t i)
 	((t_room **)dst->array)[i] = (void *)malloc(sizeof(t_room));
 	if (!dst->array[i])
 		error(MALLOC_ERR);
-	((t_room **)dst->array)[i]->next = NULL;
 	((t_room **)dst->array)[i]->links_vec = NULL;
+	((t_room **)dst->array)[i]->coords = NULL;
 	((t_room **)dst->array)[i]->parent = NULL;
 	((t_room **)dst->array)[i]->flow_parent = NULL;
-	// ((t_room **)dst->array)[i]->is_path = 0;
-	// ((t_room **)dst->array)[i]->non_flow_visit = false;
-	// ((t_room **)dst->array)[i]->flow_visit = false;
 	((t_room **)dst->array)[i]->flow = NULL;
 	((t_room **)dst->array)[i]->flow_from = false;
-	// ((t_room **)dst->array)[i]->first_step = true;
-
-
+	((t_room **)dst->array)[i]->next = NULL;
 }
 
 static void	vec_free(t_vec *vector)

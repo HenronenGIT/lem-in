@@ -133,12 +133,17 @@ void init_vector(t_vec *vector, size_t start_size)
 static void allocate_vectors(t_data *data, size_t start_size)
 {
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
-	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * start_size);
-	data->coords_vec = (t_vec *)malloc(sizeof(t_vec));
-	data->coords_vec->array = (void **)malloc(sizeof(t_coords *) * start_size);
-	if (!data->rooms_vec || !data->rooms_vec->array
-		|| !data->coords_vec || !data->coords_vec->array)
+	if (!data->rooms_vec)
 		error(MALLOC_ERR);
+	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * start_size);
+	if (!data->rooms_vec->array)
+		error(MALLOC_ERR);
+		
+	// data->coords_vec = (t_vec *)malloc(sizeof(t_vec));
+	// data->coords_vec->array = (void **)malloc(sizeof(t_coords *) * start_size);
+	// if (!data->rooms_vec || !data->rooms_vec->array)
+		// || !data->coords_vec || !data->coords_vec->array)
+		// error(MALLOC_ERR);
 }
 
 void init_data_struct(t_data *data)
@@ -149,7 +154,7 @@ void init_data_struct(t_data *data)
 	data->ants = 0;
 	allocate_vectors(data, start_size);
 	init_vector(data->rooms_vec, start_size);
-	init_vector(data->coords_vec, start_size);
+	// init_vector(data->coords_vec, start_size);
 }
 
 int main(void)

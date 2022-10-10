@@ -43,7 +43,7 @@ void read_rooms(t_data *data)
 		else if ((line && *line == 'L'))
 			error(FORMAT_ERR);
 		else
-			read_room_name(data, line, NORMAL);
+			read_room_info(data, line, NORMAL);
 		ft_strdel(&line);
 	}
 	sort_hash_values(data);
@@ -72,9 +72,9 @@ bool handle_command(t_data *data, int decider)
 	if (room_info[0] == '#' || room_info[0] == '\0')
 		error(FORMAT_ERR);
 	if (decider == START)
-		read_room_name(data, room_info, START);
+		read_room_info(data, room_info, START);
 	else
-		read_room_name(data, room_info, END);
+		read_room_info(data, room_info, END);
 	return (true);
 }
 
@@ -96,18 +96,40 @@ void read_hashtag(t_data *data, char *line)
 	free(new_line);
 }
 
-void read_room_name(t_data *data, char *line, int decider)
+void	read_coordinates(t_coords **coords, char *coord_x, char *coord_y)
 {
-	int i;
-	char *name;
+	(*coords) = (t_coords *)malloc(sizeof(t_coords));
+	if (!(*coords))
+		error(MALLOC_ERR);
+	if (ft_isnumber(coord_x) == false)
+		error(FORMAT_ERR);
+	(*coords)->x = ft_atol(coord_x);
+	(*coords)->y = ft_atol(coord_y);
+}
+
+// void read_room_name(t_data *data, char *line, int decider) //* old function name
+void read_room_info(t_data *data, char *line, int decider)
+{
+	int			i;
+	char		**info;
+	t_coords	*coords;
 
 	i = 0;
-	while (line[i] && line[i] != ' ')
-		i++;
-	name = ft_strsub(line, 0, i);
-	vec_insert(data->rooms_vec, name);
+	coords = NULL;
+	info = ft_strsplit(line, ' ');
+	if (ft_count_pointers(info) != 3)
+		error(FORMAT_ERR);
+	
+	// while (line[i] && line[i] != ' ')
+		// i++;
+	// name = ft_strsub(line, 0, i);
+	read_coordinates(&coords, info[1], info[2]); //*
+	vec_insert(data->rooms_vec, info[0], coords);
 	if (decider == START)
 		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	if (decider == END)
 		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
+
+	// ft_free_2d_array(info); //! mayby causes leaks
+	free(coords);
 }
