@@ -12,10 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-void	read_ants(t_data *data)
+void read_ants(t_data *data)
 {
-	char	*line;
-	long	ant_count;
+	char *line;
+	long ant_count;
 
 	line = NULL;
 	ant_count = 0;
@@ -25,18 +25,18 @@ void	read_ants(t_data *data)
 	if (!line)
 		error(INPUT_ERR);
 	ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
-	if (ant_count <= 0)
+	if (ant_count <= 0)		   //? Is 0 ant count error?
 		error(INPUT_ERR);
 	data->ants = ant_count;
 	free(line);
 }
 
-void	read_rooms(t_data *data)
+void read_rooms(t_data *data)
 {
-	char	*line;
+	char *line;
 
 	line = NULL;
-	while (get_next_line(0, &line) && !ft_strchr(line,'-'))
+	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
 		if (line && *line == '#')
 			read_hashtag(data, line);
@@ -46,7 +46,7 @@ void	read_rooms(t_data *data)
 			read_room_name(data, line, NORMAL);
 		free(line);
 		line = NULL;
-	}	
+	}
 	sort_hash_values(data);
 	if (ft_strchr(line, '-'))
 	{
@@ -64,34 +64,43 @@ void	read_rooms(t_data *data)
 	}
 }
 
-void	read_hashtag(t_data *data, char *line)
+bool handle_command(t_data *data, char *command, int decider)
 {
-	char *test;
+	char *room_info;
 
-	test = NULL;
-	if (!ft_strcmp("##start", line))
-	{
-		get_next_line(0, &test);
-		read_room_name(data, test, START);
-	}
-	else if (!ft_strcmp("##end", line))
-	{
-		get_next_line(0, &test);
-		read_room_name(data, test, END);
-	}
-	else if (*line == '#' && line[1] != '#')
-		return ;
-	else
+	room_info = NULL;
+	get_next_line(0, &room_info);
+	if (room_info[0] == '#' || room_info[0] == '\0')
 		error(FORMAT_ERR);
-		//? One more else if() might need to be added for checking if hashtag was comment.
-		//? In that case just return.
-	free(test);
+	if (decider == START)
+		read_room_name(data, room_info, START);
+	else
+		read_room_name(data, room_info, END);
+	return (true);
 }
 
-void	read_room_name(t_data *data, char *line, int decider)
+void read_hashtag(t_data *data, char *line)
 {
-	int		i;
-	char	*name;
+	char *new_line;
+	static bool is_start;
+	static bool is_end;
+
+	new_line = NULL;
+	if (!ft_strcmp("##start", line) && is_start == false)
+		is_start = handle_command(data, line, START);
+	else if (!ft_strcmp("##end", line) && is_end == false)
+		is_end = handle_command(data, line, END);
+	else if (*line == '#' && line[1] != '#')
+		return;
+	else
+		error(FORMAT_ERR);
+	free(new_line);
+}
+
+void read_room_name(t_data *data, char *line, int decider)
+{
+	int i;
+	char *name;
 
 	i = 0;
 	while (line[i] && line[i] != ' ')

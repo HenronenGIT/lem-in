@@ -18,11 +18,15 @@
 			"setupCommands": [
                 {
                     // "text": "settings set target.input-path /Users/igaplich/Documents/Curriculum/current/lem_in/eval_tests/test_maps/augment_9.map"
+
                     // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_5.map"
-                    "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_7.map"
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_7.map"
                     // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_8.map"
                     // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_3.map"
                     // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/augment_2.map"
+					/* Invalid maps */
+                    // "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/invalid_maps/two_start_command_2.map"
+                    "text": "settings set target.input-path /Users/hmaronen/workspace/github/lem-in/eval_tests/test_maps/invalid_maps/empty_after_start.map"
                 }
             ]
 		}

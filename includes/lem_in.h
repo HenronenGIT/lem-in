@@ -15,8 +15,7 @@
 
 # include <stdio.h>
 # include <stdbool.h>
-// # include "../libftprintf/includes/ft_printf.h"
-# include "../libft/includes/libft.h" // hmaronen library //? temp
+# include "../libft/includes/libft.h"
 
 # define MALLOC_ERR -2
 # define NULL_ERR -3
@@ -28,12 +27,7 @@
 # define END 2
 # define NORMAL 3
 
-// typedef enum e_visit
-// {
-// 	not_visited,
-// 	flow,
-// 	no_flow
-// } t_visit;
+// const static bool start_found = false;
 
 /* Linked list structure for BFS */
 typedef struct s_queue
@@ -51,7 +45,7 @@ typedef struct s_data
 	struct s_vec	*rooms_vec;
 }	t_data;
 
-/* General Dynamic Vector structure*/
+/* General Dynamic Vector structure */
 typedef struct s_vec
 {
 	void	 		**array;
@@ -70,6 +64,7 @@ typedef struct s_room
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
 	struct s_room	*flow_from;
 }	t_room;
+
 
 void	error(int error_number);
 
