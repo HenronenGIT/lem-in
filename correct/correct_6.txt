@@ -1,8 +1,0 @@
-New Path
-start 1 2 3 end 
-
-New Path
-start 1 2 4 5 end 
-New Path
-start 8 9 10 11 3 end 
-

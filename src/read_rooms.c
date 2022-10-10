@@ -25,7 +25,7 @@ void	read_ants(t_data *data)
 	if (!line)
 		error(INPUT_ERR);
 	ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
-	if (ant_count <= 0) //? Is 0 ant count error?
+	if (ant_count <= 0)
 		error(INPUT_ERR);
 	data->ants = ant_count;
 	free(line);

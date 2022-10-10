@@ -1,8 +1,0 @@
-New Path
-start a b c end 
-
-New Path
-start a g h i j k l end 
-New Path
-start d e f b c end 
-
