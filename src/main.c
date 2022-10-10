@@ -12,6 +12,40 @@
 
 #include "../includes/lem_in.h"
 
+void print_links(t_data data)
+{
+	size_t i;
+	size_t j;
+	t_room *tmp_room;
+
+	i = 0;
+	j = 0;
+	while (i < data.rooms_vec->length)
+	{
+		if (data.rooms_vec->array[i])
+		{
+			tmp_room = data.rooms_vec->array[i];
+			while (tmp_room)
+			{
+				ft_printf("%5s: ", tmp_room->room_name);
+				if (tmp_room->links_vec)
+				{
+					while (j < tmp_room->links_vec->space_taken)
+					{
+						ft_printf("-> %5s ", ((t_room **)tmp_room->links_vec->array)[j]->room_name);
+						// ft_printf("-> %s ", ((t_vec **)tmp_room->links_vec->array)[j]->room_name););
+						j++;
+					}
+				}
+				tmp_room = tmp_room->next;
+				j = 0;
+				ft_printf("\n");
+			}
+		}
+		i++;
+	}
+}
+
 void error(int error_number)
 {
 	if (error_number == INPUT_ERR)
@@ -25,26 +59,10 @@ void error(int error_number)
 	exit(error_number);
 }
 
-void init_struct(t_data *data)
-{
-	size_t i;
 
-	data->ants = 0;
-	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
-	if (!data->rooms_vec)
-		error(MALLOC_ERR);
-	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * 10);
-	if (!data->rooms_vec->array)
-		error(MALLOC_ERR);
-	i = 0;
-	while (i < 10)
-		data->rooms_vec->array[i++] = NULL;
-	data->rooms_vec->length = 10;
-	data->rooms_vec->space_left = 10;
-	data->rooms_vec->space_taken = 0;
-}
 
-// void allocate_flow_pointers(t_vec *vector)
+
+
 void allocate_flow_pointers(t_data *data)
 {
 	size_t i;
@@ -100,48 +118,47 @@ void allocate_flow_pointers(t_data *data)
 	}
 }
 
-void print_links(t_data data)
+void init_vector(t_vec *vector, size_t start_size)
 {
-	size_t i;
-	size_t j;
-	t_room *tmp_room;
+	size_t	i;
 
 	i = 0;
-	j = 0;
-	while (i < data.rooms_vec->length)
-	{
-		if (data.rooms_vec->array[i])
-		{
-			tmp_room = data.rooms_vec->array[i];
-			while (tmp_room)
-			{
-				ft_printf("%5s: ", tmp_room->room_name);
-				if (tmp_room->links_vec)
-				{
-					while (j < tmp_room->links_vec->space_taken)
-					{
-						ft_printf("-> %5s ", ((t_room **)tmp_room->links_vec->array)[j]->room_name);
-						// ft_printf("-> %s ", ((t_vec **)tmp_room->links_vec->array)[j]->room_name););
-						j++;
-					}
-				}
-				tmp_room = tmp_room->next;
-				j = 0;
-				ft_printf("\n");
-			}
-		}
-		i++;
-	}
+	while (i < start_size)
+		vector->array[i++] = NULL;
+	vector->length = start_size;
+	vector->space_left = start_size;
+	vector->space_taken = 0;
+}
+
+static void allocate_vectors(t_data *data, size_t start_size)
+{
+	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
+	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * start_size);
+	data->coords_vec = (t_vec *)malloc(sizeof(t_vec));
+	data->coords_vec->array = (void **)malloc(sizeof(t_coords *) * start_size);
+	if (!data->rooms_vec || !data->rooms_vec->array
+		|| !data->coords_vec || !data->coords_vec->array)
+		error(MALLOC_ERR);
+}
+
+void init_data_struct(t_data *data)
+{
+	size_t	start_size;
+
+	start_size = 10;
+	data->ants = 0;
+	allocate_vectors(data, start_size);
+	init_vector(data->rooms_vec, start_size);
+	init_vector(data->coords_vec, start_size);
 }
 
 int main(void)
 {
 	t_data data;
 
-	init_struct(&data);
+	init_data_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-	// allocate_flow_pointers(data.rooms_vec);
 	allocate_flow_pointers(&data);
 	bfs_driver(&data);
 	// print_rooms(data); //! temp

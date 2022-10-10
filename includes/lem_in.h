@@ -40,9 +40,10 @@ typedef struct s_queue
 typedef struct s_data
 {
 	unsigned long	ants;
+	struct s_vec	*rooms_vec;
+	struct s_vec	*coords_vec;
 	struct s_room	*start;
 	struct s_room	*end;
-	struct s_vec	*rooms_vec;
 }	t_data;
 
 /* General Dynamic Vector structure */
@@ -65,6 +66,11 @@ typedef struct s_room
 	struct s_room	*flow_from;
 }	t_room;
 
+typedef struct s_coords
+{
+	long x;
+	long y;
+} t_coords;
 
 void	error(int error_number);
 
