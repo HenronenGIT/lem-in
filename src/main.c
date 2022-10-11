@@ -49,13 +49,15 @@ void print_links(t_data data)
 void error(int error_number)
 {
 	if (error_number == INPUT_ERR)
-		ft_puterror("Invalid ant input!\n");
+		ft_puterror("ERROR: Invalid ant input!\n");
 	if (error_number == MALLOC_ERR)
-		ft_puterror("Not enough space for malloc");
+		ft_puterror("ERROR: Not enough space for malloc");
 	if (error_number == FORMAT_ERR)
-		ft_puterror("Invalid formatting!\n");
+		ft_puterror("ERROR: Invalid formatting!\n");
 	if (error_number == NO_PATH)
-		ft_puterror("No path found!\n");
+		ft_puterror("ERROR: No path found!\n");
+	if (error_number == LINK_ERR)
+		ft_puterror("ERROR: Invalid link input!\n");
 	exit(error_number);
 }
 
@@ -164,6 +166,7 @@ int main(void)
 	init_data_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
+	exit(0);
 	allocate_flow_pointers(&data);
 	bfs_driver(&data);
 	// print_rooms(data); //! temp

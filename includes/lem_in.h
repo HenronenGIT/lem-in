@@ -22,6 +22,8 @@
 # define FORMAT_ERR -4
 # define INPUT_ERR -5
 # define NO_PATH -6
+# define LINK_ERR -7
+# define ANT_ERR -8
 
 # define START 1
 # define END 2
@@ -41,7 +43,6 @@ typedef struct s_data
 {
 	unsigned long	ants;
 	struct s_vec	*rooms_vec;
-	// struct s_vec	*coords_vec;
 	struct s_room	*start;
 	struct s_room	*end;
 }	t_data;
