@@ -247,8 +247,8 @@ paths are sorted and only paths on the left are potentially shorter.
 */
 bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants)
 {
-	int	j;
-	int	sum;
+	int		j;
+	size_t	sum;
 
 	if (i == 0)
 		return (true);

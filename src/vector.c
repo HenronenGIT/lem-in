@@ -40,6 +40,7 @@ void	vec_allocate_element(t_vec *dst, size_t i)
 	// ((t_room **)dst->array)[i]->flow_visit = false;
 	((t_room **)dst->array)[i]->flow = NULL;
 	((t_room **)dst->array)[i]->flow_from = false;
+	((t_room **)dst->array)[i]->occupied = false;
 	// ((t_room **)dst->array)[i]->first_step = true;
 
 

@@ -78,6 +78,7 @@ typedef struct s_room
 	struct s_room	*next;
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
 	struct s_room	*flow_from;
+	bool			occupied;
 }	t_room;
 
 void	error(int error_number);
@@ -117,6 +118,12 @@ void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
 /*------SETTING FLOWS--------*/
 void	set_flows(t_data *data);
 void	allocate_flow_pointer(t_data *data, t_room *current);
+
+/*------SEARCHING BEST PATHS SET--------*/
 void	best_paths_set_operations(t_data *data, size_t bfs_times);
+bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
+
+/*------RESULT OUTPUT-------------*/
+void	print_result(t_data *data);
 
 #endif
