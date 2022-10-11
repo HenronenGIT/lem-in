@@ -19,7 +19,7 @@ void	ft_free_2d_array(char **array)
 	i = 0;
 	while (array[i])
 	{
-		ft_memdel((void **)&array[i]);
+		ft_strdel(&array[i]);
 		i++;
 	}
 	ft_memdel((void **)&array);
