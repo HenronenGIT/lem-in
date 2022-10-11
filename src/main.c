@@ -53,10 +53,10 @@ void allocate_flow_pointers(t_data *data)
 	size_t j;
 	t_vec *vector;
 	size_t end_links;
+	t_room *room_ptr;
 
 	end_links = data->end->links_vec->space_taken;
 	vector = data->rooms_vec;
-	t_room *room_ptr;
 	i = 0;
 	while (i < vector->length)
 	{
@@ -84,13 +84,8 @@ void allocate_flow_pointers(t_data *data)
 				//!
 				else //* FOR ALL OTHER ROOM THAN START
 				{
-
 					room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * 2);
 					if (!room_ptr->flow)
-						error(MALLOC_ERR);
-					room_ptr->flow[0] = (t_room *)malloc(sizeof(t_room));
-					room_ptr->flow[1] = (t_room *)malloc(sizeof(t_room));
-					if (!room_ptr->flow[0] || !room_ptr->flow[1])
 						error(MALLOC_ERR);
 					room_ptr->flow[0] = NULL;
 					room_ptr->flow[1] = NULL;
@@ -196,7 +191,6 @@ int main(void)
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
-	// system("leaks lem-in");
 	return (0);
 	// exit (0);
 }

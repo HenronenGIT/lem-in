@@ -31,7 +31,8 @@ void	send_from_start(t_data *data, t_room **ants, size_t *ant_num, size_t *finis
 	i = 0;
 	while (i < data->best_set->paths_amount)
 	{
-		if (!data->start->flow[i]->occupied && can_send_this_path(data->best_set, i, data->ants - *finished))
+		if (!data->start->flow[i]->occupied
+			&& can_send_this_path(data->best_set, i, data->ants - *finished))
 		{
 			ants[*ant_num] = data->start->flow[i];
 			check_if_move_end(data, ants, ant_num, finished);
@@ -46,7 +47,9 @@ void	print_result(t_data *data)
 	t_room	**ants;
 	size_t	finished;
 	size_t	ant_num;
+	size_t	moves;
 
+	moves = 0;
 	ant_num = 0;
 	ants = (t_room **)malloc(sizeof(t_room) * data->ants);
 	if (!ants)
@@ -69,6 +72,9 @@ void	print_result(t_data *data)
 			}
 			ant_num++;
 		}
+		moves++;
 		printf("\n");
 	}
+	free(ants);
+	printf("%zu moves made\n", moves);
 }

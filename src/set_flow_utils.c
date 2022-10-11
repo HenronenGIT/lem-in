@@ -19,17 +19,11 @@ void allocate_flow_pointer(t_data *data, t_room *current)
 	i = 0;
 	while (data->start->flow[i])
 		i += 1;
-	data->start->flow[i] = (t_room *)malloc(sizeof(t_room));
-	if (!data->start->flow[i])
-		error(MALLOC_ERR);
 	data->start->flow[i] = current;
 }
 
 void allocate_flow_from_pointer(t_room *current, t_room *parent)
 {
-	current->flow_from = (t_room *)malloc(sizeof(t_room));
-	if (!current->flow_from)
-		error(MALLOC_ERR);
 	current->flow_from = parent;
 }
 

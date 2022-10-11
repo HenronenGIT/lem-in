@@ -202,6 +202,19 @@ can_send_this_path
 check_longest_move
 */
 
+
+void	free_paths_set(t_set *paths_set)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < paths_set->paths_amount)
+		free(paths_set->paths[i++]);
+	free(paths_set->paths);
+	free(paths_set->lengths);
+	free(paths_set);
+}
+
 /*
 here we take a path, and check how long it will take to send all ants down the path.
 i came up with formula, that it will take (length_of_path + amount_of_ants) moves
@@ -225,9 +238,13 @@ void	check_longest_move(t_data *data, t_set *paths_set, size_t *ants_to_path)
 	}
 	if (longest_move < data->best_speed || !data->best_set)
 	{
+		if (data->best_set)
+			free_paths_set(data->best_set);
 		data->best_set = paths_set;
 		data->best_speed = longest_move;
 	}
+	else
+		free_paths_set(paths_set);
 }
 
 /*
@@ -314,6 +331,7 @@ void	check_if_current_is_best(t_data *data, t_set *paths_set)
 			i++;
 		}
 	}
+	free(ants_to_path);
 	check_longest_move(data, paths_set, ants_to_path);
 }
 
@@ -335,5 +353,5 @@ void	best_paths_set_operations(t_data *data, size_t bfs_times)
 	save_current_paths_set(data, paths_set);
 	sort_paths_short_to_long(paths_set);
 	check_if_current_is_best(data, paths_set);
-	print_paths_set(data, data->best_set, bfs_times);
+	// print_paths_set(data, data->best_set, bfs_times);
 }

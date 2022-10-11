@@ -4,7 +4,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address#-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -g -Wimplicit #-fsanitize=address #-fno-sanitize=all#-fsanitize=address
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -36,7 +36,7 @@ LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(INC) Makefile
+$(NAME): $(OBJ) $(INC)
 	@make -C $(LIBPRINT_DIR)
 	@echo "$(CYELLOW)Compiling $(NAME)$(CEND)"
 	@$(CC) -o $(NAME) $(FLAGS) $(OBJ) -I libft/includes/ -I ./includes/ -L. $(LIBPRINT)

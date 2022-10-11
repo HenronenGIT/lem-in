@@ -68,9 +68,8 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 {
 	if (!data->start || !data->end || !data->start->links_vec || !data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
-
 	*head = (t_queue *)malloc(sizeof(t_queue));
-	if (!head)
+	if (!*head)
 		error(MALLOC_ERR);
 	(*head)->room = data->start;
 	(*head)->next = NULL;
@@ -126,5 +125,5 @@ void	bfs_driver(t_data *data)
 		best_paths_set_operations(data, i);
 		i++;
 	}
-	print_paths(data);
+	// print_paths(data);
 }
