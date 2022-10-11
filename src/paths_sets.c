@@ -195,33 +195,21 @@ void	sort_paths_short_to_long(t_set *paths_set)
 }
 
 /*
-Okay it's very late and i don't have energy to explain three next functions, but
-please check "Step X" here:
-https://github.com/VBrazhnik/Lem_in/wiki/Algorithm
-It is explained there, how the calculation is done. we can the discuss
-later the implementation or i'll do another commit with explanation.
-Next 3 functions are just doing that
+Next 3 functions are connected, so here's the order how to read the
+manual:
+check_if_current_is best
+can_send_this_path
+check_longest_move
 */
-bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants)
-{
-	int	j;
-	int		sum;
 
-	if (i == 0)
-		return (true);
-	j = i - 1;
-	sum = 0;
-	while (j >= 0)
-	{
-		if (paths_set->lengths[j] < paths_set->lengths[i])
-			sum += paths_set->lengths[i] - paths_set->lengths[j];
-		j--;
-	}
-	if (ants > sum)
-		return (true);
-	return (false);
-}
-
+/*
+here we take a path, and check how long it will take to send all ants down the path.
+i came up with formula, that it will take (length_of_path + amount_of_ants) moves
+to transport all ants from start to finish. We check, what is the largest result
+we check it for each path and we choose the longest one.
+if the longest one is shorter, than the one we have saved previously, then it means
+that we can send all ants faster using this set of paths.
+*/
 void	check_longest_move(t_data *data, t_set *paths_set, size_t *ants_to_path)
 {
 	size_t	longest_move;
@@ -241,6 +229,64 @@ void	check_longest_move(t_data *data, t_set *paths_set, size_t *ants_to_path)
 		data->best_speed = longest_move;
 	}
 }
+
+/*
+This function is like a decider, which checks, if we want to send an ant down the path.
+We receive a number of the path i, amount of ants and paths_set.
+Go thorugh Step X here:
+https://github.com/VBrazhnik/Lem_in/wiki/Algorithm
+to understand, what is going on.
+Basically, we take a path[2].
+we check if path[1] is shorter than path[2], than we do
+length of path[2] - length of path[1] and save it into "sum"
+if path[0] is shorter than path[2] then we do
+length of path[2] - length of path[0] and add that to the previous "sum"
+then we check, if amount of ants is larger than the sum, then we can send and down
+the path. there's no need to check if path[3] is shorter than path[2], because
+paths are sorted and only paths on the left are potentially shorter.
+*/
+bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants)
+{
+	int	j;
+	int	sum;
+
+	if (i == 0)
+		return (true);
+	j = i - 1;
+	sum = 0;
+	while (j >= 0)
+	{
+		if (paths_set->lengths[j] < paths_set->lengths[i])
+			sum += paths_set->lengths[i] - paths_set->lengths[j];
+		j--;
+	}
+	if (ants > sum)
+		return (true);
+	return (false);
+}
+
+/*
+This function checks if current set of paths (the one we have just saved and sorted)
+is better, than the one we have saved in data->best_set.
+To do so, here we create and array, as long as there are paths.
+Let's base this example on the previsous one.
+So we have 3 paths [0, 0, 0], where 0 is the amount of ants we are
+going to send down the path[0], path[1] and path[2].
+if can_send_this_path returns true, we send one ant down the path
+for instance [1, 0, 0] and we make amount of ants 1 smaller.
+first we check if we want to send ant down the first path, then the second,
+then the third. We keep looping like this as long as we have ants.
+we always check starting from first path, because we have sorted the paths
+based on the length of them and we always want to send an ant down the shortest path.
+then second shortest and then we check the longest path.
+we might end up with something like this
+if amount of ants is 15
+[8, 5, 2]
+so we send 8 ants down the first path, 5 ants down the second path
+2 ants down the third path
+after we have "sent" all ants, we check, if this solution is better
+than previous in check_longest_move
+*/
 
 void	check_if_current_is_best(t_data *data, t_set *paths_set)
 {
@@ -275,6 +321,9 @@ void	check_if_current_is_best(t_data *data, t_set *paths_set)
 This is a driver function, see other functions for descriptions. Just follow the file
 from top to bottom and read the description and it should make sense, because this
 driver function is very straightforward :)
+
+NOTE:
+!!!Solution is not yet perfect and it's leaking!!!
 */
 void	best_paths_set_operations(t_data *data, size_t bfs_times)
 {
