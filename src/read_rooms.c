@@ -15,7 +15,7 @@
 bool	handle_command(t_data *data, int decider)
 {
 	char	*room_info;
-
+	
 	room_info = NULL;
 	get_next_line(0, &room_info);
 	if (room_info[0] == '#' || room_info[0] == '\0')
@@ -26,26 +26,26 @@ bool	handle_command(t_data *data, int decider)
 		read_room_info(data, room_info, END);
 	return (true);
 	free(room_info);
+	exit(1); //!
 }
 
 void	read_coordinates(t_coords **coords, char *coord_x, char *coord_y)
-{
-	(*coords) = (t_coords *)malloc(sizeof(t_coords));
-	if (!(*coords))
-		error(MALLOC_ERR);
-	if (ft_isnumber(coord_x) == false)
+	{
+	if (ft_isnumber(coord_x) == false || ft_isnumber(coord_y) == false)
 		error(FORMAT_ERR);
+	*coords = (t_coords *)malloc(sizeof(t_coords));
+	if (!*coords)
+		error(MALLOC_ERR);
 	(*coords)->x = ft_atol(coord_x);
 	(*coords)->y = ft_atol(coord_y);
+	
 }
 
 void	read_room_info(t_data *data, char *line, int decider)
 {
-	int			i;
 	char		**info;
 	t_coords	*coords;
 
-	i = 0;
 	coords = NULL;
 	info = ft_strsplit(line, ' ');
 	if (!info)
@@ -58,17 +58,14 @@ void	read_room_info(t_data *data, char *line, int decider)
 		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	if (decider == END)
 		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
-	free(coords);
-	ft_free_2d_array(info);
+	// free(coords); //! without can cause leaks
 }
 
-void	read_hashtag(t_data *data, char *line)
+void	handle_hashtag(t_data *data, char *line)
 {
-	char			*new_line;
 	static bool		is_start;
 	static bool		is_end;
 
-	new_line = NULL;
 	if (!ft_strcmp("##start", line) && is_start == false)
 		is_start = handle_command(data, START);
 	else if (!ft_strcmp("##end", line) && is_end == false)
@@ -77,7 +74,6 @@ void	read_hashtag(t_data *data, char *line)
 		return;
 	else
 		error(FORMAT_ERR);
-	free(new_line);
 }
 
 void	read_rooms(t_data *data)
@@ -88,7 +84,7 @@ void	read_rooms(t_data *data)
 	while (get_next_line(0, &line))
 	{
 		if (line && *line == '#')
-			read_hashtag(data, line);
+			handle_hashtag(data, line);
 		else if (!ft_strchr(line, ' '))
 			break;
 		else if ((line && *line == 'L'))
