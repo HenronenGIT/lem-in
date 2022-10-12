@@ -87,6 +87,8 @@ void	read_start(t_data *data, char *line);
 void	read_end(t_data *data, char *line);
 void	read_links(t_data *data, char *line);
 
+void	allocate_flow_pointers(t_data *data);
+
 /*----------VECTOR------------*/
 void	vec_new_arr(t_vec *dst, size_t len);
 void	vec_resize(t_vec *src);

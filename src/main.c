@@ -61,54 +61,6 @@ void error(int error_number)
 	exit(error_number);
 }
 
-void allocate_other_flows(t_room *room_ptr)
-{
-	room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * 2);
-
-	if (!room_ptr->flow)
-		error(MALLOC_ERR);
-	room_ptr->flow[0] = NULL;
-	room_ptr->flow[1] = NULL;
-}
-
-void allocate_start_flows(t_data *data, t_room *room_ptr)
-{
-	size_t end_links;
-	size_t i;
-
-	i = 0;
-	end_links = data->end->links_vec->space_taken;
-	room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * (end_links + 1));
-	if (!room_ptr->flow)
-		error(MALLOC_ERR);
-	while (i <= end_links)
-		room_ptr->flow[i++] = NULL;
-}
-
-void allocate_flow_pointers(t_data *data)
-{
-	size_t i;
-	t_room *room_ptr;
-
-	i = 0;
-	while (i < data->rooms_vec->length)
-	{
-		if (data->rooms_vec->array[i])
-		{
-			room_ptr = data->rooms_vec->array[i];
-			while (room_ptr)
-			{
-				if (room_ptr == data->start)
-					allocate_start_flows(data, room_ptr);
-				else
-					allocate_other_flows(room_ptr);
-				room_ptr = room_ptr->next;
-			}
-		}
-		i++;
-	}
-}
-
 void init_vector(t_vec *vector, size_t start_size)
 {
 	size_t i;
