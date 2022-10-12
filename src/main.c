@@ -61,54 +61,47 @@ void error(int error_number)
 	exit(error_number);
 }
 
+void allocate_other_flows(t_room *room_ptr)
+{
+	room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * 2);
+
+	if (!room_ptr->flow)
+		error(MALLOC_ERR);
+	room_ptr->flow[0] = NULL;
+	room_ptr->flow[1] = NULL;
+}
+
+void allocate_start_flows(t_data *data, t_room *room_ptr)
+{
+	size_t end_links;
+	size_t i;
+
+	i = 0;
+	end_links = data->end->links_vec->space_taken;
+	room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * (end_links + 1));
+	if (!room_ptr->flow)
+		error(MALLOC_ERR);
+	while (i <= end_links)
+		room_ptr->flow[i++] = NULL;
+}
+
 void allocate_flow_pointers(t_data *data)
 {
 	size_t i;
-	size_t j;
-	t_vec *vector;
-	size_t end_links;
-
-	end_links = data->end->links_vec->space_taken;
-	vector = data->rooms_vec;
 	t_room *room_ptr;
+
 	i = 0;
-	while (i < vector->length)
+	while (i < data->rooms_vec->length)
 	{
-		if (vector->array[i])
+		if (data->rooms_vec->array[i])
 		{
-			room_ptr = vector->array[i];
+			room_ptr = data->rooms_vec->array[i];
 			while (room_ptr)
 			{
-				//! Allocates that many flow indexes to start room as they are links in end room
-				//? Can cause problems if end room links does not lead anywhere
-				//? 	At the moment allocates 1 pointer for EVERY room. This may be unneccessary, because there is not flow from every room
-				//?	Allocation can be moved to "set_flows() func."
-				if (room_ptr == data->start) //* FOR START ROOM
-				{
-					room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * (end_links + 1));
-					if (!room_ptr)
-						error(MALLOC_ERR);
-					j = 0;
-					while (j <= end_links) //! can cause issues
-					{
-						room_ptr->flow[j] = NULL;
-						j += 1;
-					}
-				}
-				//!
-				else //* FOR ALL OTHER ROOM THAN START
-				{
-
-					room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * 2);
-					if (!room_ptr->flow)
-						error(MALLOC_ERR);
-					room_ptr->flow[0] = (t_room *)malloc(sizeof(t_room));
-					room_ptr->flow[1] = (t_room *)malloc(sizeof(t_room));
-					if (!room_ptr->flow[0] || !room_ptr->flow[1])
-						error(MALLOC_ERR);
-					room_ptr->flow[0] = NULL;
-					room_ptr->flow[1] = NULL;
-				}
+				if (room_ptr == data->start)
+					allocate_start_flows(data, room_ptr);
+				else
+					allocate_other_flows(room_ptr);
 				room_ptr = room_ptr->next;
 			}
 		}
@@ -118,7 +111,7 @@ void allocate_flow_pointers(t_data *data)
 
 void init_vector(t_vec *vector, size_t start_size)
 {
-	size_t	i;
+	size_t i;
 
 	i = 0;
 	while (i < start_size)
@@ -128,7 +121,7 @@ void init_vector(t_vec *vector, size_t start_size)
 	vector->space_taken = 0;
 }
 
-static void	allocate_vectors(t_data *data, size_t start_size)
+static void allocate_vectors(t_data *data, size_t start_size)
 {
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
 	if (!data->rooms_vec)
@@ -140,7 +133,7 @@ static void	allocate_vectors(t_data *data, size_t start_size)
 
 void init_data_struct(t_data *data)
 {
-	size_t	start_size;
+	size_t start_size;
 
 	start_size = 10;
 	data->ants = 0;
@@ -155,7 +148,6 @@ int main(void)
 	init_data_struct(&data);
 	read_ants(&data);
 	read_rooms(&data);
-	// exit(0); //!
 	allocate_flow_pointers(&data);
 	bfs_driver(&data);
 	// print_rooms(data); //! temp

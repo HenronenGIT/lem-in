@@ -68,6 +68,7 @@ void	read_links(t_data *data, char *line)
 	if (!rooms)
 		error(MALLOC_ERR);
 	validate_links(data, rooms);
+	ft_free_2d_array(rooms);
 	free(line);
 	while (get_next_line(0, &line))
 	{

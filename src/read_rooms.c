@@ -12,33 +12,19 @@
 
 #include "../includes/lem_in.h"
 
-bool	handle_command(t_data *data, int decider)
+t_coords	*read_coordinates(char *coord_x, char *coord_y)
 {
-	char	*room_info;
-	
-	room_info = NULL;
-	get_next_line(0, &room_info);
-	if (room_info[0] == '#' || room_info[0] == '\0')
-		error(FORMAT_ERR);
-	if (decider == START)
-		read_room_info(data, room_info, START);
-	else
-		read_room_info(data, room_info, END);
-	return (true);
-	free(room_info);
-	exit(1); //!
-}
+	t_coords	*coords;
 
-void	read_coordinates(t_coords **coords, char *coord_x, char *coord_y)
-	{
+	coords = NULL;
 	if (ft_isnumber(coord_x) == false || ft_isnumber(coord_y) == false)
 		error(FORMAT_ERR);
-	*coords = (t_coords *)malloc(sizeof(t_coords));
-	if (!*coords)
+	coords = (t_coords *)malloc(sizeof(t_coords));
+	if (!coords)
 		error(MALLOC_ERR);
-	(*coords)->x = ft_atol(coord_x);
-	(*coords)->y = ft_atol(coord_y);
-	
+	(coords)->x = ft_atol(coord_x);
+	(coords)->y = ft_atol(coord_y);
+	return (coords);
 }
 
 void	read_room_info(t_data *data, char *line, int decider)
@@ -52,19 +38,37 @@ void	read_room_info(t_data *data, char *line, int decider)
 		error(MALLOC_ERR);
 	if (ft_count_pointers(info) != 3)
 		error(FORMAT_ERR);
-	read_coordinates(&coords, info[1], info[2]);
+	coords = read_coordinates(info[1], info[2]);
 	vec_insert(data->rooms_vec, info[0], coords);
 	if (decider == START)
 		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	if (decider == END)
 		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
-	// free(coords); //! without can cause leaks
+	free(info[1]);
+	free(info[2]);
+	free(info);
+}
+
+bool	handle_command(t_data *data, int decider)
+{
+	char	*room_info;
+
+	room_info = NULL;
+	get_next_line(0, &room_info);
+	if (room_info[0] == '#' || room_info[0] == '\0')
+		error(FORMAT_ERR);
+	if (decider == START)
+		read_room_info(data, room_info, START);
+	else
+		read_room_info(data, room_info, END);
+	free(room_info);
+	return (true);
 }
 
 void	handle_hashtag(t_data *data, char *line)
 {
-	static bool		is_start;
-	static bool		is_end;
+	static bool	is_start;
+	static bool	is_end;
 
 	if (!ft_strcmp("##start", line) && is_start == false)
 		is_start = handle_command(data, START);
@@ -76,19 +80,19 @@ void	handle_hashtag(t_data *data, char *line)
 		error(FORMAT_ERR);
 }
 
-void	read_rooms(t_data *data)
+void read_rooms(t_data *data)
 {
 	char	*line;
 
 	line = NULL;
 	while (get_next_line(0, &line))
 	{
+		if (line && *line == 'L')
+			error(FORMAT_ERR);
 		if (line && *line == '#')
 			handle_hashtag(data, line);
 		else if (!ft_strchr(line, ' '))
 			break;
-		else if ((line && *line == 'L'))
-			error(FORMAT_ERR);
 		else
 			read_room_info(data, line, NORMAL);
 		ft_strdel(&line);
@@ -97,7 +101,7 @@ void	read_rooms(t_data *data)
 	read_links(data, line);
 }
 
-void	read_ants(t_data *data)
+void read_ants(t_data *data)
 {
 	char	*line;
 	long	ant_count;
@@ -109,7 +113,8 @@ void	read_ants(t_data *data)
 		error(INPUT_ERR);
 	if (!line)
 		error(INPUT_ERR);
-	ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
+	// ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
+	ant_count = ft_atol(line);
 	if (ant_count <= 0)
 		error(ANT_ERR);
 	data->ants = ant_count;

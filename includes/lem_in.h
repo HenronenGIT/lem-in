@@ -41,7 +41,7 @@ typedef struct s_queue
 /* Main structure which contains all the data */
 typedef struct s_data
 {
-	unsigned long	ants;
+	long			ants;
 	struct s_vec	*rooms_vec;
 	struct s_room	*start;
 	struct s_room	*end;
