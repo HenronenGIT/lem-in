@@ -61,8 +61,12 @@ void error(int error_number)
 	exit(error_number);
 }
 
-static void allocate_vectors(t_data *data, size_t start_size)
+static void	init_data_struct(t_data *data)
 {
+	size_t	start_size;
+
+	start_size = 10;
+	data->ants = 0;
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
 	data->input_vec = (t_vec *)malloc(sizeof(t_vec));
 	if (!data->rooms_vec || !data->input_vec)
@@ -71,18 +75,9 @@ static void allocate_vectors(t_data *data, size_t start_size)
 	vec_new_arr(data->input_vec, start_size);
 }
 
-void init_data_struct(t_data *data)
-{
-	size_t start_size;
-
-	start_size = 10;
-	data->ants = 0;
-	allocate_vectors(data, start_size);
-}
-
 int main(void)
 {
-	t_data data;
+	t_data	data;
 
 	init_data_struct(&data);
 	read_ants(&data);
