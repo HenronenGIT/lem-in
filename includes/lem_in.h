@@ -29,8 +29,6 @@
 # define END 2
 # define NORMAL 3
 
-// const static bool start_found = false;
-
 /* Main structure which contains all the data */
 typedef struct s_data
 {
@@ -68,7 +66,6 @@ typedef struct s_queue
 	struct s_queue	*next;
 }	t_queue;
 
-
 typedef struct s_coords
 {
 	long x;
@@ -80,8 +77,7 @@ void	error(int error_number);
 /*----------PARSING-----------*/
 void	read_ants(t_data *data);
 void	read_rooms(t_data *data);
-void	read_room_info(t_data *data, char *line, int decider);
-// void	read_room_name(t_data *data, char *line, int decider);
+void	read_room_info(t_data *data, char *line);
 void	read_hashtag(t_data *data, char *line); //? Testing with void return value
 void	read_command(t_data *data, char *line);
 void	read_start(t_data *data, char *line);
@@ -93,8 +89,6 @@ void	allocate_flow_pointers(t_data *data);
 /*----------VECTOR------------*/
 void	vec_new_arr(t_vec *dst, size_t len);
 void	vec_resize(t_vec *src);
-// void	vec_insert(t_vec *dst, char *name);
-// void	vec_insert(t_vec *dst, char *name, t_coords *coordinates);
 void	vec_insert(t_vec *dst_vec, void *element);
 void	vec_allocate_element(t_vec *dst, size_t i);
 void	vec_link_insert(t_room *room_1, t_room *room_2);

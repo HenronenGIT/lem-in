@@ -69,7 +69,8 @@ void	read_links(t_data *data, char *line)
 		error(MALLOC_ERR);
 	validate_links(data, rooms);
 	ft_free_2d_array(rooms);
-	free(line);
+	// free(line);
+	vec_insert(data->input_vec, line);
 	while (get_next_line(0, &line))
 	{
 		if (*line != '#')
@@ -80,6 +81,6 @@ void	read_links(t_data *data, char *line)
 			validate_links(data, rooms);
 			ft_free_2d_array(rooms);
 		}
-		free(line);
+		vec_insert(data->input_vec, line); //! last edit
 	}
 }

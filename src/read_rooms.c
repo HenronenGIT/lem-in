@@ -12,21 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-t_coords	*read_coordinates(char *coord_x, char *coord_y)
-{
-	t_coords	*coords;
-
-	coords = NULL;
-	if (ft_isnumber(coord_x) == false || ft_isnumber(coord_y) == false)
-		error(FORMAT_ERR);
-	coords = (t_coords *)malloc(sizeof(t_coords));
-	if (!coords)
-		error(MALLOC_ERR);
-	(coords)->x = ft_atol(coord_x);
-	(coords)->y = ft_atol(coord_y);
-	return (coords);
-}
-
+//? can be moved to another file
 t_room	*allocate_new_room(char *room_name, t_coords *coords)
 {
 	t_room	*new_room;
@@ -46,7 +32,22 @@ t_room	*allocate_new_room(char *room_name, t_coords *coords)
 	return (new_room);
 }
 
-void	read_room_info(t_data *data, char *line, int decider)
+t_coords	*read_coordinates(char *coord_x, char *coord_y)
+{
+	t_coords	*coords;
+
+	coords = NULL;
+	if (ft_isnumber(coord_x) == false || ft_isnumber(coord_y) == false)
+		error(FORMAT_ERR);
+	coords = (t_coords *)malloc(sizeof(t_coords));
+	if (!coords)
+		error(MALLOC_ERR);
+	(coords)->x = ft_atol(coord_x);
+	(coords)->y = ft_atol(coord_y);
+	return (coords);
+}
+
+void	read_room_info(t_data *data, char *line)
 {
 	char		**info;
 	t_coords	*coords;
@@ -62,42 +63,28 @@ void	read_room_info(t_data *data, char *line, int decider)
 	coords = read_coordinates(info[1], info[2]);
 	room = allocate_new_room(info[0], coords);
 	vec_insert(data->rooms_vec, room);
-	if (decider == START)
-		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
-	if (decider == END)
-		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
+	vec_insert(data->input_vec, line);
 	free(info[1]);
 	free(info[2]);
 	free(info);
 }
 
-bool	handle_command(t_data *data, int decider)
+void	handle_hashtag(t_data *data, char *line)
 {
 	char	*room_info;
 
 	room_info = NULL;
+	vec_insert(data->input_vec, line);
+	if (*line == '#' && line[1] != '#')
+		return ;
 	get_next_line(0, &room_info);
 	if (room_info[0] == '#' || room_info[0] == '\0')
 		error(FORMAT_ERR);
-	if (decider == START)
-		read_room_info(data, room_info, START);
-	else
-		read_room_info(data, room_info, END);
-	free(room_info);
-	return (true);
-}
-
-void	handle_hashtag(t_data *data, char *line)
-{
-	static bool	is_start;
-	static bool	is_end;
-
-	if (!ft_strcmp("##start", line) && is_start == false)
-		is_start = handle_command(data, START);
-	else if (!ft_strcmp("##end", line) && is_end == false)
-		is_end = handle_command(data, END);
-	else if (*line == '#' && line[1] != '#')
-		return;
+	read_room_info(data, room_info);
+	if (!ft_strcmp("##start", line) && data->start == NULL)
+		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
+	else if (!ft_strcmp("##end", line) && data->end == NULL)
+		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	else
 		error(FORMAT_ERR);
 }
@@ -116,8 +103,7 @@ void read_rooms(t_data *data)
 		else if (!ft_strchr(line, ' '))
 			break;
 		else
-			read_room_info(data, line, NORMAL);
-		ft_strdel(&line);
+			read_room_info(data, line);
 	}
 	sort_hash_values(data);
 	read_links(data, line);
@@ -140,5 +126,5 @@ void read_ants(t_data *data)
 	if (ant_count <= 0)
 		error(ANT_ERR);
 	data->ants = ant_count;
-	free(line);
+	vec_insert(data->input_vec, line);
 }

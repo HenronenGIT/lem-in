@@ -21,20 +21,6 @@ void	vec_insert(t_vec *dst_vec, void *element)
 	dst_vec->space_left--;
 }
 
-// void	vec_allocate_element(t_vec *dst, size_t i)
-// {
-// 	((t_room **)dst->array)[i] = (void *)malloc(sizeof(t_room));
-// 	if (!dst->array[i])
-// 		error(MALLOC_ERR);
-// 	((t_room **)dst->array)[i]->links_vec = NULL;
-// 	((t_room **)dst->array)[i]->coords = NULL;
-// 	((t_room **)dst->array)[i]->parent = NULL;
-// 	((t_room **)dst->array)[i]->flow_parent = NULL;
-// 	((t_room **)dst->array)[i]->flow = NULL;
-// 	((t_room **)dst->array)[i]->flow_from = false;
-// 	((t_room **)dst->array)[i]->next = NULL;
-// }
-
 static void	vec_free(t_vec *vector)
 {
 	if (vector)
