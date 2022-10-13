@@ -125,5 +125,8 @@ bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
 
 /*------RESULT OUTPUT-------------*/
 void	print_result(t_data *data);
+void	print_paths(t_data *data);
+void	set_correct_flows(t_data *data);
+void	print_paths_set(t_data *data, t_set *paths_set, size_t times);
 
 #endif

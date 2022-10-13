@@ -104,22 +104,25 @@ void	print_paths_set(t_data *data, t_set *paths_set, size_t times)
 
 	i = 0;
 	j = 0;
-	printf("\033[0;32mBest set of path after %zu BFSs\033[0m\n", times);
+	if (times == 100000)
+		ft_printf("\033[0;32mBest set of paths\033[0m\n");
+	else
+		ft_printf("\033[0;32mBest set of path after %zu BFSs\033[0m\n", times);
 	while (i < paths_set->paths_amount)
 	{
-		printf("PATH [%zu] = %s -> ", i + 1, data->start->room_name);
+		ft_printf("PATH [%zu] = %s -> ", i + 1, data->start->room_name);
 		while (j < paths_set->lengths[i])
 		{
-			printf("%s -> ", paths_set->paths[i][j]->room_name);
+			ft_printf("%s -> ", paths_set->paths[i][j]->room_name);
 			j++;
 		}
-		printf("%s", data->end->room_name);
-		printf("length = %zu", paths_set->lengths[i]);
-		printf("\n");
+		ft_printf("%s", data->end->room_name);
+		ft_printf(" length = %zu", paths_set->lengths[i]);
+		ft_printf("\n");
 		j = 0;
 		i++;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 
@@ -341,7 +344,7 @@ from top to bottom and read the description and it should make sense, because th
 driver function is very straightforward :)
 
 NOTE:
-!!!Solution is not yet perfect and it's leaking!!!
+!!!Solution is not yet perfect!!!
 */
 void	best_paths_set_operations(t_data *data, size_t bfs_times)
 {
@@ -353,5 +356,4 @@ void	best_paths_set_operations(t_data *data, size_t bfs_times)
 	save_current_paths_set(data, paths_set);
 	sort_paths_short_to_long(paths_set);
 	check_if_current_is_best(data, paths_set);
-	// print_paths_set(data, data->best_set, bfs_times);
 }

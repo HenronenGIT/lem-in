@@ -187,7 +187,7 @@ int main(void)
 	// allocate_flow_pointers(data.rooms_vec);
 	allocate_flow_pointers(&data);
 	bfs_driver(&data);
-	print_result(&data);
+	// print_paths(&data);
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
