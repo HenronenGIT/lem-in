@@ -31,18 +31,12 @@
 
 // const static bool start_found = false;
 
-/* Linked list structure for BFS */
-typedef struct s_queue
-{
-	struct s_room	*room;
-	struct s_queue	*next;
-}	t_queue;
-
 /* Main structure which contains all the data */
 typedef struct s_data
 {
 	long			ants;
 	struct s_vec	*rooms_vec;
+	struct s_vec	*input_vec;
 	struct s_room	*start;
 	struct s_room	*end;
 }	t_data;
@@ -67,6 +61,13 @@ typedef struct s_room
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
 	struct s_room	*flow_from;
 }	t_room;
+/* Linked list structure for BFS */
+typedef struct s_queue
+{
+	struct s_room	*room;
+	struct s_queue	*next;
+}	t_queue;
+
 
 typedef struct s_coords
 {
@@ -93,7 +94,8 @@ void	allocate_flow_pointers(t_data *data);
 void	vec_new_arr(t_vec *dst, size_t len);
 void	vec_resize(t_vec *src);
 // void	vec_insert(t_vec *dst, char *name);
-void	vec_insert(t_vec *dst, char *name, t_coords *coordinates);
+// void	vec_insert(t_vec *dst, char *name, t_coords *coordinates);
+void	vec_insert(t_vec *dst_vec, void *element);
 void	vec_allocate_element(t_vec *dst, size_t i);
 void	vec_link_insert(t_room *room_1, t_room *room_2);
 void	vec_resize_links(t_room *room);

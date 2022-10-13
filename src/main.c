@@ -61,26 +61,14 @@ void error(int error_number)
 	exit(error_number);
 }
 
-void init_vector(t_vec *vector, size_t start_size)
-{
-	size_t i;
-
-	i = 0;
-	while (i < start_size)
-		vector->array[i++] = NULL;
-	vector->length = start_size;
-	vector->space_left = start_size;
-	vector->space_taken = 0;
-}
-
 static void allocate_vectors(t_data *data, size_t start_size)
 {
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
-	if (!data->rooms_vec)
+	data->input_vec = (t_vec *)malloc(sizeof(t_vec));
+	if (!data->rooms_vec || !data->input_vec)
 		error(MALLOC_ERR);
-	data->rooms_vec->array = (void **)malloc(sizeof(t_room *) * start_size);
-	if (!data->rooms_vec->array)
-		error(MALLOC_ERR);
+	vec_new_arr(data->rooms_vec, start_size);
+	vec_new_arr(data->input_vec, start_size);
 }
 
 void init_data_struct(t_data *data)
@@ -90,7 +78,6 @@ void init_data_struct(t_data *data)
 	start_size = 10;
 	data->ants = 0;
 	allocate_vectors(data, start_size);
-	init_vector(data->rooms_vec, start_size);
 }
 
 int main(void)

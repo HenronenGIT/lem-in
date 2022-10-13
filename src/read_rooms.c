@@ -27,11 +27,32 @@ t_coords	*read_coordinates(char *coord_x, char *coord_y)
 	return (coords);
 }
 
+t_room	*allocate_new_room(char *room_name, t_coords *coords)
+{
+	t_room	*new_room;
+
+	new_room = NULL;
+	new_room = (t_room *)malloc(sizeof(t_room));
+	if (!new_room)
+		error(MALLOC_ERR);
+	new_room->room_name = room_name;
+	new_room->coords = coords;
+	new_room->links_vec = NULL;
+	new_room->parent = NULL;
+	new_room->flow_parent = NULL;
+	new_room->flow = NULL;
+	new_room->flow_from = false;
+	new_room->next = NULL;
+	return (new_room);
+}
+
 void	read_room_info(t_data *data, char *line, int decider)
 {
 	char		**info;
 	t_coords	*coords;
+	t_room		*room;
 
+	room = NULL;
 	coords = NULL;
 	info = ft_strsplit(line, ' ');
 	if (!info)
@@ -39,7 +60,8 @@ void	read_room_info(t_data *data, char *line, int decider)
 	if (ft_count_pointers(info) != 3)
 		error(FORMAT_ERR);
 	coords = read_coordinates(info[1], info[2]);
-	vec_insert(data->rooms_vec, info[0], coords);
+	room = allocate_new_room(info[0], coords);
+	vec_insert(data->rooms_vec, room);
 	if (decider == START)
 		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	if (decider == END)
@@ -114,7 +136,7 @@ void read_ants(t_data *data)
 	if (!line)
 		error(INPUT_ERR);
 	// ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
-	ant_count = ft_atol(line);
+	ant_count = ft_atol(line); // ? long datatype big enough ?
 	if (ant_count <= 0)
 		error(ANT_ERR);
 	data->ants = ant_count;
