@@ -67,7 +67,7 @@ typedef struct s_room
 }	t_room;
 /* Linked list structure for BFS */
 typedef struct s_queue
-{
+ {
 	struct s_room	*room;
 	struct s_queue	*next;
 }	t_queue;
