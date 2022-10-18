@@ -87,11 +87,13 @@ int main(void)
 
 	size_t i;
 	i = 0;
-	while (data.input_vec->array[i])
-	{
-		printf("%s\n", ((char **)data.input_vec->array)[i]);
-		i += 1;
-	}
+	// while (data.input_vec->array[i])
+	// while (i < data.input_vec->space_taken)
+	// {
+	// 	printf("%s\n", ((char **)data.input_vec->array)[i]);
+	// 	i += 1;
+	// }
+
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
