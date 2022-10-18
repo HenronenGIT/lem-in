@@ -24,6 +24,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: No path found!\n");
 	if (error_number == LINK_ERR)
 		ft_puterror("ERROR: Invalid link input!\n");
+	if (error_number == ANT_ERR)
+		ft_puterror("ERROR: Invalid ant input!\n");
 	exit(error_number);
 }
 
@@ -54,7 +56,7 @@ static void	init_data_struct(t_data *data)
 	vec_new_arr(data->input_vec, start_size);
 }
 
-int main(void)
+int	main(void)
 {
 	t_data	data;
 

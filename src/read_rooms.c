@@ -118,12 +118,13 @@ void read_ants(t_data *data)
 	line = NULL;
 	ant_count = 0;
 	get_next_line(0, &line);
+	if (line && (line[0] == '-' || line[0] == '0'))
+		error(ANT_ERR);
 	if (!ft_isnumber(line))
-		error(INPUT_ERR);
+		error(ANT_ERR);
 	if (!line)
-		error(INPUT_ERR);
-	// ant_count = ft_atoi(line); //! Change to "atou" - unsigned long.
-	ant_count = ft_atol(line); // ? long datatype big enough ?
+		error(ANT_ERR);
+	ant_count = ft_atol(line);
 	if (ant_count <= 0)
 		error(ANT_ERR);
 	data->ants = ant_count;
