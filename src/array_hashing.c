@@ -46,7 +46,7 @@ void	handle_collision(t_room *list_room, t_room *insert_room)
 	insert_room->next = NULL;
 }
 
-void	move_and_clear_array(t_data *data, t_room **tmp_arr)
+static void	move_and_clear_array(t_data *data, t_room **tmp_arr)
 {
 	size_t	i;
 
@@ -59,7 +59,7 @@ void	move_and_clear_array(t_data *data, t_room **tmp_arr)
 	}
 }
 
-void	hash_and_move_array(t_data *data, t_room **tmp_arr)
+static void	hash_and_move_array(t_data *data, t_room **tmp_arr)
 {
 	size_t i;
 	unsigned long	hash;

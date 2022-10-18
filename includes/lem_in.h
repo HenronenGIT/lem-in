@@ -87,31 +87,18 @@ void	error(int error_number);
 /*----------PARSING-----------*/
 void	read_ants(t_data *data);
 void	read_rooms(t_data *data);
-void	read_room_info(t_data *data, char *line);
-void	read_hashtag(t_data *data, char *line); //? Testing with void return value
-void	read_command(t_data *data, char *line);
-void	read_start(t_data *data, char *line);
-void	read_end(t_data *data, char *line);
 void	read_links(t_data *data, char *line);
 t_room	*allocate_new_room(char *room_name, t_coords *coords);
-
-
-void	allocate_flow_pointers(t_data *data);
 
 /*----------VECTOR------------*/
 void	vec_new_arr(t_vec *dst, size_t len);
 void	vec_resize(t_vec *src);
 void	vec_insert(t_vec *dst_vec, void *element);
-void	vec_allocate_element(t_vec *dst, size_t i);
-void	vec_link_insert(t_room *room_1, t_room *room_2);
-void	vec_resize_links(t_room *room);
 
 /*----------HASH--------------*/
 void			sort_hash_values(t_data *data);
-unsigned long	hashing(t_data *data, char *name);
 
 /*----------BFS--------------*/
-int		bfs(t_data *data, t_queue **head);
 void	bfs_driver(t_data *data);
 int		positive_flow(t_room **flows, t_room *link);
 void	allocate_flow_pointers(t_data *data);
@@ -125,7 +112,7 @@ void	set_flows(t_data *data);
 void	allocate_flow_pointer(t_data *data, t_room *current);
 
 /*------SEARCHING BEST PATHS SET--------*/
-void	best_paths_set_operations(t_data *data, size_t bfs_times);
+void	best_paths_set_operations(t_data *data);
 bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
 
 /*------RESULT OUTPUT-------------*/

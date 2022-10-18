@@ -346,7 +346,8 @@ driver function is very straightforward :)
 NOTE:
 !!!Solution is not yet perfect!!!
 */
-void	best_paths_set_operations(t_data *data, size_t bfs_times)
+// void	best_paths_set_operations(t_data *data, size_t bfs_times)
+void	best_paths_set_operations(t_data *data)
 {
 	t_set	*paths_set;
 

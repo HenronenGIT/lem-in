@@ -26,7 +26,7 @@ int positive_flow(t_room **flows, t_room *link)
 	return (0);
 }
 
-void found_old_path(t_queue **tail, t_queue *que)
+void	found_old_path(t_queue **tail, t_queue *que)
 {
 	t_room **link_array;
 
@@ -35,10 +35,8 @@ void found_old_path(t_queue **tail, t_queue *que)
 	que->room->flow_from->flow_parent = que->room;
 }
 
-void can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
+void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 {
-	// if (link->flow_parent)
-	// return;
 	if (link->parent)
 		return;
 	add_to_que(tail, link);
@@ -48,7 +46,7 @@ void can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 		link->parent = current;
 }
 
-void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link)
+void	visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link)
 {
 	size_t i;
 
@@ -61,7 +59,7 @@ void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link)
 	link->parent = que->room;
 }
 
-void add_to_que(t_queue **tail, t_room *link)
+void	add_to_que(t_queue **tail, t_room *link)
 {
 	(*tail)->next = (t_queue *)malloc(sizeof(t_queue));
 	if (!(*tail)->next)

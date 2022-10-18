@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-t_coords	*read_coordinates(char *coord_x, char *coord_y)
+static t_coords	*read_coordinates(char *coord_x, char *coord_y)
 {
 	t_coords	*coords;
 
@@ -27,7 +27,7 @@ t_coords	*read_coordinates(char *coord_x, char *coord_y)
 	return (coords);
 }
 
-void	read_room_info(t_data *data, char *line)
+static void	read_room_info(t_data *data, char *line)
 {
 	char		**info;
 	t_coords	*coords;
@@ -49,7 +49,7 @@ void	read_room_info(t_data *data, char *line)
 	free(info);
 }
 
-void	handle_hashtag(t_data *data, char *line)
+static void	handle_hashtag(t_data *data, char *line)
 {
 	char	*room_info;
 

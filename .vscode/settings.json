@@ -1,5 +1,8 @@
 {
 	"files.associations": {
-		"lem_in.h": "c"
+		"*.js": "javascriptreact",
+		"lem_in.h": "c",
+		"chrono": "c",
+		"locale": "c"
 	}
 }

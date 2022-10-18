@@ -77,7 +77,7 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	*cur = *head;
 }
 
-int	bfs(t_data *data, t_queue **head)
+static int	bfs(t_data *data, t_queue **head)
 {
 	t_queue *que;
 	t_queue *tail;
@@ -123,7 +123,7 @@ void	bfs_driver(t_data *data)
 	{
 		if (head)
 			reset_graph_values(head);
-		best_paths_set_operations(data, i);
+		best_paths_set_operations(data);
 		i++;
 	}
 	iterator = head;

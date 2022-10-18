@@ -23,7 +23,7 @@ t_room	*find_room(t_room *room, char *link_name)
 	return (NULL);
 }
 
-void	vec_link_insert(t_room *dst, t_room *src)
+static void	vec_link_insert(t_room *dst, t_room *src)
 {
 	if (!dst->links_vec)
 	{

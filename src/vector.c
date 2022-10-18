@@ -30,7 +30,7 @@ static void	vec_free(t_vec *vector)
 	}
 }
 
-void	vec_copy(t_vec *src, t_vec *dst)
+static void	vec_copy(t_vec *src, t_vec *dst)
 {
 	size_t	i;
 
