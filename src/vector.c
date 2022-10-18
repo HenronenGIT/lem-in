@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vector_1.c                                         :+:      :+:    :+:   */
+/*   vector.  c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -15,7 +15,7 @@
 void	vec_insert(t_vec *dst_vec, void *element)
 {
 	if (dst_vec->space_left == 0)
-		vec_resize(dst_vec); //! test
+		vec_resize(dst_vec);
 	dst_vec->array[dst_vec->space_taken] = element;
 	dst_vec->space_taken++;
 	dst_vec->space_left--;
