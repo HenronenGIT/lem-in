@@ -44,7 +44,7 @@ typedef struct s_data
 /* General Dynamic Vector structure */
 typedef struct s_vec
 {
-	void	 		**array;
+	void			**array;
 	size_t			length;
 	size_t			space_left;
 	size_t			space_taken;
@@ -62,10 +62,10 @@ typedef struct s_room
 	char			*room_name;
 	struct s_coords	*coords;
 	struct s_vec	*links_vec;
-	struct s_room	*parent;//? change name to "no_flow_parent" or similar
+	struct s_room	*parent;
 	struct s_room	*flow_parent;
 	struct s_room	*next;
-	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
+	struct s_room	**flow;
 	struct s_room	*flow_from;
 	bool			occupied;
 }	t_room;
@@ -78,9 +78,9 @@ typedef struct s_queue
 
 typedef struct s_coords
 {
-	long x;
-	long y;
-} t_coords;
+	long	x;
+	long	y;
+}		t_coords;
 
 void	error(int error_number);
 
@@ -96,8 +96,8 @@ void	vec_resize(t_vec *src);
 void	vec_insert(t_vec *dst_vec, void *element);
 
 /*----------HASH--------------*/
+void	sort_hash_values(t_data *data);
 unsigned long	hashing(t_data *data, char *name);
-void			sort_hash_values(t_data *data);
 
 /*----------BFS--------------*/
 void	bfs_driver(t_data *data);
