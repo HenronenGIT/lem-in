@@ -63,7 +63,7 @@ re : fclean all clean all
 
 # Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/augment_2.map 
+	./lem-in < ./eval_tests/test_maps/augment_1.map 
 
 test:
 	make python > test.txt

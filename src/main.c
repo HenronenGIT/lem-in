@@ -87,16 +87,18 @@ int main(void)
 
 	size_t i;
 	i = 0;
-	// while (data.input_vec->array[i])
 	while (i < data.input_vec->space_taken)
 	{
-		printf("%s\n", ((char **)data.input_vec->array)[i]);
+		ft_printf("%s\n", ((char **)data.input_vec->array)[i]);
 		i += 1;
 	}
-	// 
+	ft_printf("\n");
+	print_result(&data);
+
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
+	// system("leaks lem-in");exit(0);
 	return (0);
 	// exit (0);
 }

@@ -114,6 +114,7 @@ void reset_graph_values(t_queue *head)
 void	bfs_driver(t_data *data)
 {
 	t_queue *head;
+	t_queue *iterator;
 	size_t i;
 
 	i = 0;
@@ -125,7 +126,14 @@ void	bfs_driver(t_data *data)
 		best_paths_set_operations(data, i);
 		i++;
 	}
-	ft_printf("\033[0;32mOur algo chose \033[0m\n");
-	print_paths_set(data, data->best_set, 100000);
-	print_result(data);
+	iterator = head;
+	// free(head);
+	while (iterator)
+	{
+		free(iterator);
+		iterator = iterator->next;
+	}
+	// ft_printf("\033[0;32mOur algo chose \033[0m\n");
+	// print_paths_set(data, data->best_set, 100000);
+	// print_result(data);
 }
