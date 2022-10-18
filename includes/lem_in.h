@@ -17,17 +17,13 @@
 # include <stdbool.h>
 # include "../libft/includes/libft.h"
 
+/* Error message code */
 # define MALLOC_ERR -2
 # define NULL_ERR -3
 # define FORMAT_ERR -4
-# define INPUT_ERR -5
-# define NO_PATH -6
-# define LINK_ERR -7
-# define ANT_ERR -8
-
-# define START 1
-# define END 2
-# define NORMAL 3
+# define NO_PATH -5
+# define LINK_ERR -6
+# define ANT_ERR -7
 
 /* Main structure which contains all the data */
 typedef struct s_data

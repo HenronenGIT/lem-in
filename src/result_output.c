@@ -17,10 +17,7 @@ void	check_if_move_end(t_data *data, t_room **ants, long *ant_num, long *finishe
 	if (ants[*ant_num] != data->end)
 		ants[*ant_num]->occupied = true;
 	else
-	{
 		*finished += 1;
-		return ;
-	}
 	ft_printf("L%lu-%s ", *ant_num + 1, ants[*ant_num]->room_name);
 }
 

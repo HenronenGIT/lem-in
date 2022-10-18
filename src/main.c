@@ -14,8 +14,6 @@
 
 void	error(int error_number)
 {
-	if (error_number == INPUT_ERR)
-		ft_puterror("ERROR: Invalid ant input!\n");
 	if (error_number == MALLOC_ERR)
 		ft_puterror("ERROR: Not enough space for malloc");
 	if (error_number == FORMAT_ERR)
