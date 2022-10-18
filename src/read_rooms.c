@@ -12,27 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-//? can be moved to another file
-t_room	*allocate_new_room(char *room_name, t_coords *coords)
-{
-	t_room	*new_room;
-
-	new_room = NULL;
-	new_room = (t_room *)malloc(sizeof(t_room));
-	if (!new_room)
-		error(MALLOC_ERR);
-	new_room->room_name = room_name;
-	new_room->coords = coords;
-	new_room->links_vec = NULL;
-	new_room->parent = NULL;
-	new_room->flow_parent = NULL;
-	new_room->flow = NULL;
-	new_room->flow_from = false;
-	new_room->next = NULL;
-	new_room->occupied = false;
-	return (new_room);
-}
-
 t_coords	*read_coordinates(char *coord_x, char *coord_y)
 {
 	t_coords	*coords;
@@ -90,7 +69,7 @@ void	handle_hashtag(t_data *data, char *line)
 		error(FORMAT_ERR);
 }
 
-void read_rooms(t_data *data)
+void	read_rooms(t_data *data)
 {
 	char	*line;
 
@@ -102,7 +81,7 @@ void read_rooms(t_data *data)
 		if (line && *line == '#')
 			handle_hashtag(data, line);
 		else if (!ft_strchr(line, ' '))
-			break;
+			break ;
 		else
 			read_room_info(data, line);
 	}
@@ -110,7 +89,12 @@ void read_rooms(t_data *data)
 	read_links(data, line);
 }
 
-void read_ants(t_data *data)
+/*
+	Read amount of ants and add that value to data->ants.
+	Add readed value also in data->input_vec.
+	If invalid input, call error() function.
+*/
+void	read_ants(t_data *data)
 {
 	char	*line;
 	long	ant_count;

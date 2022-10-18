@@ -93,6 +93,8 @@ void	read_command(t_data *data, char *line);
 void	read_start(t_data *data, char *line);
 void	read_end(t_data *data, char *line);
 void	read_links(t_data *data, char *line);
+t_room	*allocate_new_room(char *room_name, t_coords *coords);
+
 
 void	allocate_flow_pointers(t_data *data);
 
