@@ -104,5 +104,5 @@ void	print_result(t_data *data)
 	}
 	free(ants);
 	if (data->flags->moves == true)
-		ft_printf("Move count: %zu\n", moves);
+		ft_printf("\033[0;32mMove count:\n\033[0m%zu\n", moves);
 }
