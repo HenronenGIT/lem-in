@@ -12,41 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-void print_links(t_data data)
-{
-	size_t i;
-	size_t j;
-	t_room *tmp_room;
-
-	i = 0;
-	j = 0;
-	while (i < data.rooms_vec->length)
-	{
-		if (data.rooms_vec->array[i])
-		{
-			tmp_room = data.rooms_vec->array[i];
-			while (tmp_room)
-			{
-				ft_printf("%5s: ", tmp_room->room_name);
-				if (tmp_room->links_vec)
-				{
-					while (j < tmp_room->links_vec->space_taken)
-					{
-						ft_printf("-> %5s ", ((t_room **)tmp_room->links_vec->array)[j]->room_name);
-						// ft_printf("-> %s ", ((t_vec **)tmp_room->links_vec->array)[j]->room_name););
-						j++;
-					}
-				}
-				tmp_room = tmp_room->next;
-				j = 0;
-				ft_printf("\n");
-			}
-		}
-		i++;
-	}
-}
-
-void error(int error_number)
+void	error(int error_number)
 {
 	if (error_number == INPUT_ERR)
 		ft_puterror("ERROR: Invalid ant input!\n");
@@ -59,6 +25,19 @@ void error(int error_number)
 	if (error_number == LINK_ERR)
 		ft_puterror("ERROR: Invalid link input!\n");
 	exit(error_number);
+}
+
+static void	print_input(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < data->input_vec->space_taken)
+	{
+		ft_printf("%s\n", ((char **)data->input_vec->array)[i]);
+		i += 1;
+	}
+	ft_printf("\n");
 }
 
 static void	init_data_struct(t_data *data)
@@ -84,21 +63,7 @@ int main(void)
 	read_rooms(&data);
 	allocate_flow_pointers(&data);
 	bfs_driver(&data);
-
-	size_t i;
-	i = 0;
-	while (i < data.input_vec->space_taken)
-	{
-		ft_printf("%s\n", ((char **)data.input_vec->array)[i]);
-		i += 1;
-	}
-	ft_printf("\n");
+	print_input(&data);
 	print_result(&data);
-
-	// print_rooms(data); //! temp
-	// print_links(data); //! temp
-	// printf("%s\n", data.rooms_vec->array[0]->room_name);
-	// system("leaks lem-in");exit(0);
 	return (0);
-	// exit (0);
 }
