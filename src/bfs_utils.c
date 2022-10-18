@@ -12,9 +12,9 @@
 
 #include "../includes/lem_in.h"
 
-int positive_flow(t_room **flows, t_room *link)
+int	positive_flow(t_room **flows, t_room *link)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (flows[i])
@@ -28,7 +28,7 @@ int positive_flow(t_room **flows, t_room *link)
 
 void	found_old_path(t_queue **tail, t_queue *que)
 {
-	t_room **link_array;
+	t_room	**link_array;
 
 	link_array = (t_room **)que->room->links_vec->array;
 	add_to_que(tail, que->room->flow_from);
@@ -38,7 +38,7 @@ void	found_old_path(t_queue **tail, t_queue *que)
 void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 {
 	if (link->parent)
-		return;
+		return ;
 	add_to_que(tail, link);
 	if (current->flow_from == link)
 		link->flow_parent = current;
@@ -48,13 +48,13 @@ void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail)
 
 void	visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	if (que->room->flow[i] == link)
-		return;
+		return ;
 	if (link == que->room->parent)
-		return;
+		return ;
 	add_to_que(tail, link);
 	link->parent = que->room;
 }

@@ -96,7 +96,7 @@ static int	bfs(t_data *data, t_queue **head)
 	return (1);
 }
 
-void reset_graph_values(t_queue *head)
+void	reset_graph_values(t_queue *head)
 {
 	t_queue *tmp;
 
@@ -113,9 +113,9 @@ void reset_graph_values(t_queue *head)
 
 void	bfs_driver(t_data *data)
 {
-	t_queue *head;
-	t_queue *iterator;
-	size_t i;
+	t_queue	*head;
+	t_queue	*iterator;
+	size_t	i;
 
 	i = 0;
 	head = NULL;
@@ -127,7 +127,6 @@ void	bfs_driver(t_data *data)
 		i++;
 	}
 	iterator = head;
-	// free(head);
 	while (iterator)
 	{
 		free(iterator);
