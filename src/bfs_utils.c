@@ -28,9 +28,6 @@ int	positive_flow(t_room **flows, t_room *link)
 
 void	found_old_path(t_queue **tail, t_queue *que)
 {
-	t_room	**link_array;
-
-	link_array = (t_room **)que->room->links_vec->array;
 	add_to_que(tail, que->room->flow_from);
 	que->room->flow_from->flow_parent = que->room;
 }

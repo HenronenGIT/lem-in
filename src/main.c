@@ -54,7 +54,7 @@ static void	init_data_struct(t_data *data)
 	vec_new_arr(data->input_vec, start_size);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_data	data;
 
