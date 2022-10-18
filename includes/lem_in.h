@@ -96,6 +96,7 @@ void	vec_resize(t_vec *src);
 void	vec_insert(t_vec *dst_vec, void *element);
 
 /*----------HASH--------------*/
+unsigned long	hashing(t_data *data, char *name);
 void			sort_hash_values(t_data *data);
 
 /*----------BFS--------------*/

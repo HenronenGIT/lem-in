@@ -77,6 +77,21 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 	*cur = *head;
 }
 
+void	reset_graph_values(t_queue *head)
+{
+	t_queue *tmp;
+
+	tmp = head;
+	while (tmp)
+	{
+		tmp->room->parent = NULL;
+		tmp->room->flow_parent = NULL;
+		head = head->next;
+		free(tmp);
+		tmp = head;
+	}
+}
+
 static int	bfs(t_data *data, t_queue **head)
 {
 	t_queue *que;
@@ -94,21 +109,6 @@ static int	bfs(t_data *data, t_queue **head)
 		return (0);
 	set_flows(data);
 	return (1);
-}
-
-void	reset_graph_values(t_queue *head)
-{
-	t_queue *tmp;
-
-	tmp = head;
-	while (tmp)
-	{
-		tmp->room->parent = NULL;
-		tmp->room->flow_parent = NULL;
-		head = head->next;
-		free(tmp);
-		tmp = head;
-	}
 }
 
 void	bfs_driver(t_data *data)

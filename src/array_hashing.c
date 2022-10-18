@@ -61,7 +61,7 @@ static void	move_and_clear_array(t_data *data, t_room **tmp_arr)
 
 static void	hash_and_move_array(t_data *data, t_room **tmp_arr)
 {
-	size_t i;
+	size_t			i;
 	unsigned long	hash;
 
 	i = 0;
