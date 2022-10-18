@@ -37,6 +37,8 @@ typedef struct s_data
 	struct s_vec	*input_vec;
 	struct s_room	*start;
 	struct s_room	*end;
+	struct s_set	*best_set;
+	size_t			best_speed;
 }	t_data;
 
 /* General Dynamic Vector structure */
@@ -48,6 +50,13 @@ typedef struct s_vec
 	size_t			space_taken;
 }	t_vec;
 
+typedef struct s_set
+{
+	struct s_room	***paths;
+	size_t			*lengths;
+	size_t			paths_amount;
+}	t_set;
+
 typedef struct s_room
 {
 	char			*room_name;
@@ -58,6 +67,7 @@ typedef struct s_room
 	struct s_room	*next;
 	struct s_room	**flow; //? rename later to flows. need to be double pointer because start room will have multiple flows.
 	struct s_room	*flow_from;
+	bool			occupied;
 }	t_room;
 /* Linked list structure for BFS */
 typedef struct s_queue
@@ -103,13 +113,23 @@ int		bfs(t_data *data, t_queue **head);
 void	bfs_driver(t_data *data);
 int		positive_flow(t_room **flows, t_room *link);
 void	allocate_flow_pointers(t_data *data);
-void add_to_que(t_queue **tail, t_room *link);
-void found_old_path(t_queue **tail, t_queue *que);
-void visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link);
-void can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
+void	add_to_que(t_queue **tail, t_room *link);
+void	found_old_path(t_queue **tail, t_queue *que);
+void	visit_using_unused_edge(t_queue **tail, t_queue *que, t_room *link);
+void	can_go_everywhere(t_room *current, t_room *link, t_queue **tail);
 
 /*------SETTING FLOWS--------*/
-void set_flows(t_data *data);
-void allocate_flow_pointer(t_data *data, t_room *current);
+void	set_flows(t_data *data);
+void	allocate_flow_pointer(t_data *data, t_room *current);
+
+/*------SEARCHING BEST PATHS SET--------*/
+void	best_paths_set_operations(t_data *data, size_t bfs_times);
+bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
+
+/*------RESULT OUTPUT-------------*/
+void	print_result(t_data *data);
+void	print_paths(t_data *data);
+void	set_correct_flows(t_data *data);
+void	print_paths_set(t_data *data, t_set *paths_set, size_t times);
 
 #endif

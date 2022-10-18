@@ -20,6 +20,7 @@ void print_paths(t_data *data)
 
 	path = 1;
 	i = 0;
+	ft_printf("\033[0;32mSet of all POSSIBLE paths, after all BFSs\033[0m\n");
 	while (data->start->flow[i])
 	{
 		ft_printf("PATH [%zu] = ", path++);
@@ -67,9 +68,8 @@ void bfs_init(t_data *data, t_queue **head, t_queue **tail, t_queue **cur)
 {
 	if (!data->start || !data->end || !data->start->links_vec || !data->end->links_vec || data->start == data->end)
 		error(FORMAT_ERR);
-
 	*head = (t_queue *)malloc(sizeof(t_queue));
-	if (!head)
+	if (!*head)
 		error(MALLOC_ERR);
 	(*head)->room = data->start;
 	(*head)->next = NULL;
@@ -122,6 +122,10 @@ void	bfs_driver(t_data *data)
 	{
 		if (head)
 			reset_graph_values(head);
+		best_paths_set_operations(data, i);
+		i++;
 	}
-	print_paths(data);
+	ft_printf("\033[0;32mOur algo chose \033[0m\n");
+	print_paths_set(data, data->best_set, 100000);
+	print_result(data);
 }

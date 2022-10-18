@@ -97,7 +97,6 @@ int main(void)
 	// print_rooms(data); //! temp
 	// print_links(data); //! temp
 	// printf("%s\n", data.rooms_vec->array[0]->room_name);
-	// system("leaks lem-in");
 	return (0);
 	// exit (0);
 }
