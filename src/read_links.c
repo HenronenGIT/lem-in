@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-t_room		*find_room(t_room *room, char *link_name)
+t_room	*find_room(t_room *room, char *link_name)
 {
 	while (room)
 	{
@@ -69,7 +69,6 @@ void	read_links(t_data *data, char *line)
 		error(MALLOC_ERR);
 	validate_links(data, rooms);
 	ft_free_2d_array(rooms);
-	// free(line);
 	vec_insert(data->input_vec, line);
 	while (get_next_line(0, &line))
 	{
@@ -81,6 +80,6 @@ void	read_links(t_data *data, char *line)
 			validate_links(data, rooms);
 			ft_free_2d_array(rooms);
 		}
-		vec_insert(data->input_vec, line); //! last edit
+		vec_insert(data->input_vec, line);
 	}
 }
