@@ -86,6 +86,15 @@ typedef struct s_coords
 	long	y;
 }		t_coords;
 
+typedef struct s_result
+{
+	long	finished;
+	long	ant_num;
+	size_t	moves;
+	size_t	left;
+	bool	first_print;
+}	t_result;
+
 void	error(int error_number);
 
 /*----------PARSING-----------*/
@@ -119,15 +128,22 @@ void	allocate_flow_pointer(t_data *data, t_room *current);
 /*------SEARCHING BEST PATHS SET--------*/
 void	best_paths_set_operations(t_data *data);
 bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
+void	check_if_current_is_best(t_data *data, t_set *paths_set, size_t i);
+void	build_paths_set_structure(t_data *data, t_set **paths_set);
+void	calculate_paths_lengths(t_data *data, t_set *set);
+void	allocate_paths_arrays(t_set *paths_set);
+void	save_current_paths_set(t_data *data, t_set *paths_set);
+void	sort_paths_short_to_long(t_set *paths_set, size_t i, size_t j);
 
 /*------RESULT OUTPUT-------------*/
 void	print_result(t_data *data);
 void	print_paths(t_data *data);
 void	set_correct_flows(t_data *data);
+void	init_res_data_and_ants_arr(t_result *res, t_room ***ants, t_data *data);
+void	set_correct_flows(t_data *data);
 
 /*------PRINTING-------------*/
 void	print_paths(t_data *data);
 void	print_paths_set(t_data *data, t_set *paths_set);
-
 
 #endif

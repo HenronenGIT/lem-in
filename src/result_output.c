@@ -12,16 +12,22 @@
 
 #include "../includes/lem_in.h"
 
-void	check_if_move_end(t_data *data, t_room **ants, long *ant_num, long *finished)
+void	check_if_move_end(t_data *data, t_result *res, t_room **ants)
 {
-	if (ants[*ant_num] != data->end)
-		ants[*ant_num]->occupied = true;
+	if (ants[res->ant_num] != data->end)
+		ants[res->ant_num]->occupied = true;
 	else
-		*finished += 1;
-	ft_printf("L%lu-%s ", *ant_num + 1, ants[*ant_num]->room_name);
+		res->finished += 1;
+	if (res->first_print)
+	{
+		ft_printf("L%lu-%s", res->ant_num + 1, ants[res->ant_num]->room_name);
+		res->first_print = false;
+	}
+	else
+		ft_printf(" L%lu-%s", res->ant_num + 1, ants[res->ant_num]->room_name);
 }
 
-void	send_from_start(t_data *data, t_room **ants, long *ant_num, long *finished, size_t *left)
+void	send_from_start(t_data *data, t_result *res, t_room **ants)
 {
 	size_t	i;
 
@@ -29,80 +35,49 @@ void	send_from_start(t_data *data, t_room **ants, long *ant_num, long *finished,
 	while (i < data->best_set->paths_amount)
 	{
 		if (!data->start->flow[i]->occupied
-			&& can_send_this_path(data->best_set, i, data->ants - *left))
+			&& can_send_this_path(data->best_set, i, data->ants - res->left))
 		{
-			*left += 1;
-			ants[*ant_num] = data->start->flow[i];
-			check_if_move_end(data, ants, ant_num, finished);
+			res->left += 1;
+			ants[res->ant_num] = data->start->flow[i];
+			check_if_move_end(data, res, ants);
 			return ;
 		}
 		i++;
 	}
 }
 
-void	set_correct_flows(t_data *data)
+void	print_moves(t_data *data, t_result *res, t_room **ants)
 {
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (i < data->best_set->paths_amount)
+	while (res->finished != data->ants)
 	{
-		data->start->flow[i] = data->best_set->paths[i][0];
-		while (j < data->best_set->lengths[i] - 1)
+		res->ant_num = 0;
+		while (res->ant_num < data->ants)
 		{
-			data->best_set->paths[i][j]->flow[0] = data->best_set->paths[i][j + 1];
-			j++;
+			if (ants[res->ant_num] == data->start)
+				send_from_start(data, res, ants);
+			else if (ants[res->ant_num] != data->end)
+			{
+				ants[res->ant_num]->occupied = false;
+				ants[res->ant_num] = ants[res->ant_num]->flow[0];
+				check_if_move_end(data, res, ants);
+			}
+			res->ant_num++;
 		}
-		data->best_set->paths[i][j]->flow[0] = data->end;
-		j = 0;
-		i++;
-	}
-	while (data->start->flow[i])
-	{
-		data->start->flow[i] = NULL;
-		i++;
+		ft_printf("\n");
+		res->first_print = true;
+		res->moves++;
 	}
 }
 
 void	print_result(t_data *data)
 {
-	t_room	**ants;
-	long	finished;
-	long	ant_num;
-	size_t	moves;
-	size_t	left;
+	t_room		**ants;
+	t_result	res;
 
 	set_correct_flows(data);
-	moves = 0;
-	ant_num = 0;
-	left = 0;
-	ants = (t_room **)malloc(sizeof(t_room) * data->ants);
-	if (!ants)
-		error(MALLOC_ERR);
-	finished = 0;
-	while (ant_num < data->ants)
-		ants[ant_num++] = data->start;
-	while (finished != data->ants)
-	{
-		ant_num = 0;
-		while (ant_num < data->ants)
-		{
-			if (ants[ant_num] == data->start)
-				send_from_start(data, ants, &ant_num, &finished, &left);
-			else if (ants[ant_num] != data->end)
-			{
-				ants[ant_num]->occupied = false;
-				ants[ant_num] = ants[ant_num]->flow[0];
-				check_if_move_end(data, ants, &ant_num, &finished);
-			}
-			ant_num++;
-		}
-		ft_printf("\n");
-		moves++;
-	}
+	init_res_data_and_ants_arr(&res, &ants, data);
+	print_moves(data, &res, ants);
 	free(ants);
 	if (data->flags->moves == true)
-		ft_printf("\033[0;32mMove count:\n\033[0m%zu\n", moves);
+		ft_printf("\033[0;32mMove count:\n\033[0m%zu\n", res.moves);
 }

@@ -18,7 +18,9 @@ SRC_FILES = main.c \
 			allocating.c \
 			paths_sets.c \
 			result_output.c \
-			print_functions.c
+			print_functions.c \
+			best_set.c \
+			print_init.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
