@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
+/*   read_rooms.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmaronen <hmaronen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -29,6 +29,7 @@ t_room	*allocate_new_room(char *room_name, t_coords *coords)
 	new_room->flow = NULL;
 	new_room->flow_from = false;
 	new_room->next = NULL;
+	new_room->occupied = false;
 	return (new_room);
 }
 
