@@ -106,5 +106,5 @@ void	print_result(t_data *data)
 		moves++;
 	}
 	free(ants);
-	// ft_printf("%zu moves made\n\n\n", moves);
+	ft_printf("%zu moves made\n\n\n", moves);
 }
