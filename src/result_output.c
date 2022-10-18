@@ -12,7 +12,7 @@
 
 #include "../includes/lem_in.h"
 
-void	check_if_move_end(t_data *data, t_room **ants, size_t *ant_num, size_t *finished)
+void	check_if_move_end(t_data *data, t_room **ants, long *ant_num, long *finished)
 {
 	if (ants[*ant_num] != data->end)
 		ants[*ant_num]->occupied = true;
@@ -24,7 +24,7 @@ void	check_if_move_end(t_data *data, t_room **ants, size_t *ant_num, size_t *fin
 	ft_printf("L%lu-%s ", *ant_num + 1, ants[*ant_num]->room_name);
 }
 
-void	send_from_start(t_data *data, t_room **ants, size_t *ant_num, size_t *finished, size_t *left)
+void	send_from_start(t_data *data, t_room **ants, long *ant_num, long *finished, size_t *left)
 {
 	size_t	i;
 
@@ -72,8 +72,8 @@ void	set_correct_flows(t_data *data)
 void	print_result(t_data *data)
 {
 	t_room	**ants;
-	size_t	finished;
-	size_t	ant_num;
+	long	finished;
+	long	ant_num;
 	size_t	moves;
 	size_t	left;
 
