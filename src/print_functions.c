@@ -44,3 +44,28 @@ void	print_links(t_data data)
 		i++;
 	}
 }
+
+void	print_paths(t_data *data)
+{
+	t_room	*iterator;
+	size_t	i;
+	size_t	path;
+
+	path = 1;
+	i = 0;
+	ft_printf("\033[0;32mSet of all POSSIBLE paths, after all BFSs\033[0m\n");
+	while (data->start->flow[i])
+	{
+		ft_printf("PATH [%zu] = ", path++);
+		ft_printf("%s -> ", data->start->room_name);
+		iterator = data->start->flow[i];
+		while (iterator != data->end)
+		{
+			ft_printf("%s -> ", iterator->room_name);
+			iterator = *iterator->flow;
+		}
+		ft_printf("%s\n", iterator->room_name);
+		i += 1;
+	}
+	ft_printf("\n");
+}

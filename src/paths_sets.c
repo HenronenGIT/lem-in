@@ -104,6 +104,7 @@ void	print_paths_set(t_data *data, t_set *paths_set, size_t times)
 
 	i = 0;
 	j = 0;
+	ft_printf("\033[0;32mOur algo chose \033[0m\n");
 	if (times == 100000)
 		ft_printf("\033[0;32mBest set of paths\033[0m\n");
 	else

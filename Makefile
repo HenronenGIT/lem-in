@@ -17,7 +17,8 @@ SRC_FILES = main.c \
 			set_flow_utils.c \
 			allocating.c \
 			paths_sets.c \
-			result_output.c
+			result_output.c \
+			print_functions.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/

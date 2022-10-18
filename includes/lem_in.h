@@ -122,4 +122,7 @@ void	print_paths(t_data *data);
 void	set_correct_flows(t_data *data);
 void	print_paths_set(t_data *data, t_set *paths_set, size_t times);
 
+/*------PRINTING-------------*/
+void	print_paths(t_data *data);
+
 #endif
