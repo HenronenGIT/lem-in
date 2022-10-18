@@ -95,39 +95,6 @@ void	allocate_paths_arrays(t_set *paths_set)
 }
 
 /*
-Just a function to print sets of paths and length of each path
-*/
-void	print_paths_set(t_data *data, t_set *paths_set, size_t times)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	ft_printf("\033[0;32mOur algo chose \033[0m\n");
-	if (times == 100000)
-		ft_printf("\033[0;32mBest set of paths\033[0m\n");
-	else
-		ft_printf("\033[0;32mBest set of path after %zu BFSs\033[0m\n", times);
-	while (i < paths_set->paths_amount)
-	{
-		ft_printf("PATH [%zu] = %s -> ", i + 1, data->start->room_name);
-		while (j < paths_set->lengths[i])
-		{
-			ft_printf("%s -> ", paths_set->paths[i][j]->room_name);
-			j++;
-		}
-		ft_printf("%s", data->end->room_name);
-		ft_printf(" length = %zu", paths_set->lengths[i]);
-		ft_printf("\n");
-		j = 0;
-		i++;
-	}
-	ft_printf("\n");
-}
-
-
-/*
 After everything has been allocated we recreate each path and
 save it to array. Array just stores pointers to the room,
 so we just play with addresses here

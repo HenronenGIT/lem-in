@@ -24,6 +24,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: Invalid link input!\n");
 	if (error_number == ANT_ERR)
 		ft_puterror("ERROR: Invalid ant input!\n");
+	if (error_number == FLAG_ERR)
+		ft_puterror("ERROR: Invalid flag input!\n");
 	exit(error_number);
 }
 
@@ -46,12 +48,31 @@ static void	init_data_struct(t_data *data)
 
 	start_size = 10;
 	data->ants = 0;
+	data->start = NULL;
+	data->end = NULL;
+	data->flags = (t_lem_flags *)malloc(sizeof(t_lem_flags));
 	data->rooms_vec = (t_vec *)malloc(sizeof(t_vec));
 	data->input_vec = (t_vec *)malloc(sizeof(t_vec));
-	if (!data->rooms_vec || !data->input_vec)
+	if (!data->rooms_vec || !data->input_vec || !data->flags)
 		error(MALLOC_ERR);
 	vec_new_arr(data->rooms_vec, start_size);
 	vec_new_arr(data->input_vec, start_size);
+	data->flags->moves = false;
+	data->flags->paths = false;
+}
+
+void	read_flags(t_data *data, int argc, char **argv)
+{
+	if (argc == 1)
+		return ;
+	if (argc > 2)
+		error(FLAG_ERR);
+	if (!ft_strcmp(argv[1], "-l"))
+		data->flags->moves = true;
+	else if (!ft_strcmp(argv[1], "-p"))
+		data->flags->paths = true;
+	else
+		error(FLAG_ERR);
 }
 
 int	main(int argc, char **argv)
@@ -59,6 +80,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init_data_struct(&data);
+	read_flags(&data, argc, argv);
 	read_ants(&data);
 	read_rooms(&data);
 	allocate_flow_pointers(&data);

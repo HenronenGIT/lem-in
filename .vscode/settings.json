@@ -4,5 +4,6 @@
 		"lem_in.h": "c",
 		"chrono": "c",
 		"locale": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

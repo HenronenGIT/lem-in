@@ -119,5 +119,10 @@ void	bfs_driver(t_data *data)
 		free(iterator);
 		iterator = iterator->next;
 	}
-	// print_paths_set(data, data->best_set, 100000);
+	if (data->flags->paths == true)
+	{
+		// print_paths_set(data, data->best_set, 100000);
+		print_paths_set(data, data->best_set);
+		exit(0);
+	}
 }

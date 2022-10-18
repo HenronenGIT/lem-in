@@ -69,3 +69,31 @@ void	print_paths(t_data *data)
 	}
 	ft_printf("\n");
 }
+
+/*
+Just a function to print sets of paths and length of each path
+*/
+void	print_paths_set(t_data *data, t_set *paths_set)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	ft_printf("\033[0;32mOur Algo chose paths: \033[0m\n");
+	while (i < paths_set->paths_amount)
+	{
+		ft_printf("PATH [%zu] = %s -> ", i + 1, data->start->room_name);
+		while (j < paths_set->lengths[i])
+		{
+			ft_printf("%s -> ", paths_set->paths[i][j]->room_name);
+			j++;
+		}
+		ft_printf("%s", data->end->room_name);
+		ft_printf(" length = %zu", paths_set->lengths[i]);
+		ft_printf("\n");
+		j = 0;
+		i++;
+	}
+	ft_printf("\n");
+}

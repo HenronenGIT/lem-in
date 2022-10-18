@@ -24,17 +24,25 @@
 # define NO_PATH -5
 # define LINK_ERR -6
 # define ANT_ERR -7
+# define FLAG_ERR -8
+
+typedef struct s_lem_flags
+{
+	bool	moves;
+	bool	paths;
+}		t_lem_flags;
 
 /* Main structure which contains all the data */
 typedef struct s_data
 {
-	long			ants;
-	struct s_vec	*rooms_vec;
-	struct s_vec	*input_vec;
-	struct s_room	*start;
-	struct s_room	*end;
-	struct s_set	*best_set;
-	size_t			best_speed;
+	long				ants;
+	struct s_vec		*rooms_vec;
+	struct s_vec		*input_vec;
+	struct s_room		*start;
+	struct s_room		*end;
+	struct s_set		*best_set;
+	size_t				best_speed;
+	struct s_lem_flags	*flags;
 }	t_data;
 
 /* General Dynamic Vector structure */
@@ -116,9 +124,10 @@ bool	can_send_this_path(t_set *paths_set, size_t i, size_t ants);
 void	print_result(t_data *data);
 void	print_paths(t_data *data);
 void	set_correct_flows(t_data *data);
-void	print_paths_set(t_data *data, t_set *paths_set, size_t times);
 
 /*------PRINTING-------------*/
 void	print_paths(t_data *data);
+void	print_paths_set(t_data *data, t_set *paths_set);
+
 
 #endif
