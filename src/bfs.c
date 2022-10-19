@@ -102,17 +102,16 @@ void	bfs_driver(t_data *data)
 {
 	t_queue	*head;
 	t_queue	*iterator;
-	size_t	i;
 
-	i = 0;
 	head = NULL;
 	while (bfs(data, &head))
 	{
 		if (head)
 			reset_graph_values(head);
 		best_paths_set_operations(data);
-		i++;
 	}
+	if (data->start->flow[0] == NULL)
+		error(NO_PATH_ERR);
 	iterator = head;
 	while (iterator)
 	{

@@ -18,8 +18,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: Not enough space for malloc");
 	if (error_number == FORMAT_ERR)
 		ft_puterror("ERROR: Invalid formatting!\n");
-	if (error_number == NO_PATH)
-		ft_puterror("ERROR: No path found!\n");
+	if (error_number == NO_PATH_ERR)
+		ft_puterror("ERROR: No paths to end!\n");
 	if (error_number == LINK_ERR)
 		ft_puterror("ERROR: Invalid link input!\n");
 	if (error_number == ANT_ERR)
@@ -28,6 +28,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: Invalid flag input!\n");
 	if (error_number == COORD_ERR)
 		ft_puterror("ERROR: Invalid coordinate input!\n");
+	if (error_number == NO_LINK_TO_END)
+		ft_puterror("ERROR: No links to end room!\n");
 	exit(error_number);
 }
 
