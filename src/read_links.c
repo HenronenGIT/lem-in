@@ -90,6 +90,8 @@ void	read_links(t_data *data, char *line)
 	vec_insert(data->input_vec, line);
 	while (get_next_line(0, &line))
 	{
+		if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
+			error(LINK_ERR);
 		if (*line != '#')
 		{
 			rooms = ft_strsplit(line, '-');
