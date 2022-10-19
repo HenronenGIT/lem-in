@@ -25,6 +25,7 @@
 # define LINK_ERR -6
 # define ANT_ERR -7
 # define FLAG_ERR -8
+# define COORD_ERR -9
 
 typedef struct s_lem_flags
 {

@@ -26,6 +26,8 @@ void	error(int error_number)
 		ft_puterror("ERROR: Invalid ant input!\n");
 	if (error_number == FLAG_ERR)
 		ft_puterror("ERROR: Invalid flag input!\n");
+	if (error_number == COORD_ERR)
+		ft_puterror("ERROR: Invalid coordinate input!\n");
 	exit(error_number);
 }
 

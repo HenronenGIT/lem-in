@@ -12,6 +12,21 @@
 
 #include "../includes/lem_in.h"
 
+void	move_all_ants(t_data *data)
+{
+	long	ants;
+
+	ants = 1;
+	while (ants < data->ants)
+	{
+		ft_printf("L%d-%s ", ants, data->end->room_name);
+		ants += 1;
+	}
+	ft_printf("L%d-%s", ants, data->end->room_name);
+	ft_putchar('\n');
+	exit(0);
+}
+
 t_room	*find_room(t_room *room, char *link_name)
 {
 	while (room)
@@ -56,6 +71,9 @@ void	validate_links(t_data *data, char **rooms)
 	room_2 = find_room(data->rooms_vec->array[second_hash], rooms[1]);
 	if (!room_2)
 		error(FORMAT_ERR);
+	if ((room_1 == data->start && room_2 == data->end)
+		|| (room_2 == data->start && room_1 == data->end))
+		move_all_ants(data);
 	vec_link_insert(room_1, room_2);
 	vec_link_insert(room_2, room_1);
 }
