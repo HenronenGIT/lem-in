@@ -17,7 +17,7 @@ void	error(int error_number)
 	if (error_number == MALLOC_ERR)
 		ft_puterror("ERROR: Not enough space for malloc");
 	if (error_number == FORMAT_ERR)
-		ft_puterror("ERROR: Invalid formatting!\n");
+		ft_puterror("ERROR: Invalid input!\n");
 	if (error_number == NO_PATH_ERR)
 		ft_puterror("ERROR: No paths to end!\n");
 	if (error_number == LINK_ERR)
