@@ -56,10 +56,10 @@ static void	vec_link_insert(t_room *dst, t_room *src)
 
 void	validate_links(t_data *data, char **rooms)
 {
-	unsigned long	first_hash;
-	unsigned long	second_hash;
-	t_room			*room_1;
-	t_room			*room_2;
+	long	first_hash;
+	long	second_hash;
+	t_room	*room_1;
+	t_room	*room_2;
 
 	if (ft_count_pointers(rooms) != 2)
 		error(LINK_ERR);

@@ -12,10 +12,10 @@
 
 #include "../includes/lem_in.h"
 
-unsigned long	hashing(t_data *data, char *name)
+long	hashing(t_data *data, char *name)
 {
-	size_t			i;
-	unsigned long	hash;
+	size_t	i;
+	long	hash;
 
 	if (!name)
 		error(NULL_ERR);
@@ -61,8 +61,8 @@ static void	move_and_clear_array(t_data *data, t_room **tmp_arr)
 
 static void	hash_and_move_array(t_data *data, t_room **tmp_arr)
 {
-	size_t			i;
-	unsigned long	hash;
+	size_t	i;
+	long	hash;
 
 	i = 0;
 	while (i < data->rooms_vec->space_taken)

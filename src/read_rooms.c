@@ -65,8 +65,6 @@ static void	handle_hashtag(t_data *data, char *line)
 		data->start = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
 	else if (!ft_strcmp("##end", line) && data->end == NULL)
 		data->end = data->rooms_vec->array[data->rooms_vec->space_taken - 1];
-	else if (line[0] == '#' && line[1] == '#')
-		return ;
 	else
 		error(FORMAT_ERR);
 }

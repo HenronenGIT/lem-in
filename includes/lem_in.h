@@ -112,7 +112,7 @@ void	vec_insert(t_vec *dst_vec, void *element);
 
 /*----------HASH--------------*/
 void	sort_hash_values(t_data *data);
-unsigned long	hashing(t_data *data, char *name);
+long	hashing(t_data *data, char *name);
 
 /*----------BFS--------------*/
 void	bfs_driver(t_data *data);
