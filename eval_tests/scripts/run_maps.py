@@ -10,7 +10,7 @@ cwd = os.getcwd()
 
 lem_in = cwd + "/lem-in"
 # files_arr = glob.glob("eval_tests/test_maps/*.map")
-files_arr = glob.glob("eval_tests/test_maps/invalid_maps/*.map")
+files_arr = glob.glob("eval_tests/test_maps/*.map")
 
 i = 0
 for file in files_arr:
