@@ -4,7 +4,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -g -Wimplicit -fsanitize=address#-fno-sanitize=all#-fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -31,9 +31,6 @@ INC_DIR = ./includes/
 INC_FILES = lem_in.h
 INC = $(addprefix $(INC_DIR), $(INC_FILES))
 
-# LIBPRINT_DIR = libftprintf/
-# LIBPRINT_LIB = libftprintf.a
-# LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))
 LIBPRINT_DIR = libft/
 LIBPRINT_LIB = libft.a
 LIBPRINT = $(addprefix $(LIBPRINT_DIR), $(LIBPRINT_LIB))

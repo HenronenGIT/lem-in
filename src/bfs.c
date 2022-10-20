@@ -115,8 +115,9 @@ void	bfs_driver(t_data *data)
 	iterator = head;
 	while (iterator)
 	{
+		head = head->next;
 		free(iterator);
-		iterator = iterator->next;
+		iterator = head;
 	}
 	if (data->flags->paths == true)
 	{

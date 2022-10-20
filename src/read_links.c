@@ -83,6 +83,8 @@ void	validate_links(t_data *data, char **rooms)
 	if ((room_1 == data->start && room_2 == data->end)
 		|| (room_2 == data->start && room_1 == data->end))
 		move_all_ants(data);
+	if (room_1 == room_2)
+		error(FORMAT_ERR);
 	vec_link_insert(room_1, room_2);
 	vec_link_insert(room_2, room_1);
 }

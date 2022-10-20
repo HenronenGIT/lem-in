@@ -141,8 +141,8 @@ void	check_if_current_is_best(t_data *data, t_set *paths_set, size_t i)
 			i++;
 		}
 	}
-	free(ants_to_path);
 	check_longest_move(data, paths_set, ants_to_path);
+	free(ants_to_path);
 }
 
 void	best_paths_set_operations(t_data *data)
