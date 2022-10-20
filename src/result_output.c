@@ -79,5 +79,5 @@ void	print_result(t_data *data)
 	print_moves(data, &res, ants);
 	free(ants);
 	if (data->flags->moves == true)
-		ft_printf("\033[0;32mMove count:\n\033[0m%zu\n", res.moves);
+		ft_printf("\033[0;32mMove count:\n\033[0m%u\n", res.moves);
 }

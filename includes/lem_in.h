@@ -13,7 +13,6 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
 
-# include <stdio.h>
 # include <stdbool.h>
 # include "../libft/includes/libft.h"
 

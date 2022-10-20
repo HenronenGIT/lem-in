@@ -40,6 +40,9 @@ t_room	*find_room(t_room *room, char *link_name)
 
 static void	vec_link_insert(t_room *dst, t_room *src)
 {
+	size_t	i;
+
+	i = 0;
 	if (!dst->links_vec)
 	{
 		dst->links_vec = (t_vec *)malloc(sizeof(t_vec));
@@ -49,6 +52,12 @@ static void	vec_link_insert(t_room *dst, t_room *src)
 	}
 	if (!dst->links_vec->space_left)
 		vec_resize(dst->links_vec);
+	while (i < dst->links_vec->space_taken)
+	{
+		if (dst->links_vec->array[i] == src)
+			error(LINK_ERR);
+		i += 1;
+	}
 	dst->links_vec->array[dst->links_vec->space_taken] = src;
 	dst->links_vec->space_left--;
 	dst->links_vec->space_taken++;
