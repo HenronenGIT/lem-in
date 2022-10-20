@@ -18,15 +18,15 @@
 # include "../libft/includes/libft.h"
 
 /* Error message code */
-# define MALLOC_ERR -2
-# define NULL_ERR -3
-# define FORMAT_ERR -4
-# define NO_PATH_ERR -5
-# define LINK_ERR -6
-# define ANT_ERR -7
-# define FLAG_ERR -8
-# define COORD_ERR -9
-# define NO_LINK_TO_END -10
+# define MALLOC_ERR 2
+# define NULL_ERR 3
+# define FORMAT_ERR 4
+# define NO_PATH_ERR 5
+# define LINK_ERR 6
+# define ANT_ERR 7
+# define FLAG_ERR 8
+# define COORD_ERR 9
+# define NO_LINK_TO_END 10
 
 typedef struct s_lem_flags
 {

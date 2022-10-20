@@ -1,0 +1,14 @@
+1
+##start
+a 0 0
+b 0 0
+#gdgsdlg
+c 0 0
+##dsfsd
+d 0 0
+##end
+e 0 0
+a-b
+b-c
+c-d
+d-e

@@ -30,6 +30,8 @@ void	build_paths_set_structure(t_data *data, t_set **paths_set)
 
 	i = 0;
 	*paths_set = (t_set *)malloc(sizeof(t_set));
+	if (!*paths_set)
+		error(MALLOC_ERR);
 	(*paths_set)->paths_amount = 0;
 	while (data->start->flow[i])
 	{
