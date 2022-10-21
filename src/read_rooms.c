@@ -18,7 +18,7 @@ static t_coords	*read_coordinates(char *coord_x, char *coord_y)
 
 	coords = NULL;
 	if (ft_isnumber(coord_x) == false || ft_isnumber(coord_y) == false)
-		error(FORMAT_ERR);
+		error(COORD_ERR);
 	coords = (t_coords *)malloc(sizeof(t_coords));
 	if (!coords)
 		error(MALLOC_ERR);

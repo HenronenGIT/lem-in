@@ -12,6 +12,21 @@
 
 #include "../includes/lem_in.h"
 
+void	move_all_ants(t_data *data)
+{
+	long	ants;
+
+	ants = 1;
+	while (ants < data->ants)
+	{
+		ft_printf("L%d-%s ", ants, data->end->room_name);
+		ants += 1;
+	}
+	ft_printf("L%d-%s", ants, data->end->room_name);
+	ft_putchar('\n');
+	exit(0);
+}
+
 t_room	*find_room(t_room *room, char *link_name)
 {
 	while (room)
@@ -25,6 +40,9 @@ t_room	*find_room(t_room *room, char *link_name)
 
 static void	vec_link_insert(t_room *dst, t_room *src)
 {
+	size_t	i;
+
+	i = 0;
 	if (!dst->links_vec)
 	{
 		dst->links_vec = (t_vec *)malloc(sizeof(t_vec));
@@ -34,6 +52,12 @@ static void	vec_link_insert(t_room *dst, t_room *src)
 	}
 	if (!dst->links_vec->space_left)
 		vec_resize(dst->links_vec);
+	while (i < dst->links_vec->space_taken)
+	{
+		if (dst->links_vec->array[i] == src)
+			error(LINK_ERR);
+		i += 1;
+	}
 	dst->links_vec->array[dst->links_vec->space_taken] = src;
 	dst->links_vec->space_left--;
 	dst->links_vec->space_taken++;
@@ -41,10 +65,10 @@ static void	vec_link_insert(t_room *dst, t_room *src)
 
 void	validate_links(t_data *data, char **rooms)
 {
-	unsigned long	first_hash;
-	unsigned long	second_hash;
-	t_room			*room_1;
-	t_room			*room_2;
+	long	first_hash;
+	long	second_hash;
+	t_room	*room_1;
+	t_room	*room_2;
 
 	if (ft_count_pointers(rooms) != 2)
 		error(LINK_ERR);
@@ -55,6 +79,11 @@ void	validate_links(t_data *data, char **rooms)
 		error(FORMAT_ERR);
 	room_2 = find_room(data->rooms_vec->array[second_hash], rooms[1]);
 	if (!room_2)
+		error(FORMAT_ERR);
+	if ((room_1 == data->start && room_2 == data->end)
+		|| (room_2 == data->start && room_1 == data->end))
+		move_all_ants(data);
+	if (room_1 == room_2)
 		error(FORMAT_ERR);
 	vec_link_insert(room_1, room_2);
 	vec_link_insert(room_2, room_1);
@@ -72,6 +101,8 @@ void	read_links(t_data *data, char *line)
 	vec_insert(data->input_vec, line);
 	while (get_next_line(0, &line))
 	{
+		if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
+			error(LINK_ERR);
 		if (*line != '#')
 		{
 			rooms = ft_strsplit(line, '-');

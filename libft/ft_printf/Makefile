@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-CC = gcc
+CC = gcc -g
 FLAGS = #-Wall -Wextra -Werror
 DB_FLAG = -g $(FLAGS)
 AR = ar rcs

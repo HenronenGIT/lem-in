@@ -47,6 +47,8 @@ void	allocate_start_flows(t_data *data, t_room *room_ptr)
 	size_t	i;
 
 	i = 0;
+	if (data->end == NULL || data->end->links_vec == NULL)
+		error(NO_LINK_TO_END);
 	end_links = data->end->links_vec->space_taken;
 	room_ptr->flow = (t_room **)malloc(sizeof(t_room *) * (end_links + 1));
 	if (!room_ptr->flow)
