@@ -2,14 +2,11 @@
 <!-- Lem-in gif or any banner picture -->
 
 # Lem-in - "Elementary algorithmic project"
+## Table of Contents
 
-# Table of Contents
+[Description](#description)
 
-- [Description](##Description)
-
-- [Resources](##Resources)
-
-- [Keywords](###Keywords)
+[Resources](#resources)
 
 <p align="left"><img src="./README/pics/score.jpg" height="150" /></p>
 
