@@ -1,7 +1,11 @@
 <p align="left"><img src="./README/letters.jpg" ></p>
 <!-- Lem-in gif or any banner picture -->
 
+
+
 # Lem-in - "Elementary algorithmic project"
+
+https://user-images.githubusercontent.com/69038136/197578344-f139bd2b-9fcb-4fe5-82fe-87c24b44e354.mp4
 
 # Table of Contents
 
