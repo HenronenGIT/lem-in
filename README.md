@@ -2,6 +2,9 @@
 <!-- Lem-in gif or any banner picture -->
 
 # Lem-in - "Elementary algorithmic project"
+
+https://user-images.githubusercontent.com/69038136/197579221-9ce3fdde-37fe-490f-9f62-e35b30e20a76.mp4
+
 ## Table of Contents
 
 [Description](#description)
