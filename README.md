@@ -128,6 +128,10 @@ PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 
 <img src="README/pics/bfs_gif.gif" width="80%">
 
+### Edmons-Karp
+
+test
+
 
 
 ## Resources
