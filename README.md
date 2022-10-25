@@ -51,36 +51,9 @@
 | Describe link between two rooms | `start-end` |  |
 | Extra commands | `##anything` |  Extra commands will be ignored |
 
-### Example
-
-<!-- ``` text
-3
-##start
-start 4 0
-##end
-end 4 6
-3 2 2
-4 0 4
-1 4 2
-2 4 4
-5 8 2
-6 8 4
-start-1
-3-4
-2-4
-1-5
-6-5
-end-6
-1-2
-2-end
-3-start
-``` -->
-
 Ant farm | Map visualization
 :-------------------------:|:-------------------------:
 ![File Picture](./README/pics/file_pic.png)  |  ![Example Map](./README/pics/example_map.png)
-
-<!-- <p align="left"><img src="./README/pics/example_map.png" height="300" /></p> -->
 
 ## Output
 
