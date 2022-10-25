@@ -11,10 +11,14 @@
 
 [Output](#output)
 
+
 <!-- [How to run](##HowToRun) -->
 
 [Resources](#resources)
 
+[Tools](#tools)
+
+[Keywords](#keywords)
 
 <!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
 # Description
@@ -37,6 +41,7 @@
 
 | Description | Command | Note |
 | --- | --- | --- |
+| First line of the file | `21` | First line is always the ant count |
 | Specify start room | `##start` | **REQUIRED** |
 | Specify end room | `##end` | **REQUIRED**  |
 | Comment | `#` | All comments will be ignored  |
@@ -70,13 +75,17 @@ end-6
 3-start
 ```
 
-<p align="left"><img src="./README/pics/example_map.png" height="300" /></p>
+File             |  Example map
+:-------------------------:|:-------------------------:
+![](./README/pics/TEST.png)  |  ![](./README/pics/example_map.png)
+
+<!-- <p align="left"><img src="./README/pics/example_map.png" height="300" /></p> -->
 
 # How to run
 
 test
 
-## Resources
+# Resources
 
 ### Vertex disjoint paths
 
@@ -94,10 +103,18 @@ test
 
 [Maximum flow problem - Wikipedia](https://en.wikipedia.org/wiki/Maximum_flow_problem)
 
+# Tools
+
+## Drawings
+
+[Excalidraw](https://excalidraw.com/)
+
+[Graph Editor](https://csacademy.com/app/graph_editor/)
+
 ### Keywords
 
 - Algorithms
 - Path finding
 - Edmons-Karp
 - Breadth-first search
-- Max-flow
+- Max-flow min-cut theorem
