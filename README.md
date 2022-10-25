@@ -71,7 +71,7 @@ Ant farm | Map visualization
 
 <img src="README/pics/output_gif.gif" width="60%">
 
-## How to use
+## How to use <a name="howtouse"></a>
 
 ### Compiling
 
@@ -112,6 +112,10 @@ Our Algo chose paths:
 PATH [1] = start -> 1 -> 5 -> 6 -> end length = 3
 PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 ```
+
+## Algorithm
+
+test
 
 ## Resources
 
