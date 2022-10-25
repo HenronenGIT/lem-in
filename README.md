@@ -35,7 +35,7 @@
 
 3. Each turn you can move every single ant ones.
 
-<img src="./README/pics/rules_gif.gif" alt="example pic" >
+<img src="./README/pics/rules_gif.gif" alt="example gif" width="80%" >
 
 ## Input
 
@@ -93,14 +93,15 @@ Ant farm | Map visualization
 
 ### Example
 
-<img src="README/pics/output_gif.gif">
-
 > When we use map shoved above, output is following:<br>
 `L1-1 L2-3`<br>
 `L1-5 L2-4 L3-1 L4-3`<br>
 `L1-6 L2-2 L3-5 L4-4`<br>
 `L1-end L2-end L3-6 L4-2`<br>
 `L3-end L4-end`<br>
+
+<img src="README/pics/output_gif.gif" width="80%">
+
 ## How to run
 
 test
