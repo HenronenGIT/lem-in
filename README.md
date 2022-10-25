@@ -48,7 +48,6 @@
 | Specify room | `start 0 1` | Room name cannot start with `L` or `#`. Also name cannot contain `-` character |
 | Describe link between two rooms | `start-end` |  |
 | Extra commands | `##anything` |  Extra commands will be ignored |
-|  |  |  |
 
 ### Example map
 
