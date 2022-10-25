@@ -11,8 +11,9 @@
 
 [Output](#output)
 
-
 <!-- [How to run](##HowToRun) -->
+
+[Algorithm](#algorithm)
 
 [Resources](#resources)
 
@@ -49,7 +50,7 @@
 | Describe link between two rooms | `start-end` |  |
 | Extra commands | `##anything` |  Extra commands will be ignored |
 
-### Example map
+## Example map
 
 <!-- ``` text
 3
@@ -76,7 +77,7 @@ end-6
 
 File             |  Example map
 :-------------------------:|:-------------------------:
-![](./README/pics/TEST.png)  |  ![](./README/pics/example_map.png)
+![File Picture](./README/pics/file_pic.png)  |  ![Example Map](./README/pics/example_map.png)
 
 <!-- <p align="left"><img src="./README/pics/example_map.png" height="300" /></p> -->
 
@@ -86,19 +87,19 @@ test
 
 # Resources
 
-### Vertex disjoint paths
+## Vertex disjoint paths
 
 [Disjoint Paths](https://matthewdaws.github.io/blog/2015-06-08-Paths.html)
 
 [Disjoint Paths; Implementation Issues](https://matthewdaws.github.io/blog/2015-06-15-Paths-Implementation.html)
 
-### Edmonds–Karp
+## Edmonds–Karp
 
 [Edmonds-Karp - YouTube](https://www.youtube.com/watch?v=RppuJYwlcI8&ab_channel=WilliamFiset)
 
 [Edmonds-Karp algorithm - Wikipedia](https://en.wikipedia.org/wiki/Edmonds%E2%80%93Karp_algorithm)
 
-### Maximum flow problem
+## Maximum flow problem
 
 [Maximum flow problem - Wikipedia](https://en.wikipedia.org/wiki/Maximum_flow_problem)
 
