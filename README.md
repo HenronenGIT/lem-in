@@ -74,11 +74,20 @@ end-6
 3-start
 ``` -->
 
-File             |  Example map
+Ant farm | Map visualization
 :-------------------------:|:-------------------------:
 ![File Picture](./README/pics/file_pic.png)  |  ![Example Map](./README/pics/example_map.png)
 
 <!-- <p align="left"><img src="./README/pics/example_map.png" height="300" /></p> -->
+
+## Output
+
+> Output format of the program is following:<br>
+`Lx-y Lz-w Lr-o`<br>
+> x, z, and r represents ant number (going from 1 to number_of_ants).<br>
+> y, w, and o represents room names.
+
+### Example
 
 ## How to run
 
