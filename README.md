@@ -1,6 +1,6 @@
 # Lem-in - "Pathfinding Algorithm"
 
-<img src="./README/pics/banner_gif.gif" alt="Banner Gif" width="90%">
+<img src="./README/pics/banner_gif.gif" alt="Banner Gif" width="40%">
 
 ## Table of Contents
 
@@ -33,7 +33,7 @@
 
 3. Each turn you can move every single ant ones.
 
-<img src="./README/pics/rules_gif.gif" alt="example gif" width="80%" >
+<img src="./README/pics/rules_gif.gif" alt="example gif" width="60%" >
 
 ## Input
 
@@ -69,7 +69,7 @@ Ant farm | Map visualization
 `L1-end L2-end L3-6 L4-2`<br>
 `L3-end L4-end`<br>
 
-<img src="README/pics/output_gif.gif" width="80%">
+<img src="README/pics/output_gif.gif" width="60%">
 
 ## How to use
 
