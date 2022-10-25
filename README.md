@@ -1,7 +1,6 @@
-<!-- Lem-in gif or any banner picture -->
-# Lem-in - "Elementary algorithmic project"
+# Lem-in - "Pathfinding Algorithm"
 
-<img src="./README/pics/banner_gif.gif" alt="Banner Gif" height="400">
+<img src="./README/pics/banner_gif.gif" alt="Banner Gif" width="90%">
 
 ## Table of Contents
 
