@@ -1,11 +1,7 @@
 <!-- Lem-in gif or any banner picture -->
 # Lem-in - "Elementary algorithmic project"
 
-<img src="./README/pics/banner_gif.gif" alt="Banner Gif" height="500" >
-
-<!-- https://user-images.githubusercontent.com/69038136/
-
-<a href="./README/pics/lem-in_1.gif"197579221-9ce3fdde-37fe-490f-9f62-e35b30e20a76.mp4 -->> <a>
+<img src="./README/pics/banner_gif.gif" alt="Banner Gif" height="400">
 
 ## Table of Contents
 
@@ -19,7 +15,7 @@
 
 
 <!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
-## Description
+# Description
 
 > Main idea behind project `Lem-in` is to find most efficient set of paths to move ***n*** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
 
@@ -29,7 +25,7 @@
 
 3. Each turn you can move every single ant ones.
 
-## Input
+# Input
 
 > Best way to input ant farm of your choice is to create file and specify your map there.<br>
 >Here is list of all the specifications what file can and cannot contain:
