@@ -8,13 +8,26 @@ https://user-images.githubusercontent.com/69038136/197579221-9ce3fdde-37fe-490f-
 
 [Description](#description)
 
+[Input](#input)
+
 [Resources](#resources)
 
-<p align="left"><img src="./README/pics/score.jpg" height="150" /></p>
+<!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
+## Description
 
-## How to input data
+> Main idea behind project Lem-in is to find most efficient set of paths to move **n** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
 
-### Example input
+1. Ants are in the `##start` room when program starts.
+
+2. Room can contain only one ant at the time. `##start` and `##end` room can contain unlimited amount of ants.
+
+3. Each turn you can move every single ant ones.
+
+## Input
+
+> Best way to input map of your choice is to create file and specify your map there.
+
+### Example map
 
 ``` text
 3
@@ -39,17 +52,9 @@ end-6
 3-start
 ```
 
+<p align="left"><img src="./README/pics/example_map.png" height="300" /></p>
+
 <!-- map picture -->
-
-## Description
-
-> Main idea behind project Lem-in is to find most efficient set of paths to move **n** amount of ants from start room to the end room. There are certain rules what we need to follow:
-
-1. Room can contain only one ant at the time. Start and End room can contain unlimited amount of ants.
-
-2. Ants are in the `##start` room when program starts.
-
-3. Each turn you can move every single ant ones.
 
 ## Resources
 
