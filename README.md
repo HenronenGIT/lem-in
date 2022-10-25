@@ -9,6 +9,8 @@
 
 [Input](#input)
 
+[Output](#output)
+
 <!-- [How to run](##HowToRun) -->
 
 [Resources](#resources)
@@ -23,7 +25,10 @@
 
 2. Room can contain only one ant at the time. `##start` and `##end` room can contain unlimited amount of ants.
 
+
 3. Each turn you can move every single ant ones.
+
+<img src="./README/pics/rules_gif.gif" alt="example pic" >
 
 # Input
 
@@ -67,7 +72,7 @@ end-6
 
 <p align="left"><img src="./README/pics/example_map.png" height="300" /></p>
 
-## How to run
+# How to run
 
 test
 
