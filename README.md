@@ -119,8 +119,6 @@ Ant farm | Map visualization
 
 `lem-in -l < name_of_the_map`
 
-#### Example
-
 ```text
 ./lem-in -l < eval_tests/test_maps/example_3.map
 L1-1 L2-3
@@ -136,10 +134,7 @@ Move count:
 
 > Running `lem-in` with flag `-p` will show set of paths used to move ants from `##start` to `##end`.
 
-#### Example
-
-
-
+`lem-in -p < name_of_the_map`
 
 ```text
 ./lem-in -p < eval_tests/test_maps/example_3.map
@@ -147,8 +142,6 @@ Our Algo chose paths:
 PATH [1] = start -> 1 -> 5 -> 6 -> end length = 3
 PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 ```
-
-`lem-in -p < name_of_the_map`
 
 ## Resources
 
