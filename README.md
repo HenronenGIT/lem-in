@@ -26,7 +26,7 @@
 
 ## Description
 
-> the Main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
+> The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
 
 1. When the program starts, all of the ants are in the `##start` room.
 
@@ -43,10 +43,10 @@
 
 | Description                         | Command      | Note                                                                                |
 | ----------------------------------- | ------------ | ----------------------------------------------------------------------------------- |
-| First line of the file              | `21`         | the First line is always the ant count                                              |
+| First line of the file              | `21`         | The first line is always the ant count                                              |
 | Specify start room                  | `##start`    | **REQUIRED**                                                                        |
 | Specify end room                    | `##end`      | **REQUIRED**                                                                        |
-| Comment                             | `#`          | All comments will be ignored                                                        |
+| Comment                             | `#`          | Program will ignore all the commands                                                |
 | Specify room                        | `start 0 1`  | Room name cannot start with `L` or `#`. Also, a name cannot contain a `-` character |
 | Describe the link between two rooms | `start-end`  |                                                                                     |
 | Extra commands                      | `##anything` | Extra commands will be ignored                                                      |
@@ -114,9 +114,21 @@ PATH [1] = start -> 1 -> 5 -> 6 -> end length = 3
 PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 ```
 
-## Algorithm
+## Algorithms
 
-> Many different
+> Many different Algorithms were used so we can find:
+
+1. Shortest paths
+2. Vertex disjoint paths
+3. Most efficient set of paths for ***n*** amount of ants
+
+### Breadth-first search
+
+> With the help of Breadth-first search algorithm (shortened to bfs), we can find ALWAYS most shortest path from `##start` to `##end`. Here is an example:
+
+<img src="README/pics/bfs_gif.gif" width="80%">
+
+
 
 ## Resources
 
