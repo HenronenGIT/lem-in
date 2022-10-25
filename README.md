@@ -11,9 +11,12 @@
 
 [Output](#output)
 
+
 <!-- [How to run](##HowToRun) -->
 
 [Algorithm](#algorithm)
+
+[Extra](#Extra)
 
 [Resources](#resources)
 
@@ -49,7 +52,7 @@
 | Describe link between two rooms | `start-end` |  |
 | Extra commands | `##anything` |  Extra commands will be ignored |
 
-### Example map
+### Example
 
 <!-- ``` text
 3
@@ -85,10 +88,19 @@ Ant farm | Map visualization
 > Output format of the program is following:<br>
 `Lx-y Lz-w Lr-o`<br>
 > x, z, and r represents ant number (going from 1 to number_of_ants).<br>
-> y, w, and o represents room names.
+> y, w, and o represents room names.<br>
+> One line == One turn
 
 ### Example
 
+<img src="README/pics/output_gif.gif">
+
+> When we use map shoved above, output is following:<br>
+`L1-1 L2-3`<br>
+`L1-5 L2-4 L3-1 L4-3`<br>
+`L1-6 L2-2 L3-5 L4-4`<br>
+`L1-end L2-end L3-6 L4-2`<br>
+`L3-end L4-end`<br>
 ## How to run
 
 test
