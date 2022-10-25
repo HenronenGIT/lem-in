@@ -11,8 +11,7 @@
 
 [Output](#output)
 
-
-<!-- [How to run](##HowToRun) -->
+[How to use](##howtouse)
 
 [Algorithm](#algorithm)
 
@@ -29,7 +28,7 @@
 
 > Main idea behind project `Lem-in` is to find most efficient set of paths to move ***n*** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
 
-1. Ants are in the `##start` room when program starts.
+1. When program starts, all of the ants are in `##start` room.
 
 2. Room can contain only one ant at the time. `##start` and `##end` room can contain unlimited amount of ants.
 
@@ -102,9 +101,54 @@ Ant farm | Map visualization
 
 <img src="README/pics/output_gif.gif" width="80%">
 
-## How to run
+## How to use
 
-test
+### Compiling
+
+> At the root of repository there is a `Makefile`, simply running `make` will compile the whole program - name of the program will be `lem-in`.
+
+### Running `lem-in`
+
+`lem-in < name_of_the_map`
+
+### Running with flags
+
+#### `-l` Flag
+
+> Running `lem-in` with flag `-l` will show how many turns it took to move all ants from `##start` to `##end`.
+
+`lem-in -l < name_of_the_map`
+
+#### Example
+
+```text
+./lem-in -l < eval_tests/test_maps/example_3.map
+L1-1 L2-3
+L1-5 L2-4 L3-1 L4-3
+L1-6 L2-2 L3-5 L4-4
+L1-end L2-end L3-6 L4-2
+L3-end L4-end
+Move count:
+5
+```
+
+#### `-p` Flag
+
+> Running `lem-in` with flag `-p` will show set of paths used to move ants from `##start` to `##end`.
+
+#### Example
+
+
+
+
+```text
+./lem-in -p < eval_tests/test_maps/example_3.map
+Our Algo chose paths: 
+PATH [1] = start -> 1 -> 5 -> 6 -> end length = 3
+PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
+```
+
+`lem-in -p < name_of_the_map`
 
 ## Resources
 
