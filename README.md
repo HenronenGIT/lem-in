@@ -23,51 +23,52 @@
 [Keywords](#keywords)
 
 <!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
+
 ## Description
 
-> Main idea behind project `Lem-in` is to find most efficient set of paths to move ***n*** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
+> the Main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
 
-1. When program starts, all of the ants are in `##start` room.
+1. When the program starts, all of the ants are in the `##start` room.
 
-2. Room can contain only one ant at the time. `##start` and `##end` room can contain unlimited amount of ants.
+2. Room can contain only one ant at a time. `##start` and `##end` rooms can contain an unlimited amount of ants.
 
-3. Each turn you can move every single ant ones.
+3. With Each turn you can move every single ant one time.
 
 <img src="./README/pics/rules_gif.gif" alt="example gif" width="60%" >
 
 ## Input
 
-> Best way to input ant farm of your choice is to create file and specify your map there.<br>
->Here is list of all the specifications what file can and cannot contain:
+> Best way to input an ant farm of your choice is to create a file and specify your map there.<br>
+> Here is a list of all the specifications that the file can and cannot contain:
 
-| Description | Command | Note |
-| --- | --- | --- |
-| First line of the file | `21` | First line is always the ant count |
-| Specify start room | `##start` | **REQUIRED** |
-| Specify end room | `##end` | **REQUIRED**  |
-| Comment | `#` | All comments will be ignored  |
-| Specify room | `start 0 1` | Room name cannot start with `L` or `#`. Also name cannot contain `-` character |
-| Describe link between two rooms | `start-end` |  |
-| Extra commands | `##anything` |  Extra commands will be ignored |
+| Description                         | Command      | Note                                                                                |
+| ----------------------------------- | ------------ | ----------------------------------------------------------------------------------- |
+| First line of the file              | `21`         | the First line is always the ant count                                              |
+| Specify start room                  | `##start`    | **REQUIRED**                                                                        |
+| Specify end room                    | `##end`      | **REQUIRED**                                                                        |
+| Comment                             | `#`          | All comments will be ignored                                                        |
+| Specify room                        | `start 0 1`  | Room name cannot start with `L` or `#`. Also, a name cannot contain a `-` character |
+| Describe the link between two rooms | `start-end`  |                                                                                     |
+| Extra commands                      | `##anything` | Extra commands will be ignored                                                      |
 
-Ant farm | Map visualization
-:-------------------------:|:-------------------------:
-![File Picture](./README/pics/file_pic.png)  |  ![Example Map](./README/pics/example_map.png)
+|                  Ant farm                   |               Map visualization               |
+| :-----------------------------------------: | :-------------------------------------------: |
+| ![File Picture](./README/pics/file_pic.png) | ![Example Map](./README/pics/example_map.png) |
 
 ## Output
 
-> Output format of the program is following:<br>
-`Lx-y Lz-w Lr-o`<br>
+> Output format of the program is the following:<br>
+> `Lx-y Lz-w Lr-o`<br>
 > x, z, and r represents ant number (going from 1 to number_of_ants).<br>
 > y, w, and o represents room names.<br>
 > One line == One turn
 
-> When we use map shoved above, output is following:<br>
-`L1-1 L2-3`<br>
-`L1-5 L2-4 L3-1 L4-3`<br>
-`L1-6 L2-2 L3-5 L4-4`<br>
-`L1-end L2-end L3-6 L4-2`<br>
-`L3-end L4-end`<br>
+> When we use the map shoved above, the output is the following:<br>
+> `L1-1 L2-3`<br>
+> `L1-5 L2-4 L3-1 L4-3`<br>
+> `L1-6 L2-2 L3-5 L4-4`<br>
+> `L1-end L2-end L3-6 L4-2`<br>
+> `L3-end L4-end`<br>
 
 <img src="README/pics/output_gif.gif" width="60%">
 
@@ -75,7 +76,7 @@ Ant farm | Map visualization
 
 ### Compiling
 
-> At the root of repository there is a `Makefile`, simply running `make` will compile the whole program - name of the program will be `lem-in`.
+> At the root of the repository there is a `Makefile`, simply running `make` will compile the whole program - the name of the program will be `lem-in`.
 
 ### Running `lem-in`
 
@@ -85,7 +86,7 @@ Ant farm | Map visualization
 
 #### `-l` Flag
 
-> Running `lem-in` with flag `-l` will show how many turns it took to move all ants from `##start` to `##end`.
+> Running `lem-in` with the flag `-l` will show how many turns it took to move all ants from `##start` to `##end`.
 
 `lem-in -l < name_of_the_map`
 
@@ -102,20 +103,20 @@ Move count:
 
 #### `-p` Flag
 
-> Running `lem-in` with flag `-p` will show set of paths used to move ants from `##start` to `##end`.
+> Running `lem-in` with the flag `-p` will show a set of paths used to move ants from `##start` to `##end`.
 
 `lem-in -p < name_of_the_map`
 
 ```text
 ./lem-in -p < eval_tests/test_maps/example_3.map
-Our Algo chose paths: 
+Our Algo chose paths:
 PATH [1] = start -> 1 -> 5 -> 6 -> end length = 3
 PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 ```
 
 ## Algorithm
 
-test
+> Many different
 
 ## Resources
 
@@ -146,7 +147,7 @@ test
 ### Keywords
 
 - Algorithms
-- Path finding
+- Pathfinding
 - Edmons-Karp
 - Breadth-first search
 - Max-flow min-cut theorem
