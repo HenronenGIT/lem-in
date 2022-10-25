@@ -1,4 +1,3 @@
-<p align="left"><img src="./README/letters.jpg" ></p>
 <!-- Lem-in gif or any banner picture -->
 # Lem-in - "Elementary algorithmic project"
 
@@ -15,7 +14,7 @@ https://user-images.githubusercontent.com/69038136/197579221-9ce3fdde-37fe-490f-
 <!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
 ## Description
 
-> Main idea behind project Lem-in is to find most efficient set of paths to move **n** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
+> Main idea behind project `Lem-in` is to find most efficient set of paths to move ***n*** amount of ants from `##start` room to the `##end` room. There are certain rules what we need to follow:
 
 1. Ants are in the `##start` room when program starts.
 
@@ -25,7 +24,18 @@ https://user-images.githubusercontent.com/69038136/197579221-9ce3fdde-37fe-490f-
 
 ## Input
 
-> Best way to input map of your choice is to create file and specify your map there.
+> Best way to input map of your choice is to create file and specify your map there.<br>
+>Here is list of all the specifications what file can and cannot contain:
+
+| Description | Command | Note |
+| --- | --- | --- |
+| Specify start room | `##start` | **REQUIRED** |
+| Specify end room | `##end` | **REQUIRED**  |
+| Comment | `#` | All comments will be ignored  |
+| Specify room | `start 0 1` | Room name cannot start with `L` or `#`. Also name cannot contain `-` character |
+| Describe link between two rooms | `start-end` |  |
+| Extra commands | `##anything` |  Extra commands will be ignored |
+|  |  |  |
 
 ### Example map
 
