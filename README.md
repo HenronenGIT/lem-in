@@ -63,8 +63,6 @@ Ant farm | Map visualization
 > y, w, and o represents room names.<br>
 > One line == One turn
 
-### Example
-
 > When we use map shoved above, output is following:<br>
 `L1-1 L2-3`<br>
 `L1-5 L2-4 L3-1 L4-3`<br>
