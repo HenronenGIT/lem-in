@@ -14,19 +14,15 @@
 
 [Algorithms](#algorithms)
 
-[Extra](#Extra)
-
 [Resources](#resources)
 
 [Tools](#tools)
 
 [Keywords](#keywords)
 
-<!-- <p align="left"><img src="./README/pics/score.jpg" height="150" /></p> -->
-
 ## Description
 
-> The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
+The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
 
 1. When the program starts, all of the ants are in the `##start` room.
 
@@ -38,8 +34,8 @@
 
 ## Input
 
-> Best way to input an ant farm of your choice is to create a file and specify your map there.\
-> Here is a list of all the specifications that the file can and cannot contain:
+Best way to input an ant farm of your choice is to create a file and specify your map there.\
+Here is a list of all the specifications that the file can and cannot contain:
 
 | Description                         | Command      | Note                                                                                |
 | ----------------------------------- | ------------ | ----------------------------------------------------------------------------------- |
@@ -57,27 +53,26 @@
 
 ## Output
 
-> Output format of the program is the following:\
-> `Lx-y Lz-w Lr-o`\
-> x, z, and r represents ant number (going from 1 to number_of_ants).\
-> y, w, and o represents room names.\
-> One line == One turn \
-> When we use the map shoved above, the output is the following:\
-> `L1-1 L2-3`\
-> `L1-5 L2-4 L3-1 L4-3`\
-> `L1-6 L2-2 L3-5 L4-4`\
-> `L1-end L2-end L3-6 L4-2`\
-> `L3-end L4-end`
+Output format of the program is the following:\
+`Lx-y Lz-w Lr-o`\
+x, z, and r represents ant number (going from 1 to number_of_ants).\
+y, w, and o represents room names.\
+One line == One turn \
+When we use the map shoved above, the output is the following:\
+`L1-1 L2-3`\
+`L1-5 L2-4 L3-1 L4-3`\
+`L1-6 L2-2 L3-5 L4-4`\
+`L1-end L2-end L3-6 L4-2`\
+`L3-end L4-end`
 
 <img src="README/pics/output_gif.gif" width="60%">
 
->**NOTE!**\
->If you are wondering what happens between room 1 and room 2, all of this will be explained in [Algorithms](#algorithms) section.
-## How to use <a name="howtouse"></a>
+**NOTE!**\
+If you are wondering what happens between room 1 and room 2, all of this will be explained in [Algorithms](#algorithms) section.
 
 ### Compiling
 
-> At the root of the repository there is a `Makefile`, simply running `make` will compile the whole program - the name of the program will be `lem-in`.
+At the root of the repository there is a `Makefile`, simply running `make` will compile the whole program - the name of the program will be `lem-in`.
 
 ### Running `lem-in`
 
@@ -87,7 +82,7 @@
 
 #### `-l` Flag
 
-> Running `lem-in` with the flag `-l` will show how many turns it took to move all ants from `##start` to `##end`.
+Running `lem-in` with the flag `-l` will show how many turns it took to move all ants from `##start` to `##end`.
 
 `lem-in -l < name_of_the_map`
 
@@ -104,7 +99,7 @@ Move count:
 
 #### `-p` Flag
 
-> Running `lem-in` with the flag `-p` will show a set of paths used to move ants from `##start` to `##end`.
+Running `lem-in` with the flag `-p` will show a set of paths used to move ants from `##start` to `##end`.
 
 `lem-in -p < name_of_the_map`
 
@@ -117,7 +112,7 @@ PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 
 ## Algorithms
 
-> Many different Algorithms were used so we can find:
+Many different Algorithms were used so we can find:
 
 1. Shortest paths
 2. Vertex disjoint paths
@@ -127,11 +122,11 @@ PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 
 With the help of Breadth-first search algorithm (shortened to bfs), we can find ALWAYS most shortest path from `##start` to `##end`.
 
->Here is an example:
+Here is an example:
 
 <img src="README/pics/bfs_gif.gif" width="80%">
 
->What we can see from this GIF is that a Breadth-first search can find the shortest path efficiently.
+What we can see from this GIF is that a Breadth-first search can find the shortest path efficiently.
 
 <details>
 <summary>Code snippet from the source code </summary>
