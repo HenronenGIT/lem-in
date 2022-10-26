@@ -181,7 +181,7 @@ With the help of Breadth-first search algorithm (shortened to bfs), we can find 
 
 Here is an example:
 
-<img src="README/pics/bfs_gif.gif" width="80%">
+<img src="README/pics/bfs_gif.gif" width="90%">
 
 What we can see from this example is that a Breadth-first search can find the shortest path efficiently.
 
@@ -317,6 +317,7 @@ typedef struct s_vec
 ```
 </details>
 
+All of the rooms 
 
 ## Resources
 
