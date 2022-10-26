@@ -347,7 +347,6 @@ If during hashing process happens collision, it is handled with a `chaining styl
 - How to plan a project before even writing single line of code
 - New data structures
 - Combining multiple algorithms into a single complex one
-- Data Structures
 
 ## Resources
 
