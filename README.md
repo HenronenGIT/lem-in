@@ -24,10 +24,10 @@
 
 ## Description
 
-The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room./
-This process has to be done as fast as possible aswell.
-Grading was following:
-> **5** - Program runs 3 second or less
+The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the **start** room to the **end** room.
+This process has to be done as fast as possible.
+
+
 There are certain rules that we need to follow:
 
 1. When the program starts, all of the ants are in the `##start` room.
@@ -46,10 +46,15 @@ There was two main things how project was graded:
 
 2. Algorithm's accuracy
 
-Time Complexity grades:
+To test both of these we use map `generator` what was provided for us.
+To generate biggest possible map we can use our `Makefile` like so:\
+`make map`\
+This generates map called `generator_map.map`
+
+#### Time Complexity grades
 
 This can be easily tested like so:\
-`time lem-in < name_of_the_map`
+`time lem-in < `generator_map.map`
 
 | Grade | Program runtime |
 | --- | --- |
@@ -60,7 +65,7 @@ This can be easily tested like so:\
 | 1 | ≤ 15 seconds |
 
 
-Algorithm's accuracy grades:
+#### Algorithm's accuracy grades:
 
 Project provided us map `generator` which generates random maps and with that map there is always maximum move count what you cannot exceed if you wanna get best grade.
 

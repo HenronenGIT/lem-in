@@ -70,3 +70,6 @@ test:
 
 python:
 	python3 ./eval_tests/scripts/run_maps.py
+
+map:
+	./eval_tests/generator --big-superposition > generator_map.map
