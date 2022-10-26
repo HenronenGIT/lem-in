@@ -24,7 +24,11 @@
 
 ## Description
 
-The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room. There are certain rules that we need to follow:
+The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the `##start` room to the `##end` room./
+This process has to be done as fast as possible aswell.
+Grading was following:
+> **5** - Program runs 3 second or less
+There are certain rules that we need to follow:
 
 1. When the program starts, all of the ants are in the `##start` room.
 
@@ -33,6 +37,50 @@ The main idea behind project `Lem-in` is to find the most efficient set of paths
 3. With each turn you can move every single ant one time.
 
 <img src="./README/pics/rules_gif.gif" alt="example gif" width="60%" >
+
+### Grading
+
+There was two main things how project was graded:
+
+1. Time complexity
+
+2. Algorithm's accuracy
+
+Time Complexity grades:
+
+This can be easily tested like so:\
+`time lem-in < name_of_the_map`
+
+| Grade | Program runtime |
+| --- | --- |
+| 5 | ≤ 3 seconds |
+| 4 | ≤ 6 seconds |
+| 3 | ≤ 9 seconds |
+| 2 | ≤ 12 seconds |
+| 1 | ≤ 15 seconds |
+
+
+Algorithm's accuracy grades:
+
+Project provided us map `generator` which generates random maps and with that map there is always maximum move count what you cannot exceed if you wanna get best grade.
+
+| Grade | Δ turns made |
+| --- | --- |
+| 5 | Turn count is identical or less |
+| 4 | ≤ 2 |
+| 3 | ≤ 3-10 |
+| 2 | ≤ Increases dramatically |
+| 1 | ≤ Far from the objectives |
+
+Under our testing *Time complexity* of the program never exceeded `0.15 s`. So we think we did pretty good on that part.
+
+Under our testing average of *Algorithm's accuracy* was on 4 grade mark. Sometimes turn count exceeded by 2 moves.
+
+Final grade:
+
+**Time complexity** 5
+**Algorithm's accuracy** 4
+
 
 ## Input
 
@@ -215,13 +263,32 @@ void	iterate_links(t_queue **tail, t_queue *que)
 	}
 }
 ```
-
 </details>
 
 ## Data Structures
 
-temp
+To make program as fast as possbile our data structure were following:
 
+- Every single room was structure called `t_room`
+
+<details>
+<summary>Code snippet from the source code.</summary>
+
+```c
+typedef struct s_room
+{
+	char			*room_name;
+	struct s_coords	*coords;
+	struct s_vec	*links_vec;
+	struct s_room	*parent;
+	struct s_room	*flow_parent;
+	struct s_room	*next;
+	struct s_room	**flow;
+	struct s_room	*flow_from;
+	bool			occupied;
+}	t_room;
+```
+</details>
 ## Resources
 
 ### Vertex disjoint paths
