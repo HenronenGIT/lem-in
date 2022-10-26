@@ -272,12 +272,18 @@ void	iterate_links(t_queue **tail, t_queue *que)
 
 ## Data Structures
 
+Used data structures:
+
+- Dynamic 2D arrays
+- Linked lists
+- Hashed arrays
+
 To make program as fast as possbile our data structure were following:
 
-- Every single room was structure called `t_room`
+- `t_room` structure represents single room.
 
 <details>
-<summary>Code snippet from the source code.</summary>
+<summary>t_room structure</summary>
 
 ```c
 typedef struct s_room
@@ -294,6 +300,24 @@ typedef struct s_room
 }	t_room;
 ```
 </details>
+
+All of the rooms were stored to *Dynamic 2D array* `rooms_vec`. Structure looks following:
+
+<details>
+<summary>rooms_vec structure</summary>
+
+```c
+typedef struct s_vec
+{
+	void			**array;
+	size_t			length;
+	size_t			space_left;
+	size_t			space_taken;
+}	t_vec;
+```
+</details>
+
+
 ## Resources
 
 ### Vertex disjoint paths
