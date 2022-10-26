@@ -1,6 +1,7 @@
 # Lem-in - "Pathfinding Algorithm"
 
 <img src="./README/pics/banner_gif.gif" alt="Banner Gif" width="40%">
+<img src="./README/pics/score_2.png" alt="Banner Gif" width="40%">
 
 ## Table of Contents
 
