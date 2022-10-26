@@ -1,3 +1,4 @@
+
 ]CYELLOW=\033[0;33m
 CEND=\033[0m
 CGREEN=\033[0;32m
@@ -63,7 +64,7 @@ re : fclean all clean all
 
 # Easier way to run and test program
 run:
-	./lem-in < ./eval_tests/test_maps/augment_1.map 
+	./lem-in < temp.map
 
 test:
 	make python > test.txt

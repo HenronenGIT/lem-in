@@ -12,6 +12,23 @@
 
 #include "../includes/lem_in.h"
 
+int	is_comment(char *str)
+{
+	if (str[0] == '#' && str[1] != '#')
+		return (1);
+	return (0);
+}
+
+void	skip_comments(t_data *data, char **line)
+{
+	get_next_line(0, line);
+	while (is_comment(*line))
+	{
+		vec_insert(data->input_vec, *line);
+		get_next_line(0, line);
+	}
+}
+
 static t_coords	*read_coordinates(char *coord_x, char *coord_y)
 {
 	t_coords	*coords;
@@ -101,7 +118,7 @@ void	read_ants(t_data *data)
 
 	line = NULL;
 	ant_count = 0;
-	get_next_line(0, &line);
+	skip_comments(data, &line);
 	if (line && (line[0] == '-' || line[0] == '0'))
 		error(ANT_ERR);
 	if (!ft_isnumber(line))
