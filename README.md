@@ -12,7 +12,7 @@
 
 [How to use](##howtouse)
 
-[Algorithm](#algorithm)
+[Algorithms](#algorithms)
 
 [Extra](#Extra)
 
@@ -38,7 +38,7 @@
 
 ## Input
 
-> Best way to input an ant farm of your choice is to create a file and specify your map there.<br>
+> Best way to input an ant farm of your choice is to create a file and specify your map there.\
 > Here is a list of all the specifications that the file can and cannot contain:
 
 | Description                         | Command      | Note                                                                                |
@@ -57,21 +57,22 @@
 
 ## Output
 
-> Output format of the program is the following:<br>
-> `Lx-y Lz-w Lr-o`<br>
-> x, z, and r represents ant number (going from 1 to number_of_ants).<br>
-> y, w, and o represents room names.<br>
-> One line == One turn
-
-> When we use the map shoved above, the output is the following:<br>
-> `L1-1 L2-3`<br>
-> `L1-5 L2-4 L3-1 L4-3`<br>
-> `L1-6 L2-2 L3-5 L4-4`<br>
-> `L1-end L2-end L3-6 L4-2`<br>
-> `L3-end L4-end`<br>
+> Output format of the program is the following:\
+> `Lx-y Lz-w Lr-o`\
+> x, z, and r represents ant number (going from 1 to number_of_ants).\
+> y, w, and o represents room names.\
+> One line == One turn \
+> When we use the map shoved above, the output is the following:\
+> `L1-1 L2-3`\
+> `L1-5 L2-4 L3-1 L4-3`\
+> `L1-6 L2-2 L3-5 L4-4`\
+> `L1-end L2-end L3-6 L4-2`\
+> `L3-end L4-end`
 
 <img src="README/pics/output_gif.gif" width="60%">
 
+>**NOTE!**\
+>If you are wondering what happens between room 1 and room 2, all of this will be explained in [Algorithms](#algorithms) section.
 ## How to use <a name="howtouse"></a>
 
 ### Compiling
@@ -123,15 +124,51 @@ PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 3. Most efficient set of paths for ***n*** amount of ants
 
 ### Breadth-first search
+> With the help of Breadth-first search algorithm (shortened to bfs), we can find ALWAYS most shortest path from `##start` to `##end`.
+``` C
+static int	bfs(t_data *data, t_queue **head)
+{
+	t_queue	*que;
+	t_queue	*tail;
 
-> With the help of Breadth-first search algorithm (shortened to bfs), we can find ALWAYS most shortest path from `##start` to `##end`. Here is an example:
+	que = NULL;
+	tail = NULL;
+	bfs_init(data, head, &tail, &que);
+	while (data->end->parent == NULL && que != NULL)
+	{
+		iterate_links(&tail, que);
+		que = que->next;
+	}
+	if (!data->end->parent)
+		return (0);
+	set_flows(data);
+	return (1);
+}
+```
+
+>Here is an example:
 
 <img src="README/pics/bfs_gif.gif" width="80%">
 
+>What we can see from this GIF is that a Breadth-first search can find the shortest path efficiently.
+
 ### Edmons-Karp
 
-test
+TEMP
 
+### Matthew Daws Vertex Disjoint
+
+>Finding the [Vertex Disjoint](https://www.youtube.com/watch?v=kwWN4FIEyz8&ab_channel=WrathofMath) paths is key thing in whole project. Thank you [Matthew Daws](https://matthewdaws.github.io/blog/index.html)!\
+>In this GIF we can see something interesting happening between room `1` and room `2`.
+
+<img src="README/pics/output_gif.gif" width="60%">
+
+When our second BFS finds a room, what already belongs to a path - rule goes as follow:
+> "If we can get to a vertex v which is used by a path, but the predecessor was not in a path, then we must now follow the path backwards."\
+> Matthew Daws
+
+When BFS has made its way to the end room, we start to backtrack from the end room to the start room. During our backtrack, if a link between 2 rooms has already flow from our previous BFS, we need to cut that flow. \
+>With this r
 
 
 ## Resources
