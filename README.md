@@ -69,7 +69,7 @@ This is the turn count that we need to match for the max grade.
 | 2 | ≤ Increases dramatically |
 | 1 | ≤ Far from the objectives |
 
-Under our testing *Time complexity* of the program never exceeded `0.15 s`. So we think we did pretty well on that part.
+Under our testing *Time complexity* of the program never exceeded `0.15 seconds`. So we think we did pretty well on that part.
 
 Our testing average of *Algorithm's accuracy* was on the 4-grade mark. Sometimes turn count is exceeded by 2 moves.
 
@@ -292,7 +292,7 @@ typedef struct s_room
 ```
 </details>
 
-All of the rooms were stored as a pointer to *Dynamic 2D array* `rooms_vec`. The structure looks following:
+- All of the rooms were stored as a pointer to *Dynamic 2D array* `rooms_vec`. The structure looks following:
 
 <details>
 <summary>rooms_vec structure</summary>
@@ -337,11 +337,17 @@ If during hashing process happens collision, it is handled with a `chaining styl
 
 ## Summary
 
+### Time used for the project
 
+- About 2 months
 
-**Time used for the project** - About 1,5 months
+### What we learned
 
-
+- How to work on the bigger project as a group
+- How to plan a project before even writing single line of code
+- New data structures
+- Combining multiple algorithms into a single complex one
+- Data Structures
 
 ## Resources
 
