@@ -5,7 +5,6 @@
 ## Table of Contents
 
 1. [Description](#description)
-- [Grading](###grading)
 2. [Input](#input)
 3. [Output](#output)
 4. [How to use](#how-to-use)
@@ -32,16 +31,16 @@ There are certain rules that we need to follow:
 
 ### Grading
 
-There was two main things how project was graded:
+There were two main things in how the project was graded:
 
 1. Time complexity
 
 2. Algorithm's accuracy
 
-To test both of these we use map `generator` what was provided for us.
-To generate biggest possible map we can use our `Makefile` like so:\
-`make map`\
-This generates map called `generator_map.map`
+To test both of these we use the map `generator` that was provided for us.
+To generate the biggest possible map we can use our `Makefile` like so:\
+`make the map`\
+This generates a map called `generator_map.map`
 
 #### Time Complexity grades
 
@@ -60,7 +59,7 @@ This can be easily tested like so:\
 
 If you inspect the generated map you can find line:\
 `#Here is the number of lines required: 87`\
-This is the turn count what we need to match for max grade.
+This is the turn count that we need to match for the max grade.
 
 | Grade | Δ turns made |
 | --- | --- |
@@ -70,9 +69,9 @@ This is the turn count what we need to match for max grade.
 | 2 | ≤ Increases dramatically |
 | 1 | ≤ Far from the objectives |
 
-Under our testing *Time complexity* of the program never exceeded `0.15 s`. So we think we did pretty good on that part.
+Under our testing *Time complexity* of the program never exceeded `0.15 s`. So we think we did pretty well on that part.
 
-Under our testing average of *Algorithm's accuracy* was on 4 grade mark. Sometimes turn count exceeded by 2 moves.
+Our testing average of *Algorithm's accuracy* was on the 4-grade mark. Sometimes turn count is exceeded by 2 moves.
 
 #### Final grade:
 
@@ -81,7 +80,7 @@ Under our testing average of *Algorithm's accuracy* was on 4 grade mark. Sometim
 
 ## Input
 
-Best way to input an ant farm of your choice is to create a file and specify your map there.\
+The best way to input an ant farm of your choice is to create a file and specify your map there.\
 Here is a list of all the specifications that the file can and cannot contain:
 
 | Description                         | Command      | Note                                                                                |
@@ -100,9 +99,9 @@ Here is a list of all the specifications that the file can and cannot contain:
 
 ## Output
 
-Output format of the program is the following:\
+The output format of the program is the following:\
 `Lx-y Lz-w Lr-o`\
-x, z, and r represents ant number (going from 1 to number_of_ants).\
+x, z, and r represent ant numbers (going from 1 to number_of_ants).\
 y, w, and o represents room names.\
 One line == One turn \
 When we use the map shoved above, the output is the following:\
@@ -115,13 +114,13 @@ When we use the map shoved above, the output is the following:\
 <img src="README/pics/output_gif.gif" width="60%">
 
 **NOTE!**\
-If you are wondering what happens between room `1` and room `2`, all of this will be explained in [Algorithms](#algorithms) section.
+If you are wondering what happens between room `1` and room `2`, all of this will be explained in the [Algorithms](#algorithms) section.
 
 ## How to use
 
 ### Compiling
 
-At the root of the repository there is a `Makefile`, simply running `make` will compile the whole program - the name of the program will be `lem-in`.
+At the root of the repository, there is a `Makefile`, simply running `make` will compile the whole program - the name of the program will be `lem-in`.
 
 ### Running `lem-in`
 
@@ -161,7 +160,7 @@ PATH [2] = start -> 3 -> 4 -> 2 -> end length = 3
 
 ## Algorithms
 
-Many different Algorithms were used so we can find:
+Many different Algorithms were used so we can find the:
 
 1. Shortest paths
 2. Vertex disjoint paths
@@ -169,7 +168,7 @@ Many different Algorithms were used so we can find:
 
 ### Breadth-first search
 
-With the help of Breadth-first search algorithm (shortened to bfs), we can find ALWAYS most shortest path from `##start` to `##end`.
+With the help of the Breadth-first search algorithm (shortened to bfs), we can find ALWAYS the shortest path from `##start` to `##end`.
 
 Here is an example:
 
@@ -178,86 +177,86 @@ Here is an example:
 What we can see from this example is that a Breadth-first search can find the shortest path efficiently.
 
 <details>
-<summary>Code snippet from the source code </summary>
+<summary>bfs() function from the source code</summary>
 
 ```c
-static int	bfs(t_data *data, t_queue **head)
+static int  bfs(t_data *data, t_queue **head)
 {
-	t_queue	*que;
-	t_queue	*tail;
+    t_queue *que;
+    t_queue *tail;
 
-	que = NULL;
-	tail = NULL;
-	bfs_init(data, head, &tail, &que);
-	while (data->end->parent == NULL && que != NULL)
-	{
-		iterate_links(&tail, que);
-		que = que->next;
-	}
-	if (!data->end->parent)
-		return (0);
-	set_flows(data);
-	return (1);
+    que = NULL;
+    tail = NULL;
+    bfs_init(data, head, &tail, &que);
+    while (data->end->parent == NULL && que != NULL)
+    {
+        iterate_links(&tail, que);
+        que = que->next;
+    }
+    if (!data->end->parent)
+        return (0);
+    set_flows(data);
+    return (1);
 }
 ```
 </details>
 
 ### Matthew Daws Vertex Disjoint
 
-Finding the [Vertex Disjoint](https://www.youtube.com/watch?v=kwWN4FIEyz8&ab_channel=WrathofMath) paths is key thing in whole project. Thank you [Matthew Daws](https://matthewdaws.github.io/blog/index.html)!\
-In this example we can see something interesting happening between room `1` and room `2`.
+Finding the [Vertex Disjoint](https://www.youtube.com/watch?v=kwWN4FIEyz8&ab_channel=WrathofMath) paths is the key thing in the whole project. Thank you [Matthew Daws](https://matthewdaws.github.io/blog/index.html)!\
+In this example, we can see something interesting happening between room `1` and room `2`.
 
 <img src="README/pics/output_gif.gif" width="60%">
 
-When our second BFS finds a room, what already belongs to a path - rule goes as follow:
-> "If we can get to a vertex v which is used by a path, but the predecessor was not in a path, then we must now follow the path backwards."\
+When our second BFS finds a room, what already belongs to a path - rule goes as follows:
+> "If we can get to a vertex v which is used by a path, but the predecessor was not in a path, then we must now follow the path backward."\
 > Matthew Daws
 
-After that one step backwards rules goes as:
->"If we are already following a path backwards, then we are allowed to "jump off" to any neighbour."\
+After that one step backward rule goes as:
+>"If we are already following a path backward, then we are allowed to "jump off" to any neighbor."\
 > Matthew Daws
 
 
 When BFS has made its way to the end room, we start to backtrack from the end room to the start room. During our backtrack, if a link between 2 rooms has already flow from our previous BFS, we need to cut that flow.\
-You can see this happening in above example.
+You can see this happening in the above example.
 
 <details>
 <summary>Code snippet from the source code.</summary>
 
 ```c
 /*
-	We have four different cases when we check that can we step to link.
-		1. From current room to link, there is positive flow.
-		2. Room where we are at the moment, it was first step to old path.
-		3. Room where wea re at the moment, it is second step to old path.
-		4. From current room to link, there is not any flow.
+    We have four different cases when we check that can we step to link.
+        1. From the current room to the link, there is a positive flow.
+        2. Room where we are at the moment, it was the first step to the old path.
+        3. Room where we are at the moment, it is the second step to the old path.
+        4. From the current room to the link, there is not any flow.
 */
-void	iterate_links(t_queue **tail, t_queue *que)
+void    iterate_links(t_queue **tail, t_queue *que)
 {
-	size_t	i;
-	t_room	**link_array;
+    size_t  i;
+    t_room  **link_array;
 
-	link_array = (t_room **)que->room->links_vec->array;
-	i = 0;
-	while (i < que->room->links_vec->space_taken)
-	{
-		if (positive_flow(que->room->flow, link_array[i]))
-		{
-			i++;
-			continue ;
-		}
-		else if (que->room->flow_from && !que->room->flow_parent)
-		{
-			found_old_path(tail, que);
-			return ;
-		}
-		else if (que->room->flow_from && que->room->flow_parent)
-			can_go_everywhere(que->room, link_array[i], tail);
-		else if (link_array[i]->parent == NULL
-			&& link_array[i]->parent != que->room)
-			visit_using_unused_edge(tail, que, link_array[i]);
-		i++;
-	}
+    link_array = (t_room **)que->room->links_vec->array;
+    i = 0;
+    while (i < que->room->links_vec->space_taken)
+    {
+        if (positive_flow(que->room->flow, link_array[i]))
+        {
+            i++;
+            continue ;
+        }
+        else if (que->room->flow_from && !que->room->flow_parent)
+        {
+            found_old_path(tail, que);
+            return ;
+        }
+        else if (que->room->flow_from && que->room->flow_parent)
+            can_go_everywhere(que->room, link_array[i], tail);
+        else if (link_array[i]->parent == NULL
+            && link_array[i]->parent != que->room)
+            visit_using_unused_edge(tail, que, link_array[i]);
+        i++;
+    }
 }
 ```
 </details>
@@ -270,9 +269,9 @@ Used data structures:
 - Linked lists
 - Hashed arrays
 
-To make program as fast as possbile our data structure were following:
+To make the program as fast as possible our data structure was the following:
 
-- `t_room` structure represents single room.
+- `t_room` structure represents a single room.
 
 <details>
 <summary>t_room structure</summary>
@@ -280,20 +279,20 @@ To make program as fast as possbile our data structure were following:
 ```c
 typedef struct s_room
 {
-	char			*room_name;
-	struct s_coords	*coords;
-	struct s_vec	*links_vec;
-	struct s_room	*parent;
-	struct s_room	*flow_parent;
-	struct s_room	*next;
-	struct s_room	**flow;
-	struct s_room	*flow_from;
-	bool			occupied;
-}	t_room;
+    char            *room_name;
+    struct s_coords *coords;
+    struct s_vec    *links_vec;
+    struct s_room   *parent;
+    struct s_room   *flow_parent;
+    struct s_room   *next;
+    struct s_room   **flow;
+    struct s_room   *flow_from;
+    bool            occupied;
+}   t_room;
 ```
 </details>
 
-All of the rooms were stored to *Dynamic 2D array* `rooms_vec`. Structure looks following:
+All of the rooms were stored as a pointer to *Dynamic 2D array* `rooms_vec`. The structure looks following:
 
 <details>
 <summary>rooms_vec structure</summary>
@@ -301,40 +300,48 @@ All of the rooms were stored to *Dynamic 2D array* `rooms_vec`. Structure looks 
 ```c
 typedef struct s_vec
 {
-	void			**array;
-	size_t			length;
-	size_t			space_left;
-	size_t			space_taken;
-}	t_vec;
+    void            **array;
+    size_t          length;
+    size_t          space_left;
+    size_t          space_taken;
+}   t_vec;
 ```
 </details>
 
-All of the rooms are getting stored to *2D Dynamic array* trough `hashing` process. Rooma name is sent to hashing function which looks like following:
+All of the rooms are getting stored in a *2D Dynamic array* through the `hashing` process. The room name is sent to hashing function which looks like the following:
 
 <details>
 <summary>hashing() function</summary>
 
 ```c
-long	hashing(t_data *data, char *name)
+long    hashing(t_data *data, char *name)
 {
-	size_t	i;
-	long	hash;
+    size_t  i;
+    long    hash;
 
-	if (!name)
-		error(NULL_ERR);
-	hash = 5381;
-	i = 0;
-	while (name[i])
-	{
-		hash = ((hash << 5) + hash) + name[i];
-		i++;
-	}
-	return (hash % data->rooms_vec->length);
+    if (!name)
+        error(NULL_ERR);
+    hash = 5381;
+    i = 0;
+    while (name[i])
+    {
+        hash = ((hash << 5) + hash) + name[i];
+        i++;
+    }
+    return (hash % data->rooms_vec->length);
 }
 ```
 </details>
 
-If during hashing process happens collision, it is handled with linked lists.
+If during hashing process happens collision, it is handled with a `chaining style` using linked lists.
+
+## Summary
+
+
+
+**Time used for the project** - About 1,5 months
+
+
 
 ## Resources
 
