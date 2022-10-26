@@ -10,9 +10,11 @@
 
 [Output](#output)
 
-[How to use](##howtouse)
+[How to use](#how-to-use)
 
 [Algorithms](#algorithms)
+
+[Data Structures](#data-structures)
 
 [Resources](#resources)
 
@@ -28,7 +30,7 @@ The main idea behind project `Lem-in` is to find the most efficient set of paths
 
 2. Room can contain only one ant at a time. `##start` and `##end` rooms can contain an unlimited amount of ants.
 
-3. With Each turn you can move every single ant one time.
+3. With each turn you can move every single ant one time.
 
 <img src="./README/pics/rules_gif.gif" alt="example gif" width="60%" >
 
@@ -68,7 +70,9 @@ When we use the map shoved above, the output is the following:\
 <img src="README/pics/output_gif.gif" width="60%">
 
 **NOTE!**\
-If you are wondering what happens between room 1 and room 2, all of this will be explained in [Algorithms](#algorithms) section.
+If you are wondering what happens between room `1` and room `2`, all of this will be explained in [Algorithms](#algorithms) section.
+
+## How to use
 
 ### Compiling
 
@@ -126,7 +130,7 @@ Here is an example:
 
 <img src="README/pics/bfs_gif.gif" width="80%">
 
-What we can see from this GIF is that a Breadth-first search can find the shortest path efficiently.
+What we can see from this example is that a Breadth-first search can find the shortest path efficiently.
 
 <details>
 <summary>Code snippet from the source code </summary>
@@ -156,7 +160,7 @@ static int	bfs(t_data *data, t_queue **head)
 ### Matthew Daws Vertex Disjoint
 
 Finding the [Vertex Disjoint](https://www.youtube.com/watch?v=kwWN4FIEyz8&ab_channel=WrathofMath) paths is key thing in whole project. Thank you [Matthew Daws](https://matthewdaws.github.io/blog/index.html)!\
-In this GIF we can see something interesting happening between room `1` and room `2`.
+In this example we can see something interesting happening between room `1` and room `2`.
 
 <img src="README/pics/output_gif.gif" width="60%">
 
@@ -164,10 +168,13 @@ When our second BFS finds a room, what already belongs to a path - rule goes as 
 > "If we can get to a vertex v which is used by a path, but the predecessor was not in a path, then we must now follow the path backwards."\
 > Matthew Daws
 
-After that one step backwards, we are free to go everywhere.
+After that one step backwards rules goes as:
+>"If we are already following a path backwards, then we are allowed to "jump off" to any neighbour."\
+> Matthew Daws
+
 
 When BFS has made its way to the end room, we start to backtrack from the end room to the start room. During our backtrack, if a link between 2 rooms has already flow from our previous BFS, we need to cut that flow.\
-You can see this happening in above GIF.
+You can see this happening in above example.
 
 <details>
 <summary>Code snippet from the source code.</summary>
@@ -211,6 +218,10 @@ void	iterate_links(t_queue **tail, t_queue *que)
 
 </details>
 
+## Data Structures
+
+temp
+
 ## Resources
 
 ### Vertex disjoint paths
@@ -218,12 +229,6 @@ void	iterate_links(t_queue **tail, t_queue *que)
 [Disjoint Paths](https://matthewdaws.github.io/blog/2015-06-08-Paths.html)
 
 [Disjoint Paths; Implementation Issues](https://matthewdaws.github.io/blog/2015-06-15-Paths-Implementation.html)
-
-### Edmonds–Karp
-
-[Edmonds-Karp - YouTube](https://www.youtube.com/watch?v=RppuJYwlcI8&ab_channel=WilliamFiset)
-
-[Edmonds-Karp algorithm - Wikipedia](https://en.wikipedia.org/wiki/Edmonds%E2%80%93Karp_algorithm)
 
 ### Maximum flow problem
 
@@ -241,6 +246,6 @@ void	iterate_links(t_queue **tail, t_queue *que)
 
 - Algorithms
 - Pathfinding
-- Edmons-Karp
 - Breadth-first search
+- Vertex Disjoint
 - Max-flow min-cut theorem
