@@ -1,7 +1,9 @@
 # Lem-in - "Pathfinding Algorithm"
 
+<div float="left">
 <img src="./README/pics/banner_gif.gif" alt="Banner Gif" width="40%">
 <img src="./README/pics/score_2.png" alt="Banner Gif" width="40%">
+</div>
 
 ## Table of Contents
 
@@ -46,12 +48,12 @@ This generates a map called `generator_map.map`
 #### Time Complexity grades
 
 | Grade | Program runtime |
-| --- | --- |
-| 5 | ≤ 3 seconds |
-| 4 | ≤ 6 seconds |
-| 3 | ≤ 9 seconds |
-| 2 | ≤ 12 seconds |
-| 1 | ≤ 15 seconds |
+| ----- | --------------- |
+| 5     | ≤ 3 seconds     |
+| 4     | ≤ 6 seconds     |
+| 3     | ≤ 9 seconds     |
+| 2     | ≤ 12 seconds    |
+| 1     | ≤ 15 seconds    |
 
 This can be easily tested like so:\
 `time lem-in < generator_map.map`
@@ -62,17 +64,17 @@ If you inspect the generated map you can find line:\
 `#Here is the number of lines required: 87`\
 This is the turn count that we need to match for the max grade.
 
-| Grade | Δ turns made |
-| --- | --- |
-| 5 | Turn count is identical or less |
-| 4 | ≤ 2 |
-| 3 | ≤ 3-10 |
-| 2 | ≤ Increases dramatically |
-| 1 | ≤ Far from the objectives |
+| Grade | Δ turns made                    |
+| ----- | ------------------------------- |
+| 5     | Turn count is identical or less |
+| 4     | ≤ 2                             |
+| 3     | ≤ 3-10                          |
+| 2     | ≤ Increases dramatically        |
+| 1     | ≤ Far from the objectives       |
 
-Under our testing *Time complexity* of the program never exceeded `0.15 seconds`. So we think we did pretty well on that part.
+Under our testing _Time complexity_ of the program never exceeded `0.15 seconds`. So we think we did pretty well on that part.
 
-Our testing average of *Algorithm's accuracy* was on the 4-grade mark. Sometimes turn count is exceeded by 2 moves.
+Our testing average of _Algorithm's accuracy_ was on the 4-grade mark. Sometimes turn count is exceeded by 2 moves.
 
 #### Final grade:
 
@@ -165,7 +167,7 @@ Many different Algorithms were used so we can find the:
 
 1. Shortest paths
 2. Vertex disjoint paths
-3. Most efficient set of paths for ***n*** amount of ants
+3. Most efficient set of paths for **_n_** amount of ants
 
 ### Breadth-first search
 
@@ -200,6 +202,7 @@ static int  bfs(t_data *data, t_queue **head)
     return (1);
 }
 ```
+
 </details>
 
 ### Matthew Daws Vertex Disjoint
@@ -210,13 +213,14 @@ In this example, we can see something interesting happening between room `1` and
 <img src="README/pics/output_gif.gif" width="60%">
 
 When our second BFS finds a room, what already belongs to a path - rule goes as follows:
+
 > "If we can get to a vertex v which is used by a path, but the predecessor was not in a path, then we must now follow the path backward."\
 > Matthew Daws
 
 After that one step backward rule goes as:
->"If we are already following a path backward, then we are allowed to "jump off" to any neighbor."\
-> Matthew Daws
 
+> "If we are already following a path backward, then we are allowed to "jump off" to any neighbor."\
+> Matthew Daws
 
 When BFS has made its way to the end room, we start to backtrack from the end room to the start room. During our backtrack, if a link between 2 rooms has already flow from our previous BFS, we need to cut that flow.\
 You can see this happening in the above example.
@@ -260,6 +264,7 @@ void    iterate_links(t_queue **tail, t_queue *que)
     }
 }
 ```
+
 </details>
 
 ## Data Structures
@@ -291,9 +296,10 @@ typedef struct s_room
     bool            occupied;
 }   t_room;
 ```
+
 </details>
 
-- All of the rooms were stored as a pointer to *Dynamic 2D array* `rooms_vec`. The structure looks following:
+- All of the rooms were stored as a pointer to _Dynamic 2D array_ `rooms_vec`. The structure looks following:
 
 <details>
 <summary>rooms_vec structure</summary>
@@ -307,9 +313,10 @@ typedef struct s_vec
     size_t          space_taken;
 }   t_vec;
 ```
+
 </details>
 
-All of the rooms are getting stored in a *2D Dynamic array* through the `hashing` process. The room name is sent to hashing function which looks like the following:
+All of the rooms are getting stored in a _2D Dynamic array_ through the `hashing` process. The room name is sent to hashing function which looks like the following:
 
 <details>
 <summary>hashing() function</summary>
@@ -332,6 +339,7 @@ long    hashing(t_data *data, char *name)
     return (hash % data->rooms_vec->length);
 }
 ```
+
 </details>
 
 If during hashing process happens collision, it is handled with a `chaining style` using linked lists.
