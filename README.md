@@ -53,9 +53,6 @@ This generates map called `generator_map.map`
 
 #### Time Complexity grades
 
-This can be easily tested like so:\
-`time lem-in < `generator_map.map`
-
 | Grade | Program runtime |
 | --- | --- |
 | 5 | ≤ 3 seconds |
@@ -64,10 +61,14 @@ This can be easily tested like so:\
 | 2 | ≤ 12 seconds |
 | 1 | ≤ 15 seconds |
 
+This can be easily tested like so:\
+`time lem-in < generator_map.map`
 
 #### Algorithm's accuracy grades:
 
-Project provided us map `generator` which generates random maps and with that map there is always maximum move count what you cannot exceed if you wanna get best grade.
+If you inspect the generated map you can find line:\
+`#Here is the number of lines required: 87`\
+This is the turn count what we need to match for max grade.
 
 | Grade | Δ turns made |
 | --- | --- |
@@ -81,11 +82,10 @@ Under our testing *Time complexity* of the program never exceeded `0.15 s`. So w
 
 Under our testing average of *Algorithm's accuracy* was on 4 grade mark. Sometimes turn count exceeded by 2 moves.
 
-Final grade:
+#### Final grade:
 
-**Time complexity** 5
+**Time complexity** 5\
 **Algorithm's accuracy** 4
-
 
 ## Input
 
