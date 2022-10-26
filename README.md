@@ -4,29 +4,21 @@
 
 ## Table of Contents
 
-[Description](#description)
-
-[Input](#input)
-
-[Output](#output)
-
-[How to use](#how-to-use)
-
-[Algorithms](#algorithms)
-
-[Data Structures](#data-structures)
-
-[Resources](#resources)
-
-[Tools](#tools)
-
-[Keywords](#keywords)
+1. [Description](#description)
+- [Grading](###grading)
+2. [Input](#input)
+3. [Output](#output)
+4. [How to use](#how-to-use)
+5. [Algorithms](#algorithms)
+6. [Data Structures](#data-structures)
+7. [Resources](#resources)
+8. [Tools](#tools)
+9. [Keywords](#keywords)
 
 ## Description
 
 The main idea behind project `Lem-in` is to find the most efficient set of paths to move **_n_** amount of ants from the **start** room to the **end** room.
 This process has to be done as fast as possible.
-
 
 There are certain rules that we need to follow:
 
@@ -317,7 +309,32 @@ typedef struct s_vec
 ```
 </details>
 
-All of the rooms 
+All of the rooms are getting stored to *2D Dynamic array* trough `hashing` process. Rooma name is sent to hashing function which looks like following:
+
+<details>
+<summary>hashing() function</summary>
+
+```c
+long	hashing(t_data *data, char *name)
+{
+	size_t	i;
+	long	hash;
+
+	if (!name)
+		error(NULL_ERR);
+	hash = 5381;
+	i = 0;
+	while (name[i])
+	{
+		hash = ((hash << 5) + hash) + name[i];
+		i++;
+	}
+	return (hash % data->rooms_vec->length);
+}
+```
+</details>
+
+If during hashing process happens collision, it is handled with linked lists.
 
 ## Resources
 
