@@ -13,9 +13,10 @@
 4. [How to use](#how-to-use)
 5. [Algorithms](#algorithms)
 6. [Data Structures](#data-structures)
-7. [Resources](#resources)
-8. [Tools](#tools)
-9. [Keywords](#keywords)
+7. [Summary](#summary)
+8. [Resources](#resources)
+9. [Tools](#tools)
+10. [Keywords](#keywords)
 
 ## Description
 
