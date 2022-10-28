@@ -147,4 +147,10 @@ void	set_correct_flows(t_data *data);
 void	print_paths(t_data *data);
 void	print_paths_set(t_data *data, t_set *paths_set);
 
+/*------EXTRA UTILS-------------*/
+int		is_comment(char *str);
+int		is_unknown_command(char *line);
+void	skip_comments(t_data *data, char **line);
+void	skip_unknown_commads(t_data *data, char **line);
+
 #endif

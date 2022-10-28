@@ -12,23 +12,6 @@
 
 #include "../includes/lem_in.h"
 
-int	is_comment(char *str)
-{
-	if (str[0] == '#' && str[1] != '#')
-		return (1);
-	return (0);
-}
-
-void	skip_comments(t_data *data, char **line)
-{
-	get_next_line(0, line);
-	while (is_comment(*line))
-	{
-		vec_insert(data->input_vec, *line);
-		get_next_line(0, line);
-	}
-}
-
 static t_coords	*read_coordinates(char *coord_x, char *coord_y)
 {
 	t_coords	*coords;
@@ -72,7 +55,9 @@ static void	handle_hashtag(t_data *data, char *line)
 
 	room_info = NULL;
 	vec_insert(data->input_vec, line);
-	if (*line == '#' && line[1] != '#')
+	if (is_comment(line))
+		return ;
+	if (is_unknown_command(line))
 		return ;
 	get_next_line(0, &room_info);
 	if (room_info[0] == '#' || room_info[0] == '\0')
@@ -119,6 +104,7 @@ void	read_ants(t_data *data)
 	line = NULL;
 	ant_count = 0;
 	skip_comments(data, &line);
+	skip_unknown_commads(data, &line);
 	if (line && (line[0] == '-' || line[0] == '0'))
 		error(ANT_ERR);
 	if (!ft_isnumber(line))

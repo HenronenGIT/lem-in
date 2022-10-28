@@ -5,7 +5,7 @@ CGREEN=\033[0;32m
 
 CC = gcc
 NAME = lem-in
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRC_DIR = ./src/
 SRC_FILES = main.c \
@@ -21,7 +21,8 @@ SRC_FILES = main.c \
 			result_output.c \
 			print_functions.c \
 			best_set.c \
-			print_init.c
+			print_init.c \
+			utils.c
 SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
 
 OBJ_DIR = ./obj/
@@ -64,10 +65,8 @@ re : fclean all clean all
 
 # Easier way to run and test program
 run:
-	./lem-in < temp.map
+	./lem-in < ./eval_tests/test_maps/augment_2.map
 
-test:
-	make python > test.txt
 
 python:
 	python3 ./eval_tests/scripts/run_maps.py
